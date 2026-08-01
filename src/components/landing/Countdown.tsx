@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 
-const TARGET = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 60 * 60 * 7;
+const TARGET = Date.UTC(2026, 8, 15, 10, 0, 0);
 
 function pad(n: number) {
   return String(Math.max(0, n)).padStart(2, "0");
 }
 
 export function Countdown({ compact = false }: { compact?: boolean }) {
-  const [left, setLeft] = useState(TARGET - Date.now());
+  const [left, setLeft] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setLeft(TARGET - Date.now()), 1000);
+    const update = () => setLeft(TARGET - Date.now());
+    update();
+    const id = setInterval(update, 1000);
     return () => clearInterval(id);
   }, []);
 
