@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/accordion";
 import { Countdown } from "@/components/landing/Countdown";
 import { ScoreDial } from "@/components/landing/ScoreDial";
+import { PillarStack } from "@/components/landing/PillarStack";
 import heroCollar from "@/assets/hero-collar.jpg";
 import dogRunning from "@/assets/dog-running.jpg";
 import catSleep from "@/assets/cat-sleep.jpg";
