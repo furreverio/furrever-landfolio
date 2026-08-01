@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/accordion";
 import { Countdown } from "@/components/landing/Countdown";
 import { ScoreDial } from "@/components/landing/ScoreDial";
+import { PillarStack } from "@/components/landing/PillarStack";
 import heroCollar from "@/assets/hero-collar.jpg";
 import dogRunning from "@/assets/dog-running.jpg";
 import catSleep from "@/assets/cat-sleep.jpg";
@@ -228,35 +229,16 @@ function Index() {
       </section>
 
       {/* Pillars */}
-      <section className="mx-auto max-w-7xl px-5 py-20">
-        <h2 className="max-w-2xl font-display text-4xl leading-tight md:text-5xl">
-          Better care <span className="text-muted-foreground">starts now</span>
-        </h2>
-        <div className="mt-12 space-y-6">
-          {pillars.map((p) => (
-            <div
-              key={p.kicker}
-              className="grid gap-6 rounded-3xl border border-border bg-card p-6 md:grid-cols-[1fr_2fr] md:p-8"
-            >
-              <div>
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface-2">
-                  <p.icon className="h-5 w-5 text-ember" />
-                </div>
-                <div className="mt-5 text-xs uppercase tracking-[0.25em] text-ember">{p.kicker}</div>
-                <h3 className="mt-2 text-2xl leading-snug">{p.title}</h3>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-3">
-                {p.cards.map((c) => (
-                  <div key={c.label} className="rounded-2xl bg-surface-2 p-5">
-                    <div className="text-xs text-muted-foreground">{c.label}</div>
-                    <div className="mt-3 font-display text-lg">{c.value}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+      {/* Pillars — scroll-jacked stack */}
+      <section className="pt-20">
+        <div className="mx-auto max-w-7xl px-5">
+          <h2 className="max-w-2xl font-display text-4xl leading-tight md:text-5xl">
+            Better care <span className="text-muted-foreground">starts now</span>
+          </h2>
         </div>
+        <PillarStack pillars={pillars} />
       </section>
+
 
       {/* Three scores */}
       <section className="mx-auto max-w-7xl px-5 py-20">
