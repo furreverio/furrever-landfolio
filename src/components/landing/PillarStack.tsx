@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import type { LucideIcon } from "lucide-react";
+import {
+  pillarIcons,
+  pillars as defaultPillars,
+  type PillarConfig,
+} from "@/config/pillars";
 
-export type Pillar = {
-  kicker: string;
-  icon: LucideIcon;
-  title: string;
-  cards: { label: string; value: string }[];
-};
-
-export function PillarStack({ pillars }: { pillars: Pillar[] }) {
+export function PillarStack({
+  pillars = defaultPillars,
+}: {
+  pillars?: PillarConfig[];
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
 
@@ -40,6 +41,7 @@ export function PillarStack({ pillars }: { pillars: Pillar[] }) {
         <div className="mx-auto w-full max-w-7xl px-5">
           <div className="relative">
             {pillars.map((p, i) => {
+              const Icon = pillarIcons[p.icon];
               const d = i - pos;
               const abs = Math.abs(d);
               const style: React.CSSProperties = {
@@ -50,7 +52,7 @@ export function PillarStack({ pillars }: { pillars: Pillar[] }) {
               };
               return (
                 <div
-                  key={p.kicker}
+                  key={p.id}
                   aria-hidden={i !== active}
                   className={
                     i === 0
@@ -62,15 +64,18 @@ export function PillarStack({ pillars }: { pillars: Pillar[] }) {
                   <div className="grid gap-6 rounded-3xl border border-border bg-card p-6 md:grid-cols-[1fr_2fr] md:p-8">
                     <div>
                       <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface-2">
-                        <p.icon className="h-5 w-5 text-ember" />
+                        <Icon className="h-5 w-5 text-ember" />
                       </div>
                       <div className="mt-5 text-xs uppercase tracking-[0.25em] text-ember">
                         {p.kicker}
                       </div>
                       <h3 className="mt-2 text-2xl leading-snug md:text-3xl">{p.title}</h3>
+                      {p.copy ? (
+                        <p className="mt-3 text-sm text-muted-foreground">{p.copy}</p>
+                      ) : null}
                     </div>
                     <div className="grid gap-3 sm:grid-cols-3">
-                      {p.cards.map((c) => (
+                      {p.metrics.map((c) => (
                         <div key={c.label} className="rounded-2xl bg-surface-2 p-5">
                           <div className="text-xs text-muted-foreground">{c.label}</div>
                           <div className="mt-3 font-display text-lg">{c.value}</div>
@@ -87,7 +92,7 @@ export function PillarStack({ pillars }: { pillars: Pillar[] }) {
           <div className="mt-10 flex justify-center gap-2">
             {pillars.map((p, i) => (
               <span
-                key={p.kicker}
+                key={p.id}
                 className={`h-1 rounded-full transition-all duration-300 ${
                   i === active ? "w-10 bg-ember" : "w-4 bg-surface-2"
                 }`}

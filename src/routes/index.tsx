@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  Activity,
   BatteryFull,
   Bell,
   Check,
@@ -47,39 +46,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const pillars = [
-  {
-    kicker: "Rest",
-    icon: Moon,
-    title: "Sleep that actually restores",
-    cards: [
-      { label: "Sleep stages", value: "Deep · Light · REM" },
-      { label: "Night restlessness", value: "-18% this week" },
-      { label: "Skin temp variance", value: "+0.3°C" },
-    ],
-  },
-  {
-    kicker: "Move",
-    icon: Activity,
-    title: "Every zoomie, counted",
-    cards: [
-      { label: "Active minutes", value: "94 min" },
-      { label: "Intensity zones", value: "3 of 5" },
-      { label: "Daily steps", value: "12,480" },
-    ],
-  },
-  {
-    kicker: "Watch",
-    icon: Heart,
-    title: "Vitals, before symptoms",
-    cards: [
-      { label: "Resting heart rate", value: "72 bpm" },
-      { label: "Respiratory rate", value: "18 brpm" },
-      { label: "Scratch & lick events", value: "6 today" },
-    ],
-  },
-];
 
 const science = [
   { icon: Heart, title: "Heart Rate Variability", copy: "Autonomic stress load, read overnight." },
@@ -236,7 +202,7 @@ function Index() {
             Better care <span className="text-muted-foreground">starts now</span>
           </h2>
         </div>
-        <PillarStack pillars={pillars} />
+        <PillarStack />
       </section>
 
 
