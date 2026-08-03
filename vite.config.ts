@@ -5,8 +5,8 @@ import { defineConfig } from "vite";
 import { nitro } from "nitro/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
-// GitHub Pages project site: https://<user>.github.io/<repo>/
-const base = process.env.BASE_PATH ?? "/";
+// Pages + custom domain (furrever.io) → "/". Project URL without custom domain → "/<repo>/".
+const base = process.env["BASE_PATH"] ?? "/";
 
 export default defineConfig({
   base,
@@ -19,7 +19,7 @@ export default defineConfig({
     tanstackStart({
       server: { entry: "server" },
       prerender: {
-        enabled: process.env.STATIC_EXPORT === "1",
+        enabled: process.env["STATIC_EXPORT"] === "1",
         crawlLinks: true,
         autoStaticPathsDiscovery: true,
         failOnError: true,

@@ -10,8 +10,10 @@ export const getRouter = () => {
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
-    // Matches Vite `base` (e.g. /furrever-landfolio/ on GitHub Pages)
-    basepath: import.meta.env.BASE_URL.replace(/\/$/, "") || undefined,
+    // Matches Vite `base` ("/" on furrever.io; "/<repo>/" on project Pages without a custom domain)
+    ...(import.meta.env.BASE_URL.replace(/\/$/, "")
+      ? { basepath: import.meta.env.BASE_URL.replace(/\/$/, "") }
+      : {}),
   });
 
   return router;
