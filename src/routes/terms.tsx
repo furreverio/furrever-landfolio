@@ -54,7 +54,7 @@ const sections = [
   },
   {
     h: "Governing law and contact",
-    p: "These terms are governed by the laws of India. Questions: support@furrever.pet (Locapaw Technologies Pvt Ltd).",
+    p: "These terms are governed by the laws of India. Questions: support@furrever.io (Locapaw Technologies Pvt Ltd).",
   },
 ];
 

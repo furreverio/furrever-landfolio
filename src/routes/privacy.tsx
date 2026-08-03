@@ -50,7 +50,7 @@ const sections = [
   },
   {
     h: "Contact",
-    p: "For privacy questions or requests, write to privacy@furrever.pet (Locapaw Technologies Pvt Ltd).",
+    p: "For privacy questions or requests, write to privacy@furrever.io (Locapaw Technologies Pvt Ltd).",
   },
 ];
 

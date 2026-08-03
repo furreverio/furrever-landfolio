@@ -133,12 +133,8 @@ function Index() {
         {/* Center launch + countdown */}
         <div className="absolute inset-x-0 bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-30 flex flex-col items-center gap-3 px-3 pb-2 sm:bottom-10 sm:gap-4 sm:px-4 md:bottom-[12%] md:gap-5">
           <p className="hero-launch">{launchLabel()}</p>
-          <div className="flex w-full max-w-md items-center justify-center gap-2 sm:gap-3 md:gap-4">
+          <div className="flex w-full max-w-md items-center justify-center">
             <Countdown variant="hero" />
-            <span
-              aria-hidden
-              className="hidden h-2 w-10 shrink-0 rounded-full bg-brand shadow-[0_0_18px_color-mix(in_oklab,var(--brand)_70%,transparent)] sm:block md:h-2.5 md:w-14"
-            />
           </div>
           <p className="hero-meta text-center md:hidden">24x7 Pet Health Tracker</p>
         </div>
