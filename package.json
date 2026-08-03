@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "build:pages": "STATIC_EXPORT=1 BASE_PATH=/companion-stats-hub/ vite build && cp .output/public/index.html .output/public/404.html",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const FRAME_COUNT = 84;
+const BASE = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 const FRAME_PATH = (i: number) =>
-  `/teardown-frames/frame-${String(i + 1).padStart(3, "0")}.jpg`;
+  `${BASE}teardown-frames/frame-${String(i + 1).padStart(3, "0")}.jpg`;
 
 /** Scroll length in viewport heights — longer = slower, more cinematic scrub. */
 const SCROLL_VH = 5.5;
@@ -159,11 +160,12 @@ export function TeardownScroll() {
             className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/80 to-transparent"
           />
 
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 px-5 pt-8 md:px-10 md:pt-12">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 px-5 pr-10 pt-8 md:px-10 md:pr-16 md:pt-12">
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-brand md:text-xs">
               Inside the collar
             </p>
-            <h2 className="mt-3 max-w-xl font-hero text-3xl font-semibold uppercase leading-[0.95] text-white md:text-5xl"
+            <h2
+              className="mt-3 max-w-[16ch] font-hero text-3xl font-semibold uppercase leading-[0.95] text-white md:max-w-[14ch] md:text-5xl"
               style={{ fontStretch: "72%" }}
             >
               A closer look, frame by frame
