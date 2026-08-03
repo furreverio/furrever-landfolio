@@ -1,18 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  BatteryFull,
-  Bell,
-  Check,
-  Droplets,
-  Heart,
-  MapPin,
-  Minus,
-  Moon,
-  PawPrint,
-  Thermometer,
-  Waves,
-  Wind,
-} from "lucide-react";
+import { Bell, Check, Heart, Minus, Moon, PawPrint, Thermometer, Waves, Wind } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -22,21 +9,21 @@ import {
 import { Countdown } from "@/components/landing/Countdown";
 import { ScoreDial } from "@/components/landing/ScoreDial";
 import { PillarStack } from "@/components/landing/PillarStack";
+import { SiteFooter } from "@/components/landing/SiteFooter";
 import heroCollar from "@/assets/hero-collar.jpg";
 import dogRunning from "@/assets/dog-running.jpg";
 import catSleep from "@/assets/cat-sleep.jpg";
-import colours from "@/assets/colours.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "TRACE Collar — 24x7 Pet Health Tracker" },
+      { title: "Furrever Collar — 24x7 Pet Health Tracker" },
       {
         name: "description",
         content:
-          "TRACE is a screenless smart collar that tracks your pet's sleep, recovery, activity and vitals 24x7. Pre-book and save ₹3,000.",
+          "Furrever is a screenless smart collar that tracks your pet's sleep, recovery, activity and vitals 24x7. Pre-book and save ₹3,000.",
       },
-      { property: "og:title", content: "TRACE Collar — 24x7 Pet Health Tracker" },
+      { property: "og:title", content: "Furrever Collar — 24x7 Pet Health Tracker" },
       {
         property: "og:description",
         content:
@@ -109,7 +96,7 @@ const specs = [
 
 const faqs = [
   {
-    q: "Which pets is TRACE built for?",
+    q: "Which pets is Furrever built for?",
     a: "Dogs and cats above 3 kg. The pod clips onto any collar between 24 and 62 cm, and the sensor stack is calibrated across coat densities and colours.",
   },
   {
@@ -138,7 +125,7 @@ function Index() {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
           <div className="flex items-center gap-2">
             <PawPrint className="h-5 w-5 text-brand" />
-            <span className="font-display text-lg tracking-tight">TRACE</span>
+            <span className="font-display text-lg tracking-tight">Furrever</span>
           </div>
           <div className="hidden md:block">
             <Countdown compact />
@@ -186,7 +173,7 @@ function Index() {
           </div>
           <img
             src={heroCollar}
-            alt="TRACE smart pet collar with brushed steel sensor pod"
+            alt="Furrever smart pet collar with brushed steel sensor pod"
             width={1408}
             height={1008}
             className="mx-auto mt-12 w-full max-w-3xl rounded-3xl"
@@ -237,7 +224,7 @@ function Index() {
           <div className="relative overflow-hidden rounded-3xl">
             <img
               src={dogRunning}
-              alt="Dog running at dusk wearing the TRACE collar"
+              alt="Dog running at dusk wearing the Furrever collar"
               loading="lazy"
               width={1408}
               height={1008}
@@ -254,7 +241,7 @@ function Index() {
           <div className="relative overflow-hidden rounded-3xl">
             <img
               src={catSleep}
-              alt="Cat sleeping while wearing the TRACE collar"
+              alt="Cat sleeping while wearing the Furrever collar"
               loading="lazy"
               width={1104}
               height={1104}
@@ -289,32 +276,13 @@ function Index() {
         </div>
       </section>
 
-      {/* Hardware strip */}
-      <section className="mx-auto max-w-7xl px-5 py-10">
-        <div className="grid gap-4 sm:grid-cols-3">
-          {[
-            { icon: BatteryFull, title: "14-Day Battery" },
-            { icon: MapPin, title: "In-app Location" },
-            { icon: Droplets, title: "IP68 Waterproof" },
-          ].map((f) => (
-            <div
-              key={f.title}
-              className="flex items-center gap-4 rounded-2xl bg-surface-2 px-6 py-7"
-            >
-              <f.icon className="h-6 w-6 text-brand" />
-              <span className="font-display text-lg">{f.title}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Comparison */}
       <section className="mx-auto max-w-4xl px-5 py-20">
         <h2 className="font-display text-4xl leading-tight md:text-5xl">Better everywhere</h2>
         <div className="mt-10 overflow-hidden rounded-3xl border border-border">
           <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-surface-2 px-5 py-4 text-sm">
             <span className="text-muted-foreground">Features</span>
-            <span className="text-center font-display text-brand">TRACE</span>
+            <span className="text-center font-display text-brand">Furrever</span>
             <span className="text-center text-muted-foreground">Other trackers</span>
           </div>
           {comparison.map((row) => (
@@ -338,28 +306,6 @@ function Index() {
                 )}
               </span>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Colours */}
-      <section className="mx-auto max-w-7xl px-5 py-20">
-        <h2 className="font-display text-4xl leading-tight md:text-5xl">
-          Colours that match <span className="text-muted-foreground">your pet</span>
-        </h2>
-        <img
-          src={colours}
-          alt="TRACE collar in black, sand, forest and brand colourways"
-          loading="lazy"
-          width={1408}
-          height={800}
-          className="mt-10 w-full rounded-3xl"
-        />
-        <div className="mt-6 flex flex-wrap gap-3 text-sm text-muted-foreground">
-          {["Midnight", "Sand", "Forest", "Ember"].map((c) => (
-            <span key={c} className="rounded-full border border-border px-4 py-1.5">
-              {c}
-            </span>
           ))}
         </div>
       </section>
@@ -414,7 +360,7 @@ function Index() {
           <Bell className="mx-auto h-6 w-6 text-brand" />
           <h2 className="mt-5 font-display text-4xl md:text-5xl">Get ₹3,000 off on launch</h2>
           <p className="mt-3 text-muted-foreground">
-            Reserve your TRACE collar today. Fully refundable, no subscription — ever.
+            Reserve your Furrever collar today. Fully refundable, no subscription — ever.
           </p>
           <div className="mt-8 flex justify-center">
             <Countdown />
@@ -428,15 +374,7 @@ function Index() {
         </div>
       </section>
 
-      <footer className="border-t border-border px-5 py-10">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <PawPrint className="h-4 w-4 text-brand" />
-            <span className="font-display text-foreground">TRACE</span>
-          </div>
-          <span>© {new Date().getFullYear()} TRACE Pet Wearables</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
