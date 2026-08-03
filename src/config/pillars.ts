@@ -3,7 +3,7 @@ import type { LucideIcon } from "lucide-react";
 
 /**
  * Content config for the scroll-jacked pillar stack.
- * Edit titles, copy and dial labels here — no component changes needed.
+ * Edit titles, copy and dial labels here - no component changes needed.
  */
 
 /** Icons available to pillars. Add more entries to expand the palette. */

@@ -53,6 +53,7 @@
   --color-surface-2: var(--surface-2);
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-hero: "Saira", "DM Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -124,4 +125,133 @@
 @utility glow-ring {
   box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 35%, transparent);
 }
+
+@utility font-hero {
+  font-family: var(--font-hero);
+}
+
+/* Hero overlay type */
+.hero-brand {
+  font-family: var(--font-hero);
+  font-weight: 700;
+  font-stretch: 72%;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.hero-kicker {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.7rem;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  color: color-mix(in oklab, var(--brand) 92%, white);
+}
+
+.hero-meta {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(0.68rem, 1.1vw, 0.82rem);
+  line-height: 1.2;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.hero-launch {
+  font-family: var(--font-hero);
+  font-weight: 600;
+  font-stretch: 78%;
+  font-size: clamp(0.78rem, 1.35vw, 1rem);
+  line-height: 1.15;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Hero flip countdown (Noise REP-inspired) */
+.flip-countdown {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.flip-countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.flip-card {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 3.25rem;
+  height: 3.1rem;
+  padding: 0 0.55rem;
+  border-radius: 0.4rem;
+  background: linear-gradient(180deg, #2a2a2a 0%, #141414 48%, #0d0d0d 52%, #1a1a1a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.flip-card__digit {
+  font-family: var(--font-hero);
+  font-size: 1.55rem;
+  font-weight: 650;
+  font-stretch: 85%;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.flip-card__seam {
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.flip-countdown__label {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (min-width: 768px) {
+  .hero-kicker {
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  .flip-countdown {
+    gap: 0.85rem;
+  }
+
+  .flip-card {
+    min-width: 4.25rem;
+    height: 4rem;
+    padding: 0 0.75rem;
+    border-radius: 0.5rem;
+  }
+
+  .flip-card__digit {
+    font-size: 2.2rem;
+  }
+
+  .flip-countdown__label {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+  }
+}
+
+
 

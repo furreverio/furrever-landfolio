@@ -6,29 +6,32 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Countdown } from "@/components/landing/Countdown";
+import { Countdown, launchLabel } from "@/components/landing/Countdown";
 import { ScoreDial } from "@/components/landing/ScoreDial";
 import { PillarStack } from "@/components/landing/PillarStack";
+import { ScienceCarousel } from "@/components/landing/ScienceCarousel";
 import { SiteFooter } from "@/components/landing/SiteFooter";
-import logo from "@/assets/furrever-logo.png";
-import heroCollar from "@/assets/hero-collar.jpg";
+import { PrebookButton } from "@/components/landing/prebook-context";
+import { TeardownScroll } from "@/components/landing/TeardownScroll";
+import logo from "@/assets/logo-white.png";
+import heroCollar from "@/assets/hero-collar.png";
 import dogRunning from "@/assets/dog-running.jpg";
 import catSleep from "@/assets/cat-sleep.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Furrever Collar — 24x7 Pet Health Tracker" },
+      { title: "Furrever Collar - 24x7 Pet Health Tracker" },
       {
         name: "description",
         content:
-          "Furrever is a screenless smart collar that tracks your pet's sleep, recovery, activity and vitals 24x7. Pre-book and save ₹3,000.",
+          "Furrever is a screenless smart collar that tracks your pet's sleep, recovery, activity and vitals 24x7. Pre-book now. Launch price under ₹10,000.",
       },
-      { property: "og:title", content: "Furrever Collar — 24x7 Pet Health Tracker" },
+      { property: "og:title", content: "Furrever Collar - 24x7 Pet Health Tracker" },
       {
         property: "og:description",
         content:
-          "Screenless smart collar tracking sleep, recovery and activity for dogs and cats. Pre-book and save ₹3,000.",
+          "Screenless smart collar tracking sleep, recovery and activity for dogs and cats. Pre-book now. Launch price under ₹10,000.",
       },
     ],
   }),
@@ -45,54 +48,13 @@ const science = [
 ];
 
 const comparison = [
-  { feature: "Price", trace: "₹7,999", others: "₹24,999" },
-  { feature: "Subscription", trace: "None", others: "₹18,000 / year" },
   { feature: "Heart rate variability", trace: true, others: false },
   { feature: "Recovery score", trace: true, others: false },
   { feature: "4-stage sleep tracking", trace: true, others: false },
   { feature: "Respiratory rate", trace: true, others: false },
   { feature: "Itch & scratch detection", trace: true, others: false },
   { feature: "Vet-ready health report", trace: true, others: false },
-  { feature: "Battery life", trace: "14 days", others: "3 days" },
-];
-
-const specs = [
-  {
-    group: "Health sensors",
-    rows: [
-      ["Heart rate", "Optical PPG, 24x7"],
-      ["Respiration", "Derived, sleep windows"],
-      ["Temperature", "Skin-contact thermistor"],
-      ["Motion", "6-axis accelerometer + gyro"],
-    ],
-  },
-  {
-    group: "Physical",
-    rows: [
-      ["Pod weight", "11 g"],
-      ["Neck size", "24 – 62 cm"],
-      ["Materials", "Stainless steel + soft silicone"],
-      ["Water resistance", "IP68 / 5 ATM"],
-    ],
-  },
-  {
-    group: "Connectivity",
-    rows: [
-      ["Bluetooth", "BLE 5.3"],
-      ["Range", "Up to 120 m open air"],
-      ["App", "iOS 15+ / Android 10+"],
-      ["Sync", "Automatic, background"],
-    ],
-  },
-  {
-    group: "Battery",
-    rows: [
-      ["Battery life", "Up to 14 days"],
-      ["Charging", "Magnetic pogo dock"],
-      ["Full charge", "70 minutes"],
-      ["Standby", "45 days"],
-    ],
-  },
+  { feature: "Battery life", trace: "45 days", others: "3 days" },
 ];
 
 const faqs = [
@@ -103,10 +65,6 @@ const faqs = [
   {
     q: "Does it work through thick fur?",
     a: "Yes. The contact plate sits against the skin at the underside of the neck, and the algorithm is trained on double-coated breeds like Huskies and Golden Retrievers.",
-  },
-  {
-    q: "Is there a monthly subscription?",
-    a: "No. Every insight, trend and vet report is included for life with the device.",
   },
   {
     q: "Can I share data with my vet?",
@@ -121,69 +79,73 @@ const faqs = [
 function Index() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Sticky pre-book bar */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
-          <div className="flex items-center gap-2">
-            <img src={logo} alt="Furrever logo" className="h-7 w-7" />
-            <span className="font-display text-lg tracking-tight">Furrever</span>
-          </div>
-          <div className="hidden md:block">
-            <Countdown compact />
-          </div>
-          <a
-            href="#prebook"
-            className="rounded-full bg-gradient-brand px-5 py-2 text-sm font-medium text-primary-foreground shadow-brand"
-          >
-            Pre-book now
+      {/* Sticky chrome */}
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black">
+        <div className="mx-auto flex h-12 max-w-[1400px] items-center justify-between gap-4 px-4 md:px-6">
+          <a href="#top" className="flex items-center gap-2.5">
+            <img src={logo} alt="" className="h-6 w-6" />
+            <span className="font-hero text-sm font-semibold tracking-wide text-white">
+              Furrever
+            </span>
           </a>
+          <div className="flex items-center gap-3 md:gap-5">
+            <p className="hidden text-xs text-white/70 sm:block">
+              Launch price under <span className="text-white">₹10,000</span>
+            </p>
+            <PrebookButton className="rounded-full border border-brand/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-brand hover:bg-brand/10 md:px-6 md:py-2.5 md:text-[13px]">
+              Pre-book now
+            </PrebookButton>
+          </div>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden pt-28 pb-16 md:pt-36">
-        <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[520px] w-[900px] -translate-x-1/2 opacity-40 blur-[120px]"
-          style={{ background: "var(--gradient-brand)" }}
-          aria-hidden
+      {/* Screen-wide hero */}
+      <section
+        id="top"
+        className="relative mt-12 min-h-[calc(100svh-3rem)] w-full overflow-hidden bg-black md:mt-12 md:aspect-[16/9] md:min-h-0"
+      >
+        <img
+          src={heroCollar}
+          alt="Furrever smart pet collar"
+          width={1446}
+          height={1087}
+          className="absolute inset-0 h-full w-full object-cover object-center select-none"
+          fetchPriority="high"
         />
-        <div className="relative mx-auto max-w-4xl px-5 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs uppercase tracking-[0.25em] text-muted-foreground">
-            24x7 pet health tracker
-          </span>
-          <h1 className="mt-6 font-display text-5xl leading-[0.95] md:text-7xl">
-            Know how your pet
-            <br />
-            <span className="text-gradient-brand">really feels.</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-            A screenless smart collar that reads sleep, recovery, vitals and behaviour — and tells
-            you what changed, before your pet can.
-          </p>
-          <div className="mt-10 flex justify-center">
-            <Countdown />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/70"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent"
+        />
+
+        {/* Edge labels */}
+        <div className="absolute left-4 top-5 z-20 max-w-[14rem] md:left-8 md:top-8 md:max-w-xs">
+          <p className="hero-brand text-[2.35rem] text-white md:text-[3.75rem]">Furrever</p>
+          <p className="hero-kicker mt-3">Know your pet, beyond the obvious.</p>
+        </div>
+        <p className="hero-meta absolute right-4 top-7 z-20 hidden md:right-8 md:top-10 md:block">
+          24x7 Pet Health Tracker
+        </p>
+
+        {/* Center launch + countdown */}
+        <div className="absolute inset-x-0 bottom-10 z-30 flex flex-col items-center gap-4 px-4 md:bottom-[12%] md:gap-5">
+          <p className="hero-launch text-center">{launchLabel()}</p>
+          <div className="flex items-center gap-3 md:gap-4">
+            <Countdown variant="hero" />
+            <span
+              aria-hidden
+              className="hidden h-2 w-10 rounded-full bg-brand shadow-[0_0_18px_color-mix(in_oklab,var(--brand)_70%,transparent)] sm:block md:h-2.5 md:w-14"
+            />
           </div>
-          <div className="mt-10">
-            <a
-              href="#prebook"
-              className="inline-flex items-center gap-3 rounded-full bg-gradient-brand px-7 py-3.5 font-medium text-primary-foreground shadow-brand"
-            >
-              Pre-book now
-              <span className="rounded-full bg-background/20 px-2 py-0.5 text-xs">₹3,000 off</span>
-            </a>
-          </div>
-          <img
-            src={heroCollar}
-            alt="Furrever smart pet collar with brushed steel sensor pod"
-            width={1408}
-            height={1008}
-            className="mx-auto mt-12 w-full max-w-3xl rounded-3xl"
-          />
+          <p className="hero-meta md:hidden">24x7 Pet Health Tracker</p>
         </div>
       </section>
 
       {/* Pillars */}
-      {/* Pillars — scroll-jacked stack */}
+      {/* Pillars - scroll-jacked stack */}
       <section className="pt-20">
         <div className="mx-auto max-w-7xl px-5">
           <h2 className="max-w-2xl font-display text-4xl leading-tight md:text-5xl">
@@ -193,6 +155,8 @@ function Index() {
         <PillarStack />
       </section>
 
+
+      <TeardownScroll />
 
       {/* Three scores */}
       <section className="mx-auto max-w-7xl px-5 py-20">
@@ -234,7 +198,7 @@ function Index() {
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background to-transparent p-8">
               <h3 className="font-display text-3xl">Insights that adapt</h3>
               <p className="mt-2 max-w-md text-sm text-muted-foreground">
-                Baselines are learned per pet — breed, age and temperament — so a change means
+                Baselines are learned per pet (breed, age and temperament), so a change means
                 something.
               </p>
             </div>
@@ -258,24 +222,8 @@ function Index() {
         </div>
       </section>
 
-      {/* Science grid */}
-      <section className="mx-auto max-w-7xl px-5 py-20">
-        <h2 className="font-display text-4xl leading-tight md:text-5xl">
-          Built on real animal science
-        </h2>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {science.map((s) => (
-            <div
-              key={s.title}
-              className="rounded-2xl border border-border bg-card p-6 transition-colors hover:border-brand/40"
-            >
-              <s.icon className="h-5 w-5 text-brand" />
-              <h3 className="mt-5 text-lg">{s.title}</h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">{s.copy}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Science carousel */}
+      <ScienceCarousel items={science} />
 
       {/* Comparison */}
       <section className="mx-auto max-w-4xl px-5 py-20">
@@ -311,28 +259,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Specs */}
-      <section className="mx-auto max-w-7xl px-5 py-20">
-        <h2 className="font-display text-4xl leading-tight md:text-5xl">
-          Technical specifications
-        </h2>
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {specs.map((s) => (
-            <div key={s.group} className="rounded-3xl border border-border bg-card p-7">
-              <h3 className="text-xs uppercase tracking-[0.25em] text-brand">{s.group}</h3>
-              <dl className="mt-5 space-y-3">
-                {s.rows.map(([k, v]) => (
-                  <div key={k} className="flex justify-between gap-6 border-b border-border pb-3">
-                    <dt className="text-sm text-muted-foreground">{k}</dt>
-                    <dd className="text-sm">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* FAQ */}
       <section className="mx-auto max-w-3xl px-5 py-20">
         <h2 className="font-display text-4xl leading-tight md:text-5xl">
@@ -359,19 +285,16 @@ function Index() {
         />
         <div className="relative mx-auto max-w-3xl rounded-3xl border border-border bg-card p-10 text-center">
           <Bell className="mx-auto h-6 w-6 text-brand" />
-          <h2 className="mt-5 font-display text-4xl md:text-5xl">Get ₹3,000 off on launch</h2>
+          <h2 className="mt-5 font-display text-4xl md:text-5xl">Pre-book for launch</h2>
           <p className="mt-3 text-muted-foreground">
-            Reserve your Furrever collar today. Fully refundable, no subscription — ever.
+            Final pricing is still being planned, and will stay under ₹10,000. Fully refundable.
           </p>
           <div className="mt-8 flex justify-center">
             <Countdown />
           </div>
-          <a
-            href="#prebook"
-            className="mt-10 inline-flex rounded-full bg-gradient-brand px-8 py-3.5 font-medium text-primary-foreground shadow-brand"
-          >
+          <PrebookButton className="mt-10 inline-flex rounded-full bg-gradient-brand px-8 py-3.5 font-medium text-primary-foreground shadow-brand">
             Pre-book now
-          </a>
+          </PrebookButton>
         </div>
       </section>
 

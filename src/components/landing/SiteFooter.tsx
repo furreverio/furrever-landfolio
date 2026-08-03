@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/furrever-logo.png";
+import logo from "@/assets/logo-white.png";
+import { PrebookButton } from "@/components/landing/prebook-context";
 
 export function SiteFooter() {
   return (
@@ -11,8 +12,7 @@ export function SiteFooter() {
             <span className="font-display text-xl">Furrever</span>
           </div>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            Pet health. Fitness. Longevity. Building a healthier, happier and longer life for every
-            pet.
+            Know your pet, beyond the obvious.
           </p>
         </div>
 
@@ -20,9 +20,7 @@ export function SiteFooter() {
           <h3 className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Product</h3>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <Link to="/" hash="prebook" className="hover:text-brand">
-                Pre-book
-              </Link>
+              <PrebookButton className="hover:text-brand">Pre-book</PrebookButton>
             </li>
             <li>
               <Link to="/" className="hover:text-brand">

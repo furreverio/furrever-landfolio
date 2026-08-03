@@ -1,17 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PawPrint } from "lucide-react";
 import { SiteFooter } from "@/components/landing/SiteFooter";
+import logo from "@/assets/logo-white.png";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — Furrever Pet Wearable" },
+      { title: "Privacy Policy - Furrever Pet Wearable" },
       {
         name: "description",
         content:
           "How Locapaw Technologies Pvt Ltd collects, uses and protects data from the Furrever pet health collar and app.",
       },
-      { property: "og:title", content: "Privacy Policy — Furrever" },
+      { property: "og:title", content: "Privacy Policy - Furrever" },
       {
         property: "og:description",
         content: "Data practices for the Furrever pet health collar and companion app.",
@@ -50,7 +50,7 @@ const sections = [
   },
   {
     h: "Contact",
-    p: "For privacy questions or requests, write to privacy@furrever.pet — Locapaw Technologies Pvt Ltd.",
+    p: "For privacy questions or requests, write to privacy@furrever.pet (Locapaw Technologies Pvt Ltd).",
   },
 ];
 
@@ -60,7 +60,7 @@ function Privacy() {
       <header className="border-b border-border">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
           <Link to="/" className="flex items-center gap-2">
-            <PawPrint className="h-5 w-5 text-brand" />
+            <img src={logo} alt="Furrever logo" className="h-7 w-7" />
             <span className="font-display text-lg tracking-tight">Furrever</span>
           </Link>
           <Link to="/" className="text-sm text-muted-foreground hover:text-brand">
