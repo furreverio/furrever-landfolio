@@ -91,11 +91,17 @@
     border-color: var(--color-border);
   }
 
+  html {
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
   }
 
   h1,
@@ -104,6 +110,13 @@
   .font-display {
     font-family: var(--font-display);
     letter-spacing: -0.03em;
+  }
+
+  img,
+  canvas,
+  video,
+  svg {
+    max-width: 100%;
   }
 }
 
@@ -130,68 +143,32 @@
   font-family: var(--font-hero);
 }
 
-/* Hero overlay type */
-.hero-brand {
-  font-family: var(--font-hero);
-  font-weight: 700;
-  font-stretch: 72%;
-  letter-spacing: -0.01em;
-  line-height: 0.92;
-  text-transform: uppercase;
-}
-
-.hero-kicker {
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: 0.7rem;
-  line-height: 1.35;
-  letter-spacing: 0.04em;
-  color: color-mix(in oklab, var(--brand) 92%, white);
-}
-
-.hero-meta {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: clamp(0.68rem, 1.1vw, 0.82rem);
-  line-height: 1.2;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.58);
-}
-
-.hero-launch {
-  font-family: var(--font-hero);
-  font-weight: 600;
-  font-stretch: 78%;
-  font-size: clamp(0.78rem, 1.35vw, 1rem);
-  line-height: 1.15;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
-}
-
 /* Hero flip countdown (Noise REP-inspired) */
 .flip-countdown {
   display: flex;
   align-items: flex-start;
-  gap: 0.65rem;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.4rem;
+  max-width: 100%;
 }
 
 .flip-countdown__unit {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.35rem;
+  min-width: 0;
 }
 
 .flip-card {
   position: relative;
   display: grid;
   place-items: center;
-  min-width: 3.25rem;
-  height: 3.1rem;
-  padding: 0 0.55rem;
-  border-radius: 0.4rem;
+  min-width: 2.55rem;
+  height: 2.55rem;
+  padding: 0 0.35rem;
+  border-radius: 0.35rem;
   background: linear-gradient(180deg, #2a2a2a 0%, #141414 48%, #0d0d0d 52%, #1a1a1a 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
@@ -199,7 +176,7 @@
 
 .flip-card__digit {
   font-family: var(--font-hero);
-  font-size: 1.55rem;
+  font-size: 1.2rem;
   font-weight: 650;
   font-stretch: 85%;
   line-height: 1;
@@ -219,17 +196,96 @@
 
 .flip-countdown__label {
   font-family: var(--font-sans);
-  font-size: 0.58rem;
+  font-size: 0.5rem;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
 }
 
+.hero-brand {
+  font-family: var(--font-hero);
+  font-weight: 700;
+  font-stretch: 72%;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  font-size: clamp(1.75rem, 9vw, 2.35rem);
+}
+
+.hero-kicker {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  color: color-mix(in oklab, var(--brand) 92%, white);
+  font-size: 0.68rem;
+  max-width: 16rem;
+}
+
+.hero-meta {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+  letter-spacing: 0.18em;
+  font-size: 0.62rem;
+}
+
+.hero-launch {
+  font-family: var(--font-hero);
+  font-weight: 600;
+  font-stretch: 78%;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(0.68rem, 3.2vw, 0.9rem);
+  letter-spacing: 0.14em;
+  padding-inline: 0.5rem;
+  text-align: center;
+}
+
+@media (min-width: 400px) {
+  .flip-countdown {
+    gap: 0.55rem;
+  }
+
+  .flip-card {
+    min-width: 3rem;
+    height: 2.9rem;
+    padding: 0 0.45rem;
+  }
+
+  .flip-card__digit {
+    font-size: 1.4rem;
+  }
+
+  .flip-countdown__label {
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+  }
+}
+
 @media (min-width: 768px) {
+  .hero-brand {
+    font-size: 3.75rem;
+  }
+
   .hero-kicker {
     font-size: 0.8rem;
     letter-spacing: 0.05em;
+    max-width: none;
+  }
+
+  .hero-launch {
+    font-size: 1rem;
+    letter-spacing: 0.22em;
+  }
+
+  .hero-meta {
+    font-size: clamp(0.68rem, 1.1vw, 0.82rem);
+    letter-spacing: 0.28em;
   }
 
   .flip-countdown {

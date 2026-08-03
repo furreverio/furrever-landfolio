@@ -78,22 +78,22 @@ const faqs = [
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-svh overflow-x-clip bg-background">
       {/* Sticky chrome */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black">
-        <div className="mx-auto flex h-12 max-w-[1400px] items-center justify-between gap-4 px-4 md:px-6">
-          <a href="#top" className="flex items-center gap-2.5">
-            <img src={logo} alt="" className="h-6 w-6" />
-            <span className="font-hero text-sm font-semibold tracking-wide text-white">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/95 pt-[env(safe-area-inset-top)] backdrop-blur-md">
+        <div className="mx-auto flex h-12 max-w-[1400px] items-center justify-between gap-3 px-4 sm:gap-4 md:px-6">
+          <a href="#top" className="flex min-w-0 items-center gap-2 sm:gap-2.5">
+            <img src={logo} alt="" className="h-6 w-6 shrink-0" />
+            <span className="font-hero truncate text-sm font-semibold tracking-wide text-white">
               Furrever
             </span>
           </a>
-          <div className="flex items-center gap-3 md:gap-5">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3 md:gap-5">
             <p className="hidden text-xs text-white/70 sm:block">
-              Launch price under <span className="text-white">₹10,000</span>
+              Under <span className="text-white">₹10,000</span>
             </p>
-            <PrebookButton className="rounded-full border border-brand/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-brand hover:bg-brand/10 md:px-6 md:py-2.5 md:text-[13px]">
-              Pre-book now
+            <PrebookButton className="rounded-full border border-brand/70 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:border-brand hover:bg-brand/10 sm:px-4 sm:text-[11px] sm:tracking-[0.14em] md:px-6 md:py-2.5 md:text-[13px]">
+              Pre-book
             </PrebookButton>
           </div>
         </div>
@@ -102,68 +102,66 @@ function Index() {
       {/* Screen-wide hero */}
       <section
         id="top"
-        className="relative mt-12 min-h-[calc(100svh-3rem)] w-full overflow-hidden bg-black md:mt-12 md:aspect-[16/9] md:min-h-0"
+        className="relative mt-[calc(3rem+env(safe-area-inset-top))] min-h-[calc(100svh-3rem-env(safe-area-inset-top))] w-full overflow-hidden bg-black md:aspect-video md:min-h-0"
       >
         <img
           src={heroCollar}
           alt="Furrever smart pet collar"
           width={1446}
           height={1087}
-          className="absolute inset-0 h-full w-full object-cover object-center select-none"
+          className="absolute inset-0 h-full w-full object-cover object-[center_42%] select-none sm:object-center"
           fetchPriority="high"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/70"
+          className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-black/75"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-black/85 to-transparent"
         />
 
         {/* Edge labels */}
-        <div className="absolute left-4 top-5 z-20 max-w-[14rem] md:left-8 md:top-8 md:max-w-xs">
-          <p className="hero-brand text-[2.35rem] text-white md:text-[3.75rem]">Furrever</p>
-          <p className="hero-kicker mt-3">Know your pet, beyond the obvious.</p>
+        <div className="absolute left-4 top-4 z-20 max-w-[min(70vw,14rem)] sm:left-5 sm:top-5 md:left-8 md:top-8 md:max-w-xs">
+          <p className="hero-brand text-white">Furrever</p>
+          <p className="hero-kicker mt-2 sm:mt-3">Know your pet, beyond the obvious.</p>
         </div>
-        <p className="hero-meta absolute right-4 top-7 z-20 hidden md:right-8 md:top-10 md:block">
+        <p className="hero-meta absolute right-4 top-5 z-20 hidden md:right-8 md:top-10 md:block">
           24x7 Pet Health Tracker
         </p>
 
         {/* Center launch + countdown */}
-        <div className="absolute inset-x-0 bottom-10 z-30 flex flex-col items-center gap-4 px-4 md:bottom-[12%] md:gap-5">
-          <p className="hero-launch text-center">{launchLabel()}</p>
-          <div className="flex items-center gap-3 md:gap-4">
+        <div className="absolute inset-x-0 bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-30 flex flex-col items-center gap-3 px-3 pb-2 sm:bottom-10 sm:gap-4 sm:px-4 md:bottom-[12%] md:gap-5">
+          <p className="hero-launch">{launchLabel()}</p>
+          <div className="flex w-full max-w-md items-center justify-center gap-2 sm:gap-3 md:gap-4">
             <Countdown variant="hero" />
             <span
               aria-hidden
-              className="hidden h-2 w-10 rounded-full bg-brand shadow-[0_0_18px_color-mix(in_oklab,var(--brand)_70%,transparent)] sm:block md:h-2.5 md:w-14"
+              className="hidden h-2 w-10 shrink-0 rounded-full bg-brand shadow-[0_0_18px_color-mix(in_oklab,var(--brand)_70%,transparent)] sm:block md:h-2.5 md:w-14"
             />
           </div>
-          <p className="hero-meta md:hidden">24x7 Pet Health Tracker</p>
+          <p className="hero-meta text-center md:hidden">24x7 Pet Health Tracker</p>
         </div>
       </section>
 
       {/* Pillars */}
-      {/* Pillars - scroll-jacked stack */}
-      <section className="pt-20">
-        <div className="mx-auto max-w-7xl px-5">
-          <h2 className="max-w-2xl font-display text-4xl leading-tight md:text-5xl">
+      <section className="pt-12 sm:pt-16 md:pt-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-5">
+          <h2 className="max-w-2xl font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
             Better care <span className="text-muted-foreground">starts now</span>
           </h2>
         </div>
         <PillarStack />
       </section>
 
-
       <TeardownScroll />
 
       {/* Three scores */}
-      <section className="mx-auto max-w-7xl px-5 py-20">
-        <h2 className="font-display text-4xl leading-tight md:text-5xl">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-20">
+        <h2 className="font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
           Your pet, in three scores.
         </h2>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-3">
           <ScoreDial
             value={86}
             label="Sleep"
@@ -184,36 +182,36 @@ function Index() {
       </section>
 
       {/* Lifestyle split */}
-      <section className="mx-auto max-w-7xl px-5 py-10">
-        <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
-          <div className="relative overflow-hidden rounded-3xl">
+      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-5 sm:py-10">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-[1.4fr_1fr]">
+          <div className="relative min-h-[280px] overflow-hidden rounded-2xl sm:min-h-[340px] sm:rounded-3xl md:min-h-0">
             <img
               src={dogRunning}
               alt="Dog running at dusk wearing the Furrever collar"
               loading="lazy"
               width={1408}
               height={1008}
-              className="h-full w-full object-cover"
+              className="h-full min-h-[280px] w-full object-cover sm:min-h-[340px] md:min-h-full"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background to-transparent p-8">
-              <h3 className="font-display text-3xl">Insights that adapt</h3>
+            <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-background to-transparent p-5 sm:p-8">
+              <h3 className="font-display text-2xl sm:text-3xl">Insights that adapt</h3>
               <p className="mt-2 max-w-md text-sm text-muted-foreground">
                 Baselines are learned per pet (breed, age and temperament), so a change means
                 something.
               </p>
             </div>
           </div>
-          <div className="relative overflow-hidden rounded-3xl">
+          <div className="relative min-h-[240px] overflow-hidden rounded-2xl sm:min-h-[300px] sm:rounded-3xl md:min-h-0">
             <img
               src={catSleep}
               alt="Cat sleeping while wearing the Furrever collar"
               loading="lazy"
               width={1104}
               height={1104}
-              className="h-full w-full object-cover"
+              className="h-full min-h-[240px] w-full object-cover sm:min-h-[300px] md:min-h-full"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background to-transparent p-8">
-              <h3 className="font-display text-3xl">Quiet by design</h3>
+            <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-background to-transparent p-5 sm:p-8">
+              <h3 className="font-display text-2xl sm:text-3xl">Quiet by design</h3>
               <p className="mt-2 text-sm text-muted-foreground">
                 No screen, no beeps, no lights at night.
               </p>
@@ -226,48 +224,52 @@ function Index() {
       <ScienceCarousel items={science} />
 
       {/* Comparison */}
-      <section className="mx-auto max-w-4xl px-5 py-20">
-        <h2 className="font-display text-4xl leading-tight md:text-5xl">Better everywhere</h2>
-        <div className="mt-10 overflow-hidden rounded-3xl border border-border">
-          <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-surface-2 px-5 py-4 text-sm">
-            <span className="text-muted-foreground">Features</span>
-            <span className="text-center font-display text-brand">Furrever</span>
-            <span className="text-center text-muted-foreground">Other trackers</span>
-          </div>
-          {comparison.map((row) => (
-            <div
-              key={row.feature}
-              className="grid grid-cols-[1.4fr_1fr_1fr] items-center border-t border-border px-5 py-4 text-sm"
-            >
-              <span>{row.feature}</span>
-              <span className="flex justify-center">
-                {row.trace === true ? (
-                  <Check className="h-4 w-4 text-brand" />
-                ) : (
-                  <span className="font-display">{row.trace}</span>
-                )}
-              </span>
-              <span className="flex justify-center text-muted-foreground">
-                {row.others === false ? (
-                  <Minus className="h-4 w-4" />
-                ) : (
-                  <span className="font-display">{row.others}</span>
-                )}
-              </span>
+      <section className="mx-auto max-w-4xl px-4 py-14 sm:px-5 sm:py-20">
+        <h2 className="font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
+          Better everywhere
+        </h2>
+        <div className="mt-8 -mx-4 overflow-x-auto px-4 sm:mx-0 sm:mt-10 sm:overflow-visible sm:px-0">
+          <div className="min-w-[32rem] overflow-hidden rounded-2xl border border-border sm:min-w-0 sm:rounded-3xl">
+            <div className="grid grid-cols-[1.5fr_1fr_1fr] bg-surface-2 px-3 py-3 text-xs sm:px-5 sm:py-4 sm:text-sm">
+              <span className="text-muted-foreground">Features</span>
+              <span className="text-center font-display text-brand">Furrever</span>
+              <span className="text-center text-muted-foreground">Others</span>
             </div>
-          ))}
+            {comparison.map((row) => (
+              <div
+                key={row.feature}
+                className="grid grid-cols-[1.5fr_1fr_1fr] items-center border-t border-border px-3 py-3 text-xs sm:px-5 sm:py-4 sm:text-sm"
+              >
+                <span className="pr-2 leading-snug">{row.feature}</span>
+                <span className="flex justify-center">
+                  {row.trace === true ? (
+                    <Check className="h-4 w-4 text-brand" />
+                  ) : (
+                    <span className="font-display">{row.trace}</span>
+                  )}
+                </span>
+                <span className="flex justify-center text-muted-foreground">
+                  {row.others === false ? (
+                    <Minus className="h-4 w-4" />
+                  ) : (
+                    <span className="font-display">{row.others}</span>
+                  )}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-3xl px-5 py-20">
-        <h2 className="font-display text-4xl leading-tight md:text-5xl">
+      <section className="mx-auto max-w-3xl px-4 py-14 sm:px-5 sm:py-20">
+        <h2 className="font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
           Frequently asked questions
         </h2>
-        <Accordion type="single" collapsible className="mt-10">
+        <Accordion type="single" collapsible className="mt-8 sm:mt-10">
           {faqs.map((f) => (
             <AccordionItem key={f.q} value={f.q} className="border-border">
-              <AccordionTrigger className="text-left text-base">{f.q}</AccordionTrigger>
+              <AccordionTrigger className="text-left text-sm sm:text-base">{f.q}</AccordionTrigger>
               <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
                 {f.a}
               </AccordionContent>
@@ -277,22 +279,27 @@ function Index() {
       </section>
 
       {/* Pre-book CTA */}
-      <section id="prebook" className="relative overflow-hidden px-5 py-24">
+      <section
+        id="prebook"
+        className="relative overflow-hidden px-4 py-16 sm:px-5 sm:py-20 md:py-24"
+      >
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[400px] w-[700px] -translate-x-1/2 -translate-y-1/2 opacity-30 blur-[120px]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[min(100vw,700px)] -translate-x-1/2 -translate-y-1/2 opacity-30 blur-[100px] sm:h-[400px]"
           style={{ background: "var(--gradient-brand)" }}
           aria-hidden
         />
-        <div className="relative mx-auto max-w-3xl rounded-3xl border border-border bg-card p-10 text-center">
+        <div className="relative mx-auto max-w-3xl rounded-2xl border border-border bg-card p-6 text-center sm:rounded-3xl sm:p-10">
           <Bell className="mx-auto h-6 w-6 text-brand" />
-          <h2 className="mt-5 font-display text-4xl md:text-5xl">Pre-book for launch</h2>
-          <p className="mt-3 text-muted-foreground">
+          <h2 className="mt-4 font-display text-3xl sm:mt-5 sm:text-4xl md:text-5xl">
+            Pre-book for launch
+          </h2>
+          <p className="mt-3 text-sm text-muted-foreground sm:text-base">
             Final pricing is still being planned, and will stay under ₹10,000. Fully refundable.
           </p>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-6 flex justify-center overflow-x-auto sm:mt-8">
             <Countdown />
           </div>
-          <PrebookButton className="mt-10 inline-flex rounded-full bg-gradient-brand px-8 py-3.5 font-medium text-primary-foreground shadow-brand">
+          <PrebookButton className="mt-8 inline-flex w-full max-w-xs justify-center rounded-full bg-gradient-brand px-8 py-3.5 font-medium text-primary-foreground shadow-brand sm:mt-10 sm:w-auto">
             Pre-book now
           </PrebookButton>
         </div>

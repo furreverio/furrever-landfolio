@@ -27,6 +27,7 @@ jobs:
           bun-version: latest
 
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v6
 
       - name: Install dependencies
@@ -34,6 +35,9 @@ jobs:
 
       - name: Build static site for GitHub Pages
         run: bun run build:pages
+        env:
+          # Project Pages live at https://<org>.github.io/<repo>/
+          BASE_PATH: /${{ github.event.repository.name }}/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
