@@ -5,20 +5,23 @@ import logo from "@/assets/logo-white.png";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy - Furrever Pet Wearable" },
+      { title: "Privacy Policy | Furrever Smart Pet Collar" },
       {
         name: "description",
         content:
-          "How Locapaw Technologies Pvt Ltd collects, uses and protects data from the Furrever pet health collar and app.",
+          "How Locapaw Technologies Pvt Ltd collects, uses and protects data from the Furrever smart pet collar and app.",
       },
-      { property: "og:title", content: "Privacy Policy - Furrever" },
+      { property: "og:title", content: "Privacy Policy | Furrever Smart Pet Collar" },
       {
         property: "og:description",
-        content: "Data practices for the Furrever pet health collar and companion app.",
+        content: "Data practices for the Furrever smart pet collar and companion app.",
       },
       { property: "og:type", content: "article" },
+      { property: "og:url", content: "https://furrever.io/privacy" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "index, follow" },
     ],
+    links: [{ rel: "canonical", href: "https://furrever.io/privacy" }],
   }),
   component: Privacy,
 });

@@ -126,7 +126,7 @@ export function PrebookModal({
             <DialogHeader>
               <DialogTitle className="font-display text-2xl">Pre-book Furrever</DialogTitle>
               <DialogDescription>
-                Launch price under ₹10,000. Leave your details and we'll reserve your spot.
+                Launch price under ₹7,000. Leave your details and we'll reserve your spot.
               </DialogDescription>
             </DialogHeader>
 

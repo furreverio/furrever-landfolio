@@ -5,7 +5,7 @@ const BASE = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 const FRAME_PATH = (i: number) =>
   `${BASE}teardown-frames/frame-${String(i + 1).padStart(3, "0")}.jpg`;
 
-/** Scroll length in viewport heights — longer = slower, more cinematic scrub. */
+/** Scroll length in viewport heights - longer = slower, more cinematic scrub. */
 const SCROLL_VH = 5.5;
 
 function isNarrowViewport() {
@@ -52,7 +52,7 @@ export function TeardownScroll() {
     };
   }, []);
 
-  // Draw helpers — contain on mobile so the whole product stays visible;
+  // Draw helpers - contain on mobile so the whole product stays visible;
   // cover on desktop for full-bleed cinematic scrub.
   const drawFrame = (index: number) => {
     const canvas = canvasRef.current;
@@ -172,7 +172,7 @@ export function TeardownScroll() {
             </div>
           ) : null}
 
-          {/* Soft vignette — desktop only; mobile uses letterbox black */}
+          {/* Soft vignette - desktop only; mobile uses letterbox black */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 hidden h-28 bg-gradient-to-b from-black/70 to-transparent md:block"

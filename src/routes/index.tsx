@@ -21,19 +21,40 @@ import catSleep from "@/assets/cat-sleep.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Furrever Collar - 24x7 Pet Health Tracker" },
+      {
+        title:
+          "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
+      },
       {
         name: "description",
         content:
-          "Furrever is a screenless smart collar that tracks your pet's sleep, recovery, activity and vitals 24x7. Pre-book now. Launch price under ₹10,000.",
+          "Furrever is a screenless smart collar that tracks sleep, recovery, activity and vitals for dogs and cats, 24/7. Pre-book now. Launch price under ₹7,000.",
       },
-      { property: "og:title", content: "Furrever Collar - 24x7 Pet Health Tracker" },
+      {
+        property: "og:title",
+        content:
+          "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
+      },
       {
         property: "og:description",
         content:
-          "Screenless smart collar tracking sleep, recovery and activity for dogs and cats. Pre-book now. Launch price under ₹10,000.",
+          "Know your pet beyond the obvious. Track sleep, recovery, activity and vitals with a screenless smart collar. Pre-book under ₹7,000.",
       },
+      { property: "og:url", content: "https://furrever.io/" },
+      { property: "og:site_name", content: "Furrever" },
+      {
+        name: "twitter:title",
+        content:
+          "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Screenless smart collar for dogs and cats. Sleep, recovery, activity and vitals, tracked 24/7. Pre-book under ₹7,000.",
+      },
+      { name: "robots", content: "index, follow" },
     ],
+    links: [{ rel: "canonical", href: "https://furrever.io/" }],
   }),
   component: Index,
 });
@@ -90,7 +111,7 @@ function Index() {
           </a>
           <div className="flex shrink-0 items-center gap-2 sm:gap-3 md:gap-5">
             <p className="hidden text-xs text-white/70 sm:block">
-              Under <span className="text-white">₹10,000</span>
+              Under <span className="text-white">₹7,000</span>
             </p>
             <PrebookButton className="rounded-full border border-brand/70 px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-brand hover:bg-brand/10 sm:px-4 sm:text-[11px] md:px-6 md:py-2.5 md:text-[13px]">
               Pre-book
@@ -290,7 +311,7 @@ function Index() {
             Pre-book for launch
           </h2>
           <p className="mt-3 text-sm text-muted-foreground sm:text-base">
-            Final pricing is still being planned, and will stay under ₹10,000. Fully refundable.
+            Final pricing is still being planned, and will stay under ₹7,000. Fully refundable.
           </p>
           <div className="mt-6 flex justify-center overflow-x-auto sm:mt-8">
             <Countdown />

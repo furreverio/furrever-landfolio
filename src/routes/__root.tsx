@@ -74,21 +74,44 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "Furrever - 24x7 Pet Health Tracker" },
+      {
+        title:
+          "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
+      },
       {
         name: "description",
-        content: "A screenless smart collar that tracks your pet's sleep, recovery and activity.",
+        content:
+          "Furrever is a screenless smart collar that tracks sleep, recovery, activity and vitals for dogs and cats, 24/7. Pre-book now. Launch price under ₹7,000.",
       },
-      { property: "og:title", content: "Furrever - 24x7 Pet Health Tracker" },
+      {
+        property: "og:title",
+        content:
+          "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
+      },
       {
         property: "og:description",
-        content: "A screenless smart collar that tracks your pet's sleep, recovery and activity.",
+        content:
+          "Know your pet beyond the obvious. Track sleep, recovery, activity and vitals with a screenless smart collar. Pre-book under ₹7,000.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Furrever" },
+      { property: "og:url", content: "https://furrever.io/" },
       { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:title",
+        content:
+          "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Screenless smart collar for dogs and cats. Sleep, recovery, activity and vitals, tracked 24/7. Pre-book under ₹7,000.",
+      },
+      { name: "robots", content: "index, follow" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "canonical", href: "https://furrever.io/" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
