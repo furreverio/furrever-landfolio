@@ -10,7 +10,7 @@ export const getRouter = () => {
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
-    // Matches Vite `base` (e.g. /companion-stats-hub/ on GitHub Pages)
+    // Matches Vite `base` (e.g. /furrever-landfolio/ on GitHub Pages)
     basepath: import.meta.env.BASE_URL.replace(/\/$/, "") || undefined,
   });
 
