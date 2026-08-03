@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { PawPrint } from "lucide-react";
+import logo from "@/assets/furrever-logo.png";
 
 export function SiteFooter() {
   return (
@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2">
-            <PawPrint className="h-5 w-5 text-brand" />
+            <img src={logo} alt="Furrever logo" className="h-7 w-7" />
             <span className="font-display text-xl">Furrever</span>
           </div>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">

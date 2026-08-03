@@ -57,31 +57,31 @@
 
 :root {
   --radius: 1rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.23 0.02 200);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.23 0.02 200);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.23 0.02 200);
-  --primary: oklch(0.66 0.13 178);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.008 210);
-  --secondary-foreground: oklch(0.28 0.02 200);
-  --muted: oklch(0.95 0.008 210);
-  --muted-foreground: oklch(0.55 0.015 210);
-  --accent: oklch(0.94 0.03 195);
-  --accent-foreground: oklch(0.28 0.02 200);
-  --destructive: oklch(0.66 0.19 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.9 0.01 210);
-  --input: oklch(0.9 0.01 210);
-  --ring: oklch(0.66 0.13 178);
-  --brand: oklch(0.66 0.13 178);
-  --brand-glow: oklch(0.79 0.13 178);
-  --violet-accent: oklch(0.62 0.23 292);
-  --surface: oklch(0.97 0.005 210);
-  --surface-2: oklch(0.94 0.008 210);
-  --gradient-brand: linear-gradient(120deg, oklch(0.6 0.12 178), oklch(0.79 0.13 178), oklch(0.72 0.14 216), oklch(0.62 0.23 292));
+  --background: oklch(0.17 0.02 250);
+  --foreground: oklch(0.97 0.005 210);
+  --card: oklch(0.21 0.022 250);
+  --card-foreground: oklch(0.97 0.005 210);
+  --popover: oklch(0.21 0.022 250);
+  --popover-foreground: oklch(0.97 0.005 210);
+  --primary: oklch(0.74 0.14 178);
+  --primary-foreground: oklch(0.17 0.02 250);
+  --secondary: oklch(0.26 0.022 250);
+  --secondary-foreground: oklch(0.95 0.005 210);
+  --muted: oklch(0.26 0.022 250);
+  --muted-foreground: oklch(0.72 0.015 215);
+  --accent: oklch(0.3 0.04 195);
+  --accent-foreground: oklch(0.96 0.005 210);
+  --destructive: oklch(0.62 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.3 0.02 250);
+  --input: oklch(0.3 0.02 250);
+  --ring: oklch(0.74 0.14 178);
+  --brand: oklch(0.75 0.14 178);
+  --brand-glow: oklch(0.85 0.13 190);
+  --violet-accent: oklch(0.68 0.2 292);
+  --surface: oklch(0.2 0.02 250);
+  --surface-2: oklch(0.24 0.022 250);
+  --gradient-brand: linear-gradient(120deg, oklch(0.72 0.14 165), oklch(0.83 0.13 185), oklch(0.78 0.14 216), oklch(0.68 0.2 292));
   --shadow-brand: 0 20px 60px -20px color-mix(in oklab, var(--brand) 45%, transparent);
 }
 

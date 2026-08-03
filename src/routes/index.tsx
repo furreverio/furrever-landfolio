@@ -10,6 +10,7 @@ import { Countdown } from "@/components/landing/Countdown";
 import { ScoreDial } from "@/components/landing/ScoreDial";
 import { PillarStack } from "@/components/landing/PillarStack";
 import { SiteFooter } from "@/components/landing/SiteFooter";
+import logo from "@/assets/furrever-logo.png";
 import heroCollar from "@/assets/hero-collar.jpg";
 import dogRunning from "@/assets/dog-running.jpg";
 import catSleep from "@/assets/cat-sleep.jpg";
@@ -124,7 +125,7 @@ function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
           <div className="flex items-center gap-2">
-            <PawPrint className="h-5 w-5 text-brand" />
+            <img src={logo} alt="Furrever logo" className="h-7 w-7" />
             <span className="font-display text-lg tracking-tight">Furrever</span>
           </div>
           <div className="hidden md:block">
