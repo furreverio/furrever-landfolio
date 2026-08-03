@@ -64,9 +64,9 @@ export function PillarStack({
                   <div className="grid gap-6 rounded-3xl border border-border bg-card p-6 md:grid-cols-[1fr_2fr] md:p-8">
                     <div>
                       <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface-2">
-                        <Icon className="h-5 w-5 text-ember" />
+                        <Icon className="h-5 w-5 text-brand" />
                       </div>
-                      <div className="mt-5 text-xs uppercase tracking-[0.25em] text-ember">
+                      <div className="mt-5 text-xs uppercase tracking-[0.25em] text-brand">
                         {p.kicker}
                       </div>
                       <h3 className="mt-2 text-2xl leading-snug md:text-3xl">{p.title}</h3>
@@ -94,7 +94,7 @@ export function PillarStack({
               <span
                 key={p.id}
                 className={`h-1 rounded-full transition-all duration-300 ${
-                  i === active ? "w-10 bg-ember" : "w-4 bg-surface-2"
+                  i === active ? "w-10 bg-brand" : "w-4 bg-surface-2"
                 }`}
               />
             ))}

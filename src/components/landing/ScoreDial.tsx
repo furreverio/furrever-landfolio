@@ -40,7 +40,7 @@ export function ScoreDial({
   return (
     <div
       ref={ref}
-      className="rounded-3xl border border-border bg-card p-8 transition-colors hover:border-ember/40"
+      className="rounded-3xl border border-border bg-card p-8 transition-colors hover:border-brand/40"
     >
       <div className="relative h-28 w-28">
         <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
@@ -50,7 +50,7 @@ export function ScoreDial({
             cy="50"
             r="42"
             fill="none"
-            stroke="var(--ember)"
+            stroke="var(--brand)"
             strokeWidth="8"
             strokeLinecap="round"
             strokeDasharray={`${(pct / 100) * 264} 264`}

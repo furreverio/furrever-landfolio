@@ -137,7 +137,7 @@ function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
           <div className="flex items-center gap-2">
-            <PawPrint className="h-5 w-5 text-ember" />
+            <PawPrint className="h-5 w-5 text-brand" />
             <span className="font-display text-lg tracking-tight">TRACE</span>
           </div>
           <div className="hidden md:block">
@@ -145,7 +145,7 @@ function Index() {
           </div>
           <a
             href="#prebook"
-            className="rounded-full bg-gradient-ember px-5 py-2 text-sm font-medium text-primary-foreground shadow-ember"
+            className="rounded-full bg-gradient-brand px-5 py-2 text-sm font-medium text-primary-foreground shadow-brand"
           >
             Pre-book now
           </a>
@@ -156,7 +156,7 @@ function Index() {
       <section className="relative overflow-hidden pt-28 pb-16 md:pt-36">
         <div
           className="pointer-events-none absolute left-1/2 top-0 h-[520px] w-[900px] -translate-x-1/2 opacity-40 blur-[120px]"
-          style={{ background: "var(--gradient-ember)" }}
+          style={{ background: "var(--gradient-brand)" }}
           aria-hidden
         />
         <div className="relative mx-auto max-w-4xl px-5 text-center">
@@ -166,7 +166,7 @@ function Index() {
           <h1 className="mt-6 font-display text-5xl leading-[0.95] md:text-7xl">
             Know how your pet
             <br />
-            <span className="text-gradient-ember">really feels.</span>
+            <span className="text-gradient-brand">really feels.</span>
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
             A screenless smart collar that reads sleep, recovery, vitals and behaviour — and tells
@@ -178,7 +178,7 @@ function Index() {
           <div className="mt-10">
             <a
               href="#prebook"
-              className="inline-flex items-center gap-3 rounded-full bg-gradient-ember px-7 py-3.5 font-medium text-primary-foreground shadow-ember"
+              className="inline-flex items-center gap-3 rounded-full bg-gradient-brand px-7 py-3.5 font-medium text-primary-foreground shadow-brand"
             >
               Pre-book now
               <span className="rounded-full bg-background/20 px-2 py-0.5 text-xs">₹3,000 off</span>
@@ -279,9 +279,9 @@ function Index() {
           {science.map((s) => (
             <div
               key={s.title}
-              className="rounded-2xl border border-border bg-card p-6 transition-colors hover:border-ember/40"
+              className="rounded-2xl border border-border bg-card p-6 transition-colors hover:border-brand/40"
             >
-              <s.icon className="h-5 w-5 text-ember" />
+              <s.icon className="h-5 w-5 text-brand" />
               <h3 className="mt-5 text-lg">{s.title}</h3>
               <p className="mt-1.5 text-sm text-muted-foreground">{s.copy}</p>
             </div>
@@ -301,7 +301,7 @@ function Index() {
               key={f.title}
               className="flex items-center gap-4 rounded-2xl bg-surface-2 px-6 py-7"
             >
-              <f.icon className="h-6 w-6 text-ember" />
+              <f.icon className="h-6 w-6 text-brand" />
               <span className="font-display text-lg">{f.title}</span>
             </div>
           ))}
@@ -314,7 +314,7 @@ function Index() {
         <div className="mt-10 overflow-hidden rounded-3xl border border-border">
           <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-surface-2 px-5 py-4 text-sm">
             <span className="text-muted-foreground">Features</span>
-            <span className="text-center font-display text-ember">TRACE</span>
+            <span className="text-center font-display text-brand">TRACE</span>
             <span className="text-center text-muted-foreground">Other trackers</span>
           </div>
           {comparison.map((row) => (
@@ -325,7 +325,7 @@ function Index() {
               <span>{row.feature}</span>
               <span className="flex justify-center">
                 {row.trace === true ? (
-                  <Check className="h-4 w-4 text-ember" />
+                  <Check className="h-4 w-4 text-brand" />
                 ) : (
                   <span className="font-display">{row.trace}</span>
                 )}
@@ -349,7 +349,7 @@ function Index() {
         </h2>
         <img
           src={colours}
-          alt="TRACE collar in black, sand, forest and ember colourways"
+          alt="TRACE collar in black, sand, forest and brand colourways"
           loading="lazy"
           width={1408}
           height={800}
@@ -372,7 +372,7 @@ function Index() {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {specs.map((s) => (
             <div key={s.group} className="rounded-3xl border border-border bg-card p-7">
-              <h3 className="text-xs uppercase tracking-[0.25em] text-ember">{s.group}</h3>
+              <h3 className="text-xs uppercase tracking-[0.25em] text-brand">{s.group}</h3>
               <dl className="mt-5 space-y-3">
                 {s.rows.map(([k, v]) => (
                   <div key={k} className="flex justify-between gap-6 border-b border-border pb-3">
@@ -407,11 +407,11 @@ function Index() {
       <section id="prebook" className="relative overflow-hidden px-5 py-24">
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 h-[400px] w-[700px] -translate-x-1/2 -translate-y-1/2 opacity-30 blur-[120px]"
-          style={{ background: "var(--gradient-ember)" }}
+          style={{ background: "var(--gradient-brand)" }}
           aria-hidden
         />
         <div className="relative mx-auto max-w-3xl rounded-3xl border border-border bg-card p-10 text-center">
-          <Bell className="mx-auto h-6 w-6 text-ember" />
+          <Bell className="mx-auto h-6 w-6 text-brand" />
           <h2 className="mt-5 font-display text-4xl md:text-5xl">Get ₹3,000 off on launch</h2>
           <p className="mt-3 text-muted-foreground">
             Reserve your TRACE collar today. Fully refundable, no subscription — ever.
@@ -421,7 +421,7 @@ function Index() {
           </div>
           <a
             href="#prebook"
-            className="mt-10 inline-flex rounded-full bg-gradient-ember px-8 py-3.5 font-medium text-primary-foreground shadow-ember"
+            className="mt-10 inline-flex rounded-full bg-gradient-brand px-8 py-3.5 font-medium text-primary-foreground shadow-brand"
           >
             Pre-book now
           </a>
@@ -431,7 +431,7 @@ function Index() {
       <footer className="border-t border-border px-5 py-10">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
-            <PawPrint className="h-4 w-4 text-ember" />
+            <PawPrint className="h-4 w-4 text-brand" />
             <span className="font-display text-foreground">TRACE</span>
           </div>
           <span>© {new Date().getFullYear()} TRACE Pet Wearables</span>
