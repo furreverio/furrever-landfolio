@@ -10,6 +10,7 @@ import { Countdown } from "@/components/landing/Countdown";
 import { ScoreDial } from "@/components/landing/ScoreDial";
 import { PillarStack } from "@/components/landing/PillarStack";
 import { SiteFooter } from "@/components/landing/SiteFooter";
+import logo from "@/assets/furrever-logo.png";
 import heroCollar from "@/assets/hero-collar.jpg";
 import dogRunning from "@/assets/dog-running.jpg";
 import catSleep from "@/assets/cat-sleep.jpg";
