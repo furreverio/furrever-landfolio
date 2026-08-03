@@ -36,9 +36,9 @@ export function PillarStack({
   const active = Math.round(pos);
 
   return (
-    <div ref={ref} style={{ height: `${n * 100}vh` }} className="relative">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <div className="mx-auto w-full max-w-7xl px-5">
+    <div ref={ref} style={{ height: `${n * 100}svh` }} className="relative">
+      <div className="sticky top-[calc(3rem+env(safe-area-inset-top))] flex h-[calc(100svh-3rem-env(safe-area-inset-top))] items-center overflow-hidden">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-5">
           <div className="relative">
             {pillars.map((p, i) => {
               const Icon = pillarIcons[p.icon];
@@ -46,8 +46,8 @@ export function PillarStack({
               const abs = Math.abs(d);
               const style: React.CSSProperties = {
                 opacity: Math.max(0, 1 - abs * 1.4),
-                transform: `translateY(${d * 40}px) scale(${1 - Math.min(abs, 1) * 0.06})`,
-                filter: abs > 0.02 ? `blur(${Math.min(abs * 6, 8)}px)` : undefined,
+                transform: `translateY(${d * 28}px) scale(${1 - Math.min(abs, 1) * 0.05})`,
+                filter: abs > 0.02 ? `blur(${Math.min(abs * 5, 7)}px)` : undefined,
                 pointerEvents: i === active ? "auto" : "none",
               };
               return (
@@ -61,24 +61,35 @@ export function PillarStack({
                   }
                   style={style}
                 >
-                  <div className="grid gap-6 rounded-3xl border border-border bg-card p-6 md:grid-cols-[1fr_2fr] md:p-8">
+                  <div className="grid gap-4 rounded-2xl border border-border bg-card p-4 sm:gap-5 sm:rounded-3xl sm:p-6 md:grid-cols-[1fr_2fr] md:gap-6 md:p-8">
                     <div>
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface-2">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-2 sm:h-11 sm:w-11">
                         <Icon className="h-5 w-5 text-brand" />
                       </div>
-                      <div className="mt-5 text-xs uppercase tracking-[0.25em] text-brand">
+                      <div className="mt-4 text-[10px] uppercase tracking-[0.22em] text-brand sm:mt-5 sm:text-xs sm:tracking-[0.25em]">
                         {p.kicker}
                       </div>
-                      <h3 className="mt-2 text-2xl leading-snug md:text-3xl">{p.title}</h3>
+                      <h3 className="mt-2 text-xl leading-snug sm:text-2xl md:text-3xl">
+                        {p.title}
+                      </h3>
                       {p.copy ? (
-                        <p className="mt-3 text-sm text-muted-foreground">{p.copy}</p>
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:mt-3">
+                          {p.copy}
+                        </p>
                       ) : null}
                     </div>
-                    <div className="grid gap-3 sm:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-3">
                       {p.metrics.map((c) => (
-                        <div key={c.label} className="rounded-2xl bg-surface-2 p-5">
-                          <div className="text-xs text-muted-foreground">{c.label}</div>
-                          <div className="mt-3 font-display text-lg">{c.value}</div>
+                        <div
+                          key={c.label}
+                          className="flex items-baseline justify-between gap-3 rounded-xl bg-surface-2 px-4 py-3 sm:block sm:rounded-2xl sm:p-5"
+                        >
+                          <div className="text-[11px] text-muted-foreground sm:text-xs">
+                            {c.label}
+                          </div>
+                          <div className="font-display text-base sm:mt-3 sm:text-lg">
+                            {c.value}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -88,13 +99,12 @@ export function PillarStack({
             })}
           </div>
 
-          {/* progress rail */}
-          <div className="mt-10 flex justify-center gap-2">
+          <div className="mt-6 flex justify-center gap-2 sm:mt-10">
             {pillars.map((p, i) => (
               <span
                 key={p.id}
                 className={`h-1 rounded-full transition-all duration-300 ${
-                  i === active ? "w-10 bg-brand" : "w-4 bg-surface-2"
+                  i === active ? "w-8 bg-brand sm:w-10" : "w-3 bg-surface-2 sm:w-4"
                 }`}
               />
             ))}

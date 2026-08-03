@@ -267,6 +267,35 @@
   }
 }
 
+@media (min-width: 640px) {
+  .hero-brand {
+    font-size: clamp(2.5rem, 8vw, 3.25rem);
+  }
+
+  .hero-kicker {
+    font-size: 0.75rem;
+    max-width: 20rem;
+  }
+
+  .flip-countdown {
+    gap: 0.7rem;
+  }
+
+  .flip-card {
+    min-width: 3.5rem;
+    height: 3.35rem;
+  }
+
+  .flip-card__digit {
+    font-size: 1.7rem;
+  }
+
+  .flip-countdown__label {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+  }
+}
+
 @media (min-width: 768px) {
   .hero-brand {
     font-size: 3.75rem;
@@ -306,6 +335,32 @@
   .flip-countdown__label {
     font-size: 0.65rem;
     letter-spacing: 0.22em;
+  }
+}
+
+/* Very narrow phones: keep flip units from overflowing */
+@media (max-width: 359px) {
+  .flip-countdown {
+    gap: 0.28rem;
+  }
+
+  .flip-card {
+    min-width: 2.2rem;
+    height: 2.3rem;
+    padding: 0 0.25rem;
+  }
+
+  .flip-card__digit {
+    font-size: 1.05rem;
+  }
+
+  .flip-countdown__label {
+    font-size: 0.45rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-brand {
+    font-size: 1.5rem;
   }
 }
 

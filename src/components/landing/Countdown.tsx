@@ -91,18 +91,20 @@ export function Countdown({
   }
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center justify-center gap-1.5 sm:gap-3">
       {units.map((u, i) => (
-        <div key={u.label} className="flex items-center gap-2">
+        <div key={u.label} className="flex items-center gap-1.5 sm:gap-2">
           <div className="text-center">
-            <div className="rounded-lg bg-surface-2 px-3.5 py-2 font-display text-2xl tabular-nums md:text-3xl">
+            <div className="rounded-lg bg-surface-2 px-2.5 py-1.5 font-display text-xl tabular-nums sm:px-3.5 sm:py-2 sm:text-2xl md:text-3xl">
               {pad(u.v)}
             </div>
-            <div className="mt-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            <div className="mt-1 text-[9px] uppercase tracking-[0.16em] text-muted-foreground sm:mt-1.5 sm:text-[10px] sm:tracking-[0.2em]">
               {u.label}
             </div>
           </div>
-          {i < units.length - 1 && <span className="text-muted-foreground">:</span>}
+          {i < units.length - 1 && (
+            <span className="text-muted-foreground sm:text-base">:</span>
+          )}
         </div>
       ))}
     </div>

@@ -103,7 +103,7 @@ export function PrebookModal({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="max-h-[90svh] overflow-y-auto border-border bg-card sm:max-w-md sm:rounded-2xl">
+      <DialogContent className="max-h-[min(92svh,100dvh)] w-[calc(100%-1.5rem)] overflow-y-auto overscroll-contain border-border bg-card p-5 sm:w-full sm:max-w-md sm:rounded-2xl sm:p-6">
         {submitted ? (
           <div className="flex flex-col items-center py-6 text-center">
             <CheckCircle2 className="h-12 w-12 text-brand" />

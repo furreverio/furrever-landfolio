@@ -109,7 +109,7 @@ export function ScienceCarousel({ items }: { items: ScienceItem[] }) {
 
   return (
     <section
-      className="relative overflow-hidden py-24"
+      className="relative overflow-hidden py-14 sm:py-20 md:py-24"
       onPointerMove={onPointerMove}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
@@ -119,33 +119,38 @@ export function ScienceCarousel({ items }: { items: ScienceItem[] }) {
         draggingRef.current = false;
       }}
       onPointerEnter={() => {
-        hoverPausedRef.current = true;
+        // Pause auto-scroll on hover (desktop); touch uses drag instead
+        if (window.matchMedia("(hover: hover)").matches) {
+          hoverPausedRef.current = true;
+        }
       }}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-1/4 top-0 h-[420px] w-[420px] rounded-full opacity-40 blur-[100px]"
+        className="pointer-events-none absolute -left-1/4 top-0 h-[280px] w-[280px] rounded-full opacity-40 blur-[100px] sm:h-[420px] sm:w-[420px]"
         style={{ background: "var(--gradient-brand)" }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-1/5 bottom-0 h-[380px] w-[380px] rounded-full opacity-30 blur-[110px]"
+        className="pointer-events-none absolute -right-1/5 bottom-0 h-[240px] w-[240px] rounded-full opacity-30 blur-[110px] sm:h-[380px] sm:w-[380px]"
         style={{ background: "color-mix(in oklab, var(--brand) 70%, var(--brand-glow))" }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-5">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-5">
         <div className="max-w-2xl">
-          <p className="text-xs uppercase tracking-[0.3em] text-brand">Sensor stack</p>
-          <h2 className="mt-3 font-display text-4xl leading-tight md:text-5xl">
+          <p className="text-[10px] uppercase tracking-[0.26em] text-brand sm:text-xs sm:tracking-[0.3em]">
+            Sensor stack
+          </p>
+          <h2 className="mt-3 font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
             Built on real animal science
           </h2>
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">
-            Drag to explore. Each signal is read continuously, then turned into something you can
+          <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground sm:mt-4">
+            Swipe to explore. Each signal is read continuously, then turned into something you can
             actually act on.
           </p>
         </div>
 
-        <div className="mt-6 flex gap-2">
+        <div className="mt-5 flex gap-1.5 sm:mt-6 sm:gap-2">
           {items.map((item, i) => (
             <button
               key={item.title}
@@ -168,17 +173,18 @@ export function ScienceCarousel({ items }: { items: ScienceItem[] }) {
       </div>
 
       <div
-        className="relative mt-8 cursor-grab py-8 active:cursor-grabbing md:mt-10 md:py-10"
+        className="relative mt-6 cursor-grab py-6 active:cursor-grabbing sm:mt-8 sm:py-8 md:mt-10 md:py-10"
         style={{
+          touchAction: "pan-y",
           maskImage:
-            "linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%)",
+            "linear-gradient(90deg, transparent 0%, black 4%, black 96%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%)",
+            "linear-gradient(90deg, transparent 0%, black 4%, black 96%, transparent 100%)",
         }}
       >
         <div
           ref={trackRef}
-          className="flex w-max items-stretch gap-5 px-5 will-change-transform md:gap-7 md:px-10"
+          className="flex w-max items-stretch gap-3 px-4 will-change-transform sm:gap-5 sm:px-5 md:gap-7 md:px-10"
           style={{ transform: "translate3d(0,0,0)" }}
         >
           {loop.map((item, i) => {
@@ -192,7 +198,7 @@ export function ScienceCarousel({ items }: { items: ScienceItem[] }) {
                 key={`${item.title}-${i}`}
                 data-science-card
                 className={cn(
-                  "group relative w-[min(78vw,320px)] shrink-0 overflow-hidden rounded-3xl border border-border bg-card/80 p-7 backdrop-blur-md transition-[border-color,box-shadow,transform] duration-500 md:w-[360px] md:p-8",
+                  "group relative w-[min(82vw,300px)] shrink-0 overflow-hidden rounded-2xl border border-border bg-card/80 p-5 backdrop-blur-md transition-[border-color,box-shadow,transform] duration-500 sm:w-[min(78vw,320px)] sm:rounded-3xl sm:p-7 md:w-[360px] md:p-8",
                   isActive
                     ? "z-10 scale-[1.02] border-brand/50 shadow-brand"
                     : "scale-[0.98] hover:border-brand/30",
@@ -200,18 +206,20 @@ export function ScienceCarousel({ items }: { items: ScienceItem[] }) {
               >
                 <span
                   aria-hidden
-                  className="pointer-events-none absolute right-4 top-3 font-display text-[6.5rem] leading-none text-foreground/4 select-none md:right-5 md:top-4 md:text-[8rem]"
+                  className="pointer-events-none absolute right-3 top-2 font-display text-[5rem] leading-none text-foreground/4 select-none sm:right-4 sm:top-3 sm:text-[6.5rem] md:right-5 md:top-4 md:text-[8rem]"
                 >
                   {label}
                 </span>
 
-                <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-2">
-                  <Icon className="h-6 w-6 text-brand" />
+                <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-surface-2 sm:h-14 sm:w-14 sm:rounded-2xl">
+                  <Icon className="h-5 w-5 text-brand sm:h-6 sm:w-6" />
                 </div>
 
-                <div className="relative mt-8">
-                  <h3 className="font-display text-2xl leading-tight">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.copy}</p>
+                <div className="relative mt-5 sm:mt-8">
+                  <h3 className="font-display text-xl leading-tight sm:text-2xl">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:mt-3">
+                    {item.copy}
+                  </p>
                 </div>
               </article>
             );

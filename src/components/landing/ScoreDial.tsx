@@ -40,9 +40,9 @@ export function ScoreDial({
   return (
     <div
       ref={ref}
-      className="rounded-3xl border border-border bg-card p-8 transition-colors hover:border-brand/40"
+      className="rounded-2xl border border-border bg-card p-5 transition-colors hover:border-brand/40 sm:rounded-3xl sm:p-8"
     >
-      <div className="relative h-28 w-28">
+      <div className="relative h-24 w-24 sm:h-28 sm:w-28">
         <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
           <circle cx="50" cy="50" r="42" fill="none" stroke="var(--surface-2)" strokeWidth="8" />
           <circle
@@ -56,13 +56,13 @@ export function ScoreDial({
             strokeDasharray={`${(pct / 100) * 264} 264`}
           />
         </svg>
-        <div className="absolute inset-0 flex items-center justify-center font-display text-2xl">
+        <div className="absolute inset-0 flex items-center justify-center font-display text-xl sm:text-2xl">
           {shown}
           {suffix}
         </div>
       </div>
-      <h3 className="mt-6 text-xl">{label}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{caption}</p>
+      <h3 className="mt-4 text-lg sm:mt-6 sm:text-xl">{label}</h3>
+      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground sm:mt-2">{caption}</p>
     </div>
   );
 }

@@ -129,7 +129,7 @@ export function TeardownScroll() {
       style={{ height: `${SCROLL_VH * 100}vh` }}
       aria-label="Product teardown animation"
     >
-      <div className="sticky top-0 flex h-svh w-full items-center justify-center overflow-hidden">
+      <div className="sticky top-[calc(3rem+env(safe-area-inset-top))] flex h-[calc(100svh-3rem-env(safe-area-inset-top))] w-full items-center justify-center overflow-hidden">
         <div className="relative h-full w-full">
           <canvas
             ref={canvasRef}
@@ -139,13 +139,13 @@ export function TeardownScroll() {
 
           {!ready ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black">
-              <div className="h-px w-40 overflow-hidden rounded-full bg-white/10">
+              <div className="h-px w-32 overflow-hidden rounded-full bg-white/10 sm:w-40">
                 <div
                   className="h-full bg-brand transition-[width] duration-200"
                   style={{ width: `${Math.round(loadProgress * 100)}%` }}
                 />
               </div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/45">
+              <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-white/45 sm:text-[11px] sm:tracking-[0.28em]">
                 Loading teardown
               </p>
             </div>
@@ -153,27 +153,27 @@ export function TeardownScroll() {
 
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/70 to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/70 to-transparent sm:h-28"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/80 to-transparent"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/80 to-transparent sm:h-36"
           />
 
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 px-5 pr-10 pt-8 md:px-10 md:pr-16 md:pt-12">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-brand md:text-xs">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 px-4 pt-6 sm:px-5 sm:pt-8 md:px-10 md:pr-16 md:pt-12">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-brand sm:text-[11px] sm:tracking-[0.3em] md:text-xs">
               Inside the collar
             </p>
             <h2
-              className="mt-3 max-w-[16ch] font-hero text-3xl font-semibold uppercase leading-[0.95] text-white md:max-w-[14ch] md:text-5xl"
+              className="mt-2 max-w-[14ch] font-hero text-[1.65rem] font-semibold uppercase leading-[0.95] text-white sm:mt-3 sm:max-w-[16ch] sm:text-3xl md:max-w-[14ch] md:text-5xl"
               style={{ fontStretch: "72%" }}
             >
               A closer look, frame by frame
             </h2>
           </div>
 
-          <div className="pointer-events-none absolute inset-x-0 bottom-8 z-10 flex justify-center px-5 md:bottom-12">
-            <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/50">
+          <div className="pointer-events-none absolute inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-10 flex justify-center px-4 sm:bottom-8 sm:px-5 md:bottom-12">
+            <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/50 sm:text-[11px] sm:tracking-[0.28em]">
               Scroll to scrub
             </p>
           </div>

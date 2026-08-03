@@ -4,8 +4,8 @@ import { PrebookButton } from "@/components/landing/prebook-context";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-surface">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
+    <footer className="border-t border-border bg-surface pb-[env(safe-area-inset-bottom)]">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:gap-10 sm:px-5 sm:py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2">
             <img src={logo} alt="Furrever logo" className="h-7 w-7" />
@@ -16,38 +16,44 @@ export function SiteFooter() {
           </p>
         </div>
 
-        <div>
-          <h3 className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Product</h3>
-          <ul className="mt-4 space-y-2 text-sm">
-            <li>
-              <PrebookButton className="hover:text-brand">Pre-book</PrebookButton>
-            </li>
-            <li>
-              <Link to="/" className="hover:text-brand">
-                Home
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <div className="grid grid-cols-2 gap-8 md:contents">
+          <div>
+            <h3 className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:text-xs sm:tracking-[0.25em]">
+              Product
+            </h3>
+            <ul className="mt-3 space-y-2 text-sm sm:mt-4">
+              <li>
+                <PrebookButton className="hover:text-brand">Pre-book</PrebookButton>
+              </li>
+              <li>
+                <Link to="/" className="hover:text-brand">
+                  Home
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-        <div>
-          <h3 className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Legal</h3>
-          <ul className="mt-4 space-y-2 text-sm">
-            <li>
-              <Link to="/privacy" className="hover:text-brand">
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link to="/terms" className="hover:text-brand">
-                Terms &amp; Conditions
-              </Link>
-            </li>
-          </ul>
+          <div>
+            <h3 className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:text-xs sm:tracking-[0.25em]">
+              Legal
+            </h3>
+            <ul className="mt-3 space-y-2 text-sm sm:mt-4">
+              <li>
+                <Link to="/privacy" className="hover:text-brand">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="hover:text-brand">
+                  Terms &amp; Conditions
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div className="border-t border-border px-5 py-6">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+      <div className="border-t border-border px-4 py-5 sm:px-5 sm:py-6">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
           <span>© {new Date().getFullYear()} Locapaw Technologies Pvt Ltd</span>
           <span>Made for pets, in India.</span>
         </div>
