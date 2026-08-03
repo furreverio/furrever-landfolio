@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 
 const TARGET = Date.UTC(2026, 8, 15, 10, 0, 0);
 
+/** Inflated start for the intro fall animation. */
+const INTRO_FROM_SECONDS = 90 * 86400 + 23 * 3600 + 59 * 60 + 59;
+const INTRO_MS = 2800;
+
 function pad(n: number) {
   return String(Math.max(0, n)).padStart(2, "0");
 }
@@ -13,6 +17,25 @@ function ordinal(day: number) {
   if (j === 2 && k !== 12) return `${day}nd`;
   if (j === 3 && k !== 13) return `${day}rd`;
   return `${day}th`;
+}
+
+function secondsUntilLaunch(now = Date.now()) {
+  return Math.max(0, Math.floor((TARGET - now) / 1000));
+}
+
+function splitUnits(totalSeconds: number) {
+  const s = Math.max(0, totalSeconds);
+  return [
+    { v: Math.floor(s / 86400), label: "Days" },
+    { v: Math.floor((s % 86400) / 3600), label: "Hours" },
+    { v: Math.floor((s % 3600) / 60), label: "Mins" },
+    { v: s % 60, label: "Secs" },
+  ];
+}
+
+/** Fast start, long soft landing. */
+function easeOutExpo(t: number) {
+  return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
 }
 
 export function launchLabel() {
@@ -42,22 +65,55 @@ export function Countdown({
   variant?: "default" | "hero" | "compact";
 }) {
   const mode = compact || variant === "compact" ? "compact" : variant;
-  const [left, setLeft] = useState(0);
+  const [displaySeconds, setDisplaySeconds] = useState(INTRO_FROM_SECONDS);
+  const [settled, setSettled] = useState(false);
 
+  // Intro: fall fast → slow into the live countdown, then tick.
   useEffect(() => {
-    const update = () => setLeft(TARGET - Date.now());
-    update();
-    const id = setInterval(update, 1000);
-    return () => clearInterval(id);
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion || INTRO_FROM_SECONDS <= secondsUntilLaunch()) {
+      setDisplaySeconds(secondsUntilLaunch());
+      setSettled(true);
+      return;
+    }
+
+    const from = INTRO_FROM_SECONDS;
+    const started = performance.now();
+    let raf = 0;
+    let lastShown = from;
+
+    const frame = (now: number) => {
+      const t = Math.min(1, (now - started) / INTRO_MS);
+      const liveTo = secondsUntilLaunch();
+
+      if (t >= 1) {
+        setDisplaySeconds(liveTo);
+        setSettled(true);
+        return;
+      }
+
+      const eased = easeOutExpo(t);
+      // Always aim at the live target so we never snap at the end.
+      const next = Math.round(from + (liveTo - from) * eased);
+      // Keep display monotonic while falling (no upward flicker if live clock ticks).
+      const current = Math.min(lastShown, Math.max(liveTo, next));
+      lastShown = current;
+      setDisplaySeconds(current);
+      raf = requestAnimationFrame(frame);
+    };
+
+    raf = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
-  const s = Math.floor(left / 1000);
-  const units = [
-    { v: Math.floor(s / 86400), label: "Days" },
-    { v: Math.floor((s % 86400) / 3600), label: "Hours" },
-    { v: Math.floor((s % 3600) / 60), label: "Mins" },
-    { v: s % 60, label: "Secs" },
-  ];
+  useEffect(() => {
+    if (!settled) return;
+    const id = setInterval(() => setDisplaySeconds(secondsUntilLaunch()), 1000);
+    return () => clearInterval(id);
+  }, [settled]);
+
+  const units = splitUnits(displaySeconds);
 
   if (mode === "hero") {
     return (
