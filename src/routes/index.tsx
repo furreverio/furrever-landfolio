@@ -81,7 +81,7 @@ function Index() {
     <div className="min-h-svh overflow-x-clip bg-background">
       {/* Sticky chrome */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/95 pt-[env(safe-area-inset-top)] backdrop-blur-md">
-        <div className="mx-auto flex h-12 max-w-[1400px] items-center justify-between gap-3 px-4 sm:gap-4 md:px-6">
+        <div className="mx-auto flex h-12 max-w-[1400px] items-center justify-between gap-3 px-5 sm:gap-4 md:px-8">
           <a href="#top" className="flex min-w-0 items-center gap-2 sm:gap-2.5">
             <img src={logo} alt="" className="h-6 w-6 shrink-0" />
             <span className="font-hero truncate text-sm font-semibold tracking-wide text-white">
@@ -92,7 +92,7 @@ function Index() {
             <p className="hidden text-xs text-white/70 sm:block">
               Under <span className="text-white">₹10,000</span>
             </p>
-            <PrebookButton className="rounded-full border border-brand/70 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:border-brand hover:bg-brand/10 sm:px-4 sm:text-[11px] sm:tracking-[0.14em] md:px-6 md:py-2.5 md:text-[13px]">
+            <PrebookButton className="rounded-full border border-brand/70 px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-brand hover:bg-brand/10 sm:px-4 sm:text-[11px] md:px-6 md:py-2.5 md:text-[13px]">
               Pre-book
             </PrebookButton>
           </div>

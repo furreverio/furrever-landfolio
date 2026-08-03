@@ -8,6 +8,10 @@ const FRAME_PATH = (i: number) =>
 /** Scroll length in viewport heights — longer = slower, more cinematic scrub. */
 const SCROLL_VH = 5.5;
 
+function isNarrowViewport() {
+  return typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
+}
+
 export function TeardownScroll() {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -48,7 +52,8 @@ export function TeardownScroll() {
     };
   }, []);
 
-  // Draw helpers
+  // Draw helpers — contain on mobile so the whole product stays visible;
+  // cover on desktop for full-bleed cinematic scrub.
   const drawFrame = (index: number) => {
     const canvas = canvasRef.current;
     const img = imagesRef.current[index];
@@ -67,14 +72,17 @@ export function TeardownScroll() {
       canvas.height = h;
     }
 
-    // Cover-fit
-    const scale = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+    const contain = isNarrowViewport();
+    const scale = contain
+      ? Math.min(w / img.naturalWidth, h / img.naturalHeight)
+      : Math.max(w / img.naturalWidth, h / img.naturalHeight);
     const dw = img.naturalWidth * scale;
     const dh = img.naturalHeight * scale;
     const dx = (w - dw) / 2;
     const dy = (h - dh) / 2;
 
-    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, w, h);
     ctx.drawImage(img, dx, dy, dw, dh);
   };
 
@@ -129,8 +137,21 @@ export function TeardownScroll() {
       style={{ height: `${SCROLL_VH * 100}vh` }}
       aria-label="Product teardown animation"
     >
-      <div className="sticky top-[calc(3rem+env(safe-area-inset-top))] flex h-[calc(100svh-3rem-env(safe-area-inset-top))] w-full items-center justify-center overflow-hidden">
-        <div className="relative h-full w-full">
+      <div className="sticky top-[calc(3rem+env(safe-area-inset-top))] flex h-[calc(100svh-3rem-env(safe-area-inset-top))] w-full flex-col overflow-hidden">
+        {/* Mobile: title band above the frame so type never fights the crop */}
+        <div className="relative z-20 shrink-0 px-5 pb-3 pt-5 md:absolute md:inset-x-0 md:top-0 md:z-10 md:px-10 md:pb-0 md:pt-12 md:pr-16">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-brand md:text-xs md:tracking-[0.3em]">
+            Inside the collar
+          </p>
+          <h2
+            className="mt-1.5 max-w-[18ch] font-hero text-[1.35rem] font-semibold uppercase leading-[1.05] text-white sm:text-2xl md:mt-3 md:max-w-[14ch] md:text-5xl md:leading-[0.95]"
+            style={{ fontStretch: "72%" }}
+          >
+            A closer look, frame by frame
+          </h2>
+        </div>
+
+        <div className="relative min-h-0 flex-1">
           <canvas
             ref={canvasRef}
             className="absolute inset-0 h-full w-full"
@@ -145,38 +166,27 @@ export function TeardownScroll() {
                   style={{ width: `${Math.round(loadProgress * 100)}%` }}
                 />
               </div>
-              <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-white/45 sm:text-[11px] sm:tracking-[0.28em]">
+              <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-white/45 sm:text-[11px]">
                 Loading teardown
               </p>
             </div>
           ) : null}
 
+          {/* Soft vignette — desktop only; mobile uses letterbox black */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/70 to-transparent sm:h-28"
+            className="pointer-events-none absolute inset-x-0 top-0 hidden h-28 bg-gradient-to-b from-black/70 to-transparent md:block"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/80 to-transparent sm:h-36"
+            className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-36 bg-gradient-to-t from-black/80 to-transparent md:block"
           />
+        </div>
 
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 px-4 pt-6 sm:px-5 sm:pt-8 md:px-10 md:pr-16 md:pt-12">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-brand sm:text-[11px] sm:tracking-[0.3em] md:text-xs">
-              Inside the collar
-            </p>
-            <h2
-              className="mt-2 max-w-[14ch] font-hero text-[1.65rem] font-semibold uppercase leading-[0.95] text-white sm:mt-3 sm:max-w-[16ch] sm:text-3xl md:max-w-[14ch] md:text-5xl"
-              style={{ fontStretch: "72%" }}
-            >
-              A closer look, frame by frame
-            </h2>
-          </div>
-
-          <div className="pointer-events-none absolute inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-10 flex justify-center px-4 sm:bottom-8 sm:px-5 md:bottom-12">
-            <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/50 sm:text-[11px] sm:tracking-[0.28em]">
-              Scroll to scrub
-            </p>
-          </div>
+        <div className="relative z-20 shrink-0 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3 md:absolute md:inset-x-0 md:bottom-12 md:z-10 md:pb-0 md:pt-0">
+          <p className="text-center text-[10px] font-medium uppercase tracking-[0.22em] text-white/50 md:text-[11px] md:tracking-[0.28em]">
+            Scroll to scrub
+          </p>
         </div>
       </div>
     </section>

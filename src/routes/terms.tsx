@@ -60,26 +60,28 @@ const sections = [
 
 function Terms() {
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="Furrever logo" className="h-7 w-7" />
+    <div className="min-h-svh overflow-x-clip bg-background">
+      <header className="border-b border-border pt-[env(safe-area-inset-top)]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-5">
+          <Link to="/" className="flex min-w-0 items-center gap-2">
+            <img src={logo} alt="Furrever logo" className="h-7 w-7 shrink-0" />
             <span className="font-display text-lg tracking-tight">Furrever</span>
           </Link>
-          <Link to="/" className="text-sm text-muted-foreground hover:text-brand">
-            Back to home
+          <Link to="/" className="shrink-0 text-sm text-muted-foreground hover:text-brand">
+            Back
           </Link>
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-5 py-16">
-        <h1 className="font-display text-4xl md:text-5xl">Terms &amp; Conditions</h1>
+      <main className="mx-auto max-w-3xl px-4 py-10 sm:px-5 sm:py-16">
+        <h1 className="font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
+          Terms &amp; Conditions
+        </h1>
         <p className="mt-3 text-sm text-muted-foreground">Last updated: 3 August 2026</p>
-        <div className="mt-10 space-y-8">
+        <div className="mt-8 space-y-7 sm:mt-10 sm:space-y-8">
           {sections.map((s) => (
             <section key={s.h}>
-              <h2 className="font-display text-xl">{s.h}</h2>
+              <h2 className="font-display text-lg sm:text-xl">{s.h}</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.p}</p>
             </section>
           ))}
