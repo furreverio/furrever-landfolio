@@ -77,12 +77,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TRACE — 24x7 Pet Health Tracker" },
+      { title: "Furrever — 24x7 Pet Health Tracker" },
       {
         name: "description",
         content: "A screenless smart collar that tracks your pet's sleep, recovery and activity.",
       },
-      { property: "og:title", content: "TRACE — 24x7 Pet Health Tracker" },
+      { property: "og:title", content: "Furrever — 24x7 Pet Health Tracker" },
       {
         property: "og:description",
         content: "A screenless smart collar that tracks your pet's sleep, recovery and activity.",

@@ -46,8 +46,9 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
-  --color-ember: var(--ember);
-  --color-ember-glow: var(--ember-glow);
+  --color-brand: var(--brand);
+  --color-brand-glow: var(--brand-glow);
+  --color-violet: var(--violet-accent);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -56,31 +57,32 @@
 
 :root {
   --radius: 1rem;
-  --background: oklch(0.16 0.005 60);
-  --foreground: oklch(0.97 0.005 80);
-  --card: oklch(0.21 0.008 60);
-  --card-foreground: oklch(0.97 0.005 80);
-  --popover: oklch(0.21 0.008 60);
-  --popover-foreground: oklch(0.97 0.005 80);
-  --primary: oklch(0.68 0.19 42);
-  --primary-foreground: oklch(0.16 0.01 40);
-  --secondary: oklch(0.27 0.01 60);
-  --secondary-foreground: oklch(0.97 0.005 80);
-  --muted: oklch(0.25 0.008 60);
-  --muted-foreground: oklch(0.7 0.012 70);
-  --accent: oklch(0.3 0.02 55);
-  --accent-foreground: oklch(0.97 0.005 80);
-  --destructive: oklch(0.6 0.22 27);
-  --destructive-foreground: oklch(0.98 0.003 80);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.68 0.19 42);
-  --ember: oklch(0.68 0.19 42);
-  --ember-glow: oklch(0.8 0.16 65);
-  --surface: oklch(0.21 0.008 60);
-  --surface-2: oklch(0.25 0.01 55);
-  --gradient-ember: linear-gradient(135deg, var(--ember), var(--ember-glow));
-  --shadow-ember: 0 20px 60px -20px color-mix(in oklab, var(--ember) 45%, transparent);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.23 0.02 200);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.23 0.02 200);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.23 0.02 200);
+  --primary: oklch(0.66 0.13 178);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.008 210);
+  --secondary-foreground: oklch(0.28 0.02 200);
+  --muted: oklch(0.95 0.008 210);
+  --muted-foreground: oklch(0.55 0.015 210);
+  --accent: oklch(0.94 0.03 195);
+  --accent-foreground: oklch(0.28 0.02 200);
+  --destructive: oklch(0.66 0.19 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.01 210);
+  --input: oklch(0.9 0.01 210);
+  --ring: oklch(0.66 0.13 178);
+  --brand: oklch(0.66 0.13 178);
+  --brand-glow: oklch(0.79 0.13 178);
+  --violet-accent: oklch(0.62 0.23 292);
+  --surface: oklch(0.97 0.005 210);
+  --surface-2: oklch(0.94 0.008 210);
+  --gradient-brand: linear-gradient(120deg, oklch(0.6 0.12 178), oklch(0.79 0.13 178), oklch(0.72 0.14 216), oklch(0.62 0.23 292));
+  --shadow-brand: 0 20px 60px -20px color-mix(in oklab, var(--brand) 45%, transparent);
 }
 
 @layer base {
@@ -104,22 +106,22 @@
   }
 }
 
-@utility text-gradient-ember {
-  background: var(--gradient-ember);
+@utility text-gradient-brand {
+  background: var(--gradient-brand);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 }
 
-@utility bg-gradient-ember {
-  background-image: var(--gradient-ember);
+@utility bg-gradient-brand {
+  background-image: var(--gradient-brand);
 }
 
-@utility shadow-ember {
-  box-shadow: var(--shadow-ember);
+@utility shadow-brand {
+  box-shadow: var(--shadow-brand);
 }
 
 @utility glow-ring {
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--ember) 35%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 35%, transparent);
 }
 
