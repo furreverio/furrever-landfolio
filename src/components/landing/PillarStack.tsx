@@ -5,6 +5,9 @@ import {
   type PillarConfig,
 } from "@/config/pillars";
 
+/** Viewport heights per pillar — higher = slower scrub between cards. */
+const SCROLL_VH_PER_PILLAR = 2.5;
+
 export function PillarStack({
   pillars = defaultPillars,
 }: {
@@ -36,10 +39,14 @@ export function PillarStack({
   const active = Math.round(pos);
 
   return (
-    <div ref={ref} style={{ height: `${n * 100}svh` }} className="relative">
-      <div className="sticky top-[calc(3rem+env(safe-area-inset-top))] flex h-[calc(100svh-3rem-env(safe-area-inset-top))] items-center overflow-hidden">
+    <div ref={ref} style={{ height: `${n * SCROLL_VH_PER_PILLAR * 100}svh` }} className="relative">
+      <div className="sticky top-[calc(3rem+env(safe-area-inset-top))] flex h-[calc(100svh-3rem-env(safe-area-inset-top))] flex-col justify-center overflow-hidden py-6 sm:py-8">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-5">
-          <div className="relative">
+          <h2 className="max-w-2xl shrink-0 font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
+            Better care <span className="text-muted-foreground">starts now</span>
+          </h2>
+
+          <div className="relative mt-6 sm:mt-8 md:mt-10">
             {pillars.map((p, i) => {
               const Icon = pillarIcons[p.icon];
               const d = i - pos;

@@ -162,12 +162,7 @@ function Index() {
       </section>
 
       {/* Pillars */}
-      <section className="pt-12 sm:pt-16 md:pt-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-5">
-          <h2 className="max-w-2xl font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
-            Better care <span className="text-muted-foreground">starts now</span>
-          </h2>
-        </div>
+      <section>
         <PillarStack />
       </section>
 
