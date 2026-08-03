@@ -124,7 +124,7 @@ function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
           <div className="flex items-center gap-2">
-            <PawPrint className="h-5 w-5 text-brand" />
+            <img src={logo} alt="Furrever logo" className="h-7 w-7" />
             <span className="font-display text-lg tracking-tight">Furrever</span>
           </div>
           <div className="hidden md:block">
