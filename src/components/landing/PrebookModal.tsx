@@ -37,8 +37,11 @@ const prebookSchema = z.object({
 type PrebookValues = z.infer<typeof prebookSchema>;
 
 const STORAGE_KEY = "furrever-prebook-leads";
+const DISCORD_WEBHOOK_URL = import.meta.env.VITE_DISCORD_WEBHOOK_URL as string | undefined;
 
-function saveLead(values: Omit<PrebookValues, "acceptTerms">) {
+type Lead = Omit<PrebookValues, "acceptTerms">;
+
+function saveLead(values: Lead) {
   const entry = {
     ...values,
     acceptedAt: new Date().toISOString(),
@@ -48,6 +51,39 @@ function saveLead(values: Omit<PrebookValues, "acceptTerms">) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([...existing, entry]));
   } catch {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([entry]));
+  }
+}
+
+async function notifyDiscord(lead: Lead) {
+  if (!DISCORD_WEBHOOK_URL) {
+    console.warn("VITE_DISCORD_WEBHOOK_URL is not set; skipping Discord notify");
+    return;
+  }
+
+  const petLabel = { dog: "Dog", cat: "Cat", both: "Both" }[lead.petType];
+  const res = await fetch(DISCORD_WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      embeds: [
+        {
+          title: "New Furrever pre-book",
+          color: 0x2dd4a8,
+          fields: [
+            { name: "Name", value: lead.name, inline: true },
+            { name: "Email", value: lead.email, inline: true },
+            { name: "Phone", value: lead.phone, inline: true },
+            { name: "City", value: lead.city, inline: true },
+            { name: "Pet", value: petLabel, inline: true },
+          ],
+          timestamp: new Date().toISOString(),
+        },
+      ],
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Discord webhook failed (${res.status})`);
   }
 }
 
@@ -84,8 +120,14 @@ export function PrebookModal({
   const onSubmit = handleSubmit(async (values) => {
     const { acceptTerms: _accepted, ...lead } = values;
     saveLead(lead);
-    await new Promise((r) => setTimeout(r, 400));
-    setSubmitted(true);
+    try {
+      await notifyDiscord(lead);
+      setSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      // Still treat as success for the user if Discord is down — lead is in localStorage
+      setSubmitted(true);
+    }
   });
 
   const handleOpenChange = (next: boolean) => {
