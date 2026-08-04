@@ -18,46 +18,7 @@ import heroCollar from "@/assets/hero-collar.png";
 import dogRunning from "@/assets/dog-running.jpg";
 import catSleep from "@/assets/cat-sleep.jpg";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      {
-        title:
-          "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
-      },
-      {
-        name: "description",
-        content:
-          "Furrever is a screenless smart collar that tracks sleep, recovery, activity and vitals for dogs and cats, 24/7. Pre-book now. Launch price under ₹7,000.",
-      },
-      {
-        property: "og:title",
-        content:
-          "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
-      },
-      {
-        property: "og:description",
-        content:
-          "Know your pet beyond the obvious. Track sleep, recovery, activity and vitals with a screenless smart collar. Pre-book under ₹7,000.",
-      },
-      { property: "og:url", content: "https://furrever.io/" },
-      { property: "og:site_name", content: "Furrever" },
-      {
-        name: "twitter:title",
-        content:
-          "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
-      },
-      {
-        name: "twitter:description",
-        content:
-          "Screenless smart collar for dogs and cats. Sleep, recovery, activity and vitals, tracked 24/7. Pre-book under ₹7,000.",
-      },
-      { name: "robots", content: "index, follow" },
-    ],
-    links: [{ rel: "canonical", href: "https://furrever.io/" }],
-  }),
-  component: Index,
-});
+const siteUrl = "https://furrever.io";
 
 const science = [
   { icon: Heart, title: "Heart Rate Variability", copy: "Autonomic stress load, read overnight." },
@@ -96,6 +57,78 @@ const faqs = [
     a: "The pod weighs 11 g, has rounded edges and no screen or speaker. It is IP68 rated, so swimming, mud and rain are all fine.",
   },
 ];
+
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": `${siteUrl}/#product`,
+  name: "Furrever Smart Pet Collar",
+  description:
+    "A screenless smart collar for dogs and cats that tracks sleep stages, recovery, activity zones, heart rate variability, respiratory rate and skin temperature, 24/7.",
+  image: [`${siteUrl}/og-image.jpg`],
+  brand: { "@type": "Brand", name: "Furrever" },
+  category: "Pet Wearable / Pet Health Tracker",
+  url: `${siteUrl}/`,
+  offers: {
+    "@type": "Offer",
+    url: `${siteUrl}/#prebook`,
+    priceCurrency: "INR",
+    price: "6999",
+    availability: "https://schema.org/PreOrder",
+    itemCondition: "https://schema.org/NewCondition",
+    seller: { "@id": `${siteUrl}/#organization` },
+  },
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      {
+        title: "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
+      },
+      {
+        name: "description",
+        content:
+          "Furrever is a screenless smart collar that tracks sleep, recovery, activity and vitals for dogs and cats, 24/7. Pre-book now. Launch price under ₹7,000.",
+      },
+      {
+        property: "og:title",
+        content: "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
+      },
+      {
+        property: "og:description",
+        content:
+          "Know your pet beyond the obvious. Track sleep, recovery, activity and vitals with a screenless smart collar. Pre-book under ₹7,000.",
+      },
+      { property: "og:url", content: `${siteUrl}/` },
+      { property: "og:site_name", content: "Furrever" },
+      {
+        name: "twitter:title",
+        content: "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Screenless smart collar for dogs and cats. Sleep, recovery, activity and vitals, tracked 24/7. Pre-book under ₹7,000.",
+      },
+      { name: "robots", content: "index, follow" },
+      { "script:ld+json": productJsonLd },
+      { "script:ld+json": faqJsonLd },
+    ],
+    links: [{ rel: "canonical", href: `${siteUrl}/` }],
+  }),
+  component: Index,
+});
 
 function Index() {
   return (

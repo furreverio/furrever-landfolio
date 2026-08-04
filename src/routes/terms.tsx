@@ -2,6 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import logo from "@/assets/logo-white.png";
 
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.io/" },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Terms & Conditions",
+      item: "https://furrever.io/terms",
+    },
+  ],
+};
+
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
@@ -20,6 +34,7 @@ export const Route = createFileRoute("/terms")({
       { property: "og:url", content: "https://furrever.io/terms" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "index, follow" },
+      { "script:ld+json": breadcrumbJsonLd },
     ],
     links: [{ rel: "canonical", href: "https://furrever.io/terms" }],
   }),
