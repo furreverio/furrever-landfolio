@@ -38,7 +38,7 @@ const prebookSchema = z.object({
     required_error: "Select your pet type",
   }),
   acceptTerms: requiredCheck("Please agree to the Terms and Privacy Policy"),
-  acceptContact: requiredCheck("Please confirm you're happy to be contacted"),
+  acceptContact: z.boolean(),
 });
 
 type PrebookValues = z.infer<typeof prebookSchema>;
