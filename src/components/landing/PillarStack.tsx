@@ -5,7 +5,7 @@ import {
   type PillarConfig,
 } from "@/config/pillars";
 
-/** Viewport heights per pillar — higher = slower scrub between cards. */
+/** Viewport heights per pillar - higher = slower scrub between cards. */
 const SCROLL_VH_PER_PILLAR = 2.5;
 
 export function PillarStack({
