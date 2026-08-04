@@ -17,21 +17,28 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+const requiredCheck = (message: string) =>
+  z.boolean().refine((v) => v === true, { message });
+
 const prebookSchema = z.object({
-  name: z.string().trim().min(2, "Please enter your full name"),
-  email: z.string().trim().email("Enter a valid email"),
+  name: z
+    .string()
+    .trim()
+    .min(2, "Please enter your full name")
+    .max(80, "Name is too long"),
+  email: z.string().trim().email("Enter a valid email").max(120, "Email is too long"),
   phone: z
     .string()
     .trim()
     .min(10, "Enter a valid phone number")
+    .max(20, "Phone number is too long")
     .regex(/^[+\d][\d\s-]{8,}$/, "Enter a valid phone number"),
-  city: z.string().trim().min(2, "Enter your city"),
+  city: z.string().trim().min(2, "Enter your city").max(80, "City is too long"),
   petType: z.enum(["dog", "cat", "both"], {
     required_error: "Select your pet type",
   }),
-  acceptTerms: z.boolean().refine((v) => v === true, {
-    message: "Please accept the terms to continue",
-  }),
+  acceptTerms: requiredCheck("Please agree to the Terms and Privacy Policy"),
+  acceptContact: requiredCheck("Please confirm you're happy to be contacted"),
 });
 
 type PrebookValues = z.infer<typeof prebookSchema>;
@@ -39,12 +46,12 @@ type PrebookValues = z.infer<typeof prebookSchema>;
 const STORAGE_KEY = "furrever-prebook-leads";
 const DISCORD_WEBHOOK_URL = import.meta.env.VITE_DISCORD_WEBHOOK_URL as string | undefined;
 
-type Lead = Omit<PrebookValues, "acceptTerms">;
+type Lead = PrebookValues;
 
 function saveLead(values: Lead) {
   const entry = {
     ...values,
-    acceptedAt: new Date().toISOString(),
+    submittedAt: new Date().toISOString(),
   };
   try {
     const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]") as unknown[];
@@ -61,6 +68,7 @@ async function notifyDiscord(lead: Lead) {
   }
 
   const petLabel = { dog: "Dog", cat: "Cat", both: "Both" }[lead.petType];
+  const yesNo = (v: boolean) => (v ? "Yes" : "No");
   const res = await fetch(DISCORD_WEBHOOK_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -75,6 +83,16 @@ async function notifyDiscord(lead: Lead) {
             { name: "Phone", value: lead.phone, inline: true },
             { name: "City", value: lead.city, inline: true },
             { name: "Pet", value: petLabel, inline: true },
+            {
+              name: "Agreed to Terms & Privacy",
+              value: yesNo(lead.acceptTerms),
+              inline: true,
+            },
+            {
+              name: "Happy to be contacted",
+              value: yesNo(lead.acceptContact),
+              inline: true,
+            },
           ],
           timestamp: new Date().toISOString(),
         },
@@ -111,21 +129,22 @@ export function PrebookModal({
       phone: "",
       city: "",
       acceptTerms: false,
+      acceptContact: false,
     },
   });
 
   const petType = watch("petType");
   const acceptTerms = watch("acceptTerms");
+  const acceptContact = watch("acceptContact");
 
   const onSubmit = handleSubmit(async (values) => {
-    const { acceptTerms: _accepted, ...lead } = values;
-    saveLead(lead);
+    saveLead(values);
     try {
-      await notifyDiscord(lead);
+      await notifyDiscord(values);
       setSubmitted(true);
     } catch (err) {
       console.error(err);
-      // Still treat as success for the user if Discord is down — lead is in localStorage
+      // Still treat as success for the user if Discord is down - lead is in localStorage
       setSubmitted(true);
     }
   });
@@ -231,33 +250,40 @@ export function PrebookModal({
                 ) : null}
               </div>
 
-              <div className="space-y-2">
-                <label className="flex items-start gap-3 text-sm leading-snug text-muted-foreground">
-                  <Checkbox
-                    checked={acceptTerms === true}
-                    onCheckedChange={(checked) =>
-                      setValue("acceptTerms", checked === true, {
-                        shouldValidate: true,
-                        shouldDirty: true,
-                      })
-                    }
-                    className="mt-0.5"
-                  />
-                  <span>
-                    I agree to the{" "}
-                    <Link to="/terms" className="text-foreground underline underline-offset-2">
-                      Terms
-                    </Link>{" "}
-                    and{" "}
-                    <Link to="/privacy" className="text-foreground underline underline-offset-2">
-                      Privacy Policy
-                    </Link>
-                    , and I'm happy to be contacted about my pre-booking.
-                  </span>
-                </label>
-                {errors.acceptTerms ? (
-                  <p className="text-xs text-destructive">{errors.acceptTerms.message}</p>
-                ) : null}
+              <div className="space-y-3">
+                <ConsentCheck
+                  checked={acceptTerms === true}
+                  error={errors.acceptTerms?.message}
+                  onCheckedChange={(checked) =>
+                    setValue("acceptTerms", checked, {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    })
+                  }
+                >
+                  I agree to the{" "}
+                  <Link to="/terms" className="text-foreground underline underline-offset-2">
+                    Terms
+                  </Link>{" "}
+                  and{" "}
+                  <Link to="/privacy" className="text-foreground underline underline-offset-2">
+                    Privacy Policy
+                  </Link>
+                  .
+                </ConsentCheck>
+
+                <ConsentCheck
+                  checked={acceptContact === true}
+                  error={errors.acceptContact?.message}
+                  onCheckedChange={(checked) =>
+                    setValue("acceptContact", checked, {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    })
+                  }
+                >
+                  I'm happy to be contacted about my pre-booking.
+                </ConsentCheck>
               </div>
 
               <Button
@@ -288,6 +314,32 @@ function Field({
     <div className="space-y-2">
       <Label>{label}</Label>
       {children}
+      {error ? <p className="text-xs text-destructive">{error}</p> : null}
+    </div>
+  );
+}
+
+function ConsentCheck({
+  checked,
+  error,
+  onCheckedChange,
+  children,
+}: {
+  checked: boolean;
+  error?: string;
+  onCheckedChange: (checked: boolean) => void;
+  children: ReactNode;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <label className="flex items-start gap-3 text-sm leading-snug text-muted-foreground">
+        <Checkbox
+          checked={checked}
+          onCheckedChange={(value) => onCheckedChange(value === true)}
+          className="mt-0.5"
+        />
+        <span>{children}</span>
+      </label>
       {error ? <p className="text-xs text-destructive">{error}</p> : null}
     </div>
   );
