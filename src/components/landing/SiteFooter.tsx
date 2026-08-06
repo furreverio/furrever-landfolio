@@ -30,6 +30,16 @@ export function SiteFooter() {
                   Home
                 </Link>
               </li>
+              <li>
+                <Link to="/about" className="hover:text-brand">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-brand">
+                  Contact Us
+                </Link>
+              </li>
             </ul>
           </div>
 
