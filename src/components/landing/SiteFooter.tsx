@@ -48,6 +48,11 @@ export function SiteFooter() {
                   Terms &amp; Conditions
                 </Link>
               </li>
+              <li>
+                <Link to="/refunds" className="hover:text-brand">
+                  Refund &amp; Cancellation
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
