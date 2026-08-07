@@ -85,6 +85,14 @@ const organizationJsonLd = {
   logo: `${siteUrl}/favicon.png`,
   slogan: "Know your pet, beyond the obvious.",
   description: siteDescription,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "2nd Floor, 235, Binnamangala, 13th Cross Road, Indira Nagar, 2nd Stage",
+    addressLocality: "Bengaluru Urban",
+    addressRegion: "Karnataka",
+    postalCode: "560038",
+    addressCountry: "IN",
+  },
 };
 
 const websiteJsonLd = {

@@ -1,7 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Mail, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import logo from "@/assets/logo-white.png";
+
+const registeredAddress =
+  "2nd Floor, 235, Binnamangala, 13th Cross Road, Indira Nagar, 2nd Stage, Bengaluru Urban, Karnataka, 560038";
+const mapsUrl =
+  "https://www.google.com/maps/search/?api=1&query=" +
+  encodeURIComponent(registeredAddress);
 
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
@@ -30,6 +36,14 @@ const contactPageJsonLd = {
     name: "Locapaw Technologies Pvt Ltd",
     email: "kevin@furrever.io",
     telephone: "+91-9686660425",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "2nd Floor, 235, Binnamangala, 13th Cross Road, Indira Nagar, 2nd Stage",
+      addressLocality: "Bengaluru Urban",
+      addressRegion: "Karnataka",
+      postalCode: "560038",
+      addressCountry: "IN",
+    },
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -171,6 +185,29 @@ function Contact() {
               </span>
               <ArrowUpRight
                 className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-brand"
+                aria-hidden
+              />
+            </a>
+
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-start gap-4 rounded-2xl border border-border bg-surface/80 px-4 py-4 transition-colors hover:border-brand/50 hover:bg-surface sm:gap-5 sm:px-5 sm:py-5"
+            >
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-background text-brand sm:h-12 sm:w-12">
+                <MapPin className="h-5 w-5" aria-hidden />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
+                  Registered address
+                </span>
+                <span className="mt-1 block font-display text-base leading-snug text-foreground group-hover:text-brand sm:text-lg">
+                  {registeredAddress}
+                </span>
+              </span>
+              <ArrowUpRight
+                className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-brand"
                 aria-hidden
               />
             </a>

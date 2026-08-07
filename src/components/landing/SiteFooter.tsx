@@ -14,6 +14,12 @@ export function SiteFooter() {
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
             Know your pet, beyond the obvious.
           </p>
+          <p className="mt-3 max-w-sm text-xs leading-relaxed text-muted-foreground">
+            Locapaw Technologies Pvt Ltd
+            <br />
+            2nd Floor, 235, Binnamangala, 13th Cross Road, Indira Nagar, 2nd Stage, Bengaluru Urban,
+            Karnataka, 560038
+          </p>
         </div>
 
         <div className="grid grid-cols-2 gap-8 md:contents">

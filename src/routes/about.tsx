@@ -114,6 +114,10 @@ function About() {
               Furrever is built and operated by Locapaw Technologies Pvt Ltd.
             </p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Registered address: 2nd Floor, 235, Binnamangala, 13th Cross Road, Indira Nagar, 2nd
+              Stage, Bengaluru Urban, Karnataka, 560038.
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               For questions about the product or your pre-booking, email us at:{" "}
               <a href="mailto:kevin@furrever.io" className="text-foreground hover:text-brand">
                 kevin@furrever.io
