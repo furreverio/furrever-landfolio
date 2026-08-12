@@ -461,9 +461,9 @@ function Index() {
           <div className="mt-6 flex justify-center overflow-x-auto sm:mt-8">
             <Countdown />
           </div>
-          <PrebookButton className="mt-8 inline-flex w-full max-w-xs justify-center rounded-full bg-gradient-brand px-8 py-3.5 font-medium text-primary-foreground shadow-brand sm:mt-10 sm:w-auto">
-            Be A Founding Pet Parent
-          </PrebookButton>
+          <div className="mt-8 flex justify-center sm:mt-10">
+            <HeroPrebookCta variant="brand" />
+          </div>
         </div>
       </section>
 

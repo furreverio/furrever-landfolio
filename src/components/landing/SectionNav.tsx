@@ -52,7 +52,7 @@ export function SectionNav() {
       aria-label="Page sections"
       className="pointer-events-none fixed top-1/2 right-5 z-40 hidden -translate-y-1/2 xl:block"
     >
-      <ul className="pointer-events-auto flex flex-col items-end gap-2 rounded-full border border-white/8 bg-black/25 px-2 py-3 backdrop-blur-md">
+      <ul className="pointer-events-auto flex flex-col items-end gap-2 px-1 py-1">
         {pageSections.map((section) => {
           const isActive = active === section.id;
           return (

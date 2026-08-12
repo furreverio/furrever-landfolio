@@ -9,7 +9,11 @@ const pets: { value: PetType; label: string; image: string }[] = [
   { value: "cat", label: "Cat", image: catSleep },
 ];
 
-export function HeroPrebookCta() {
+export function HeroPrebookCta({
+  variant = "hero",
+}: {
+  variant?: "hero" | "brand";
+}) {
   const { openPrebook } = usePrebook();
   const rootRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
@@ -47,10 +51,15 @@ export function HeroPrebookCta() {
     openPrebook(petType);
   };
 
+  const isBrand = variant === "brand";
+
   return (
     <div
       ref={rootRef}
-      className="relative h-12 w-[min(100%,20.5rem)] sm:h-14 sm:w-[22rem]"
+      className={cn(
+        "relative h-12 w-[min(100%,20.5rem)] sm:h-14 sm:w-[22rem]",
+        isBrand && "h-12 w-full max-w-xs sm:h-12 sm:w-auto sm:min-w-[16rem]",
+      )}
       onMouseEnter={() => canHover && setExpanded(true)}
       onMouseLeave={() => canHover && setExpanded(false)}
     >
@@ -63,11 +72,18 @@ export function HeroPrebookCta() {
           setExpanded((open) => !open);
         }}
         className={cn(
-          "absolute inset-0 rounded-full border border-brand/80 bg-black/55 px-5 font-hero text-[11px] font-semibold uppercase tracking-[0.16em] text-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-300 sm:text-[13px] sm:tracking-[0.18em]",
-          expanded ? "pointer-events-none scale-[0.98] opacity-0" : "opacity-100 hover:border-brand hover:bg-black/70",
+          "absolute inset-0 rounded-full px-8 transition-all duration-300",
+          isBrand
+            ? "bg-gradient-brand font-medium text-primary-foreground shadow-brand"
+            : "border border-brand/80 bg-black/55 px-5 font-hero text-[11px] font-semibold uppercase tracking-[0.16em] text-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.7)] backdrop-blur-md sm:text-[13px] sm:tracking-[0.18em]",
+          expanded
+            ? "pointer-events-none scale-[0.98] opacity-0"
+            : isBrand
+              ? "opacity-100"
+              : "opacity-100 hover:border-brand hover:bg-black/70",
         )}
       >
-        Be a founding pet parent
+        Be A Founding Pet Parent
       </button>
 
       <div
