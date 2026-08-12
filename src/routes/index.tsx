@@ -1,5 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Bell, Check, Heart, Minus, Moon, PawPrint, Thermometer, Waves, Wind } from "lucide-react";
+import {
+  Battery,
+  Bell,
+  Check,
+  Heart,
+  HeartPulse,
+  MapPin,
+  Minus,
+  Moon,
+  Smile,
+  Sparkles,
+  Stethoscope,
+  Thermometer,
+  Utensils,
+  Waves,
+  Wind,
+} from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -11,8 +27,10 @@ import { ScoreDial } from "@/components/landing/ScoreDial";
 import { PillarStack } from "@/components/landing/PillarStack";
 import { ScienceCarousel } from "@/components/landing/ScienceCarousel";
 import { SiteFooter } from "@/components/landing/SiteFooter";
-import { PrebookButton } from "@/components/landing/prebook-context";
+import { PrebookButton } from "@/components/landing/PrebookButton";
+import { HeroPrebookCta } from "@/components/landing/HeroPrebookCta";
 import { TeardownScroll } from "@/components/landing/TeardownScroll";
+import { SectionNav } from "@/components/landing/SectionNav";
 import logo from "@/assets/logo-white.png";
 import heroCollar from "@/assets/hero-collar.png";
 import dogRunning from "@/assets/dog-running.jpg";
@@ -20,21 +38,73 @@ import catSleep from "@/assets/cat-sleep.jpg";
 
 const siteUrl = "https://furrever.io";
 
+const highlights = [
+  {
+    icon: Stethoscope,
+    title: "Recommended by veterinarians",
+    description:
+      "Designed with vet input so the insights you see are worth sharing at the clinic.",
+  },
+  {
+    icon: HeartPulse,
+    title: "Biometric sensors",
+    description:
+      "Heart rate, respiration, temperature and motion - built for their health, not just activity.",
+  },
+  {
+    icon: Battery,
+    title: "Long-lasting battery",
+    description:
+      "Up to 45 days on a charge, in a screenless LED-first design unlike anything else on the market.",
+  },
+];
+
 const science = [
-  { icon: Heart, title: "Heart Rate Variability", copy: "Autonomic stress load, read overnight." },
-  { icon: Moon, title: "4-Stage Sleep", copy: "Deep, light, REM and awake windows." },
-  { icon: Waves, title: "Activity Zones", copy: "Walk, play, sprint and rest classified." },
-  { icon: Wind, title: "Respiratory Rate", copy: "Breath counts while your pet sleeps." },
-  { icon: Thermometer, title: "Skin Temperature", copy: "Baseline deviation, day over day." },
-  { icon: PawPrint, title: "Behaviour Signals", copy: "Scratching, licking, pacing, shaking." },
+  {
+    icon: Waves,
+    title: "Activity Recognition",
+    copy: "Walk, play, sprint and rest classified automatically.",
+  },
+  {
+    icon: MapPin,
+    title: "Live GPS",
+    copy: "Know where they are - escapes, walks and safe zones.",
+  },
+  {
+    icon: Thermometer,
+    title: "Skin Temperature",
+    copy: "Baseline deviation tracked day over day.",
+  },
+  {
+    icon: Heart,
+    title: "Resting Heart Rate",
+    copy: "Daily baseline at rest, not just overnight.",
+  },
+  {
+    icon: Wind,
+    title: "Respiratory Rate",
+    copy: "Breaths per minute while your pet is calm.",
+  },
+  {
+    icon: Utensils,
+    title: "Eating & Drinking",
+    copy: "Meal and water patterns over time.",
+  },
+  {
+    icon: Moon,
+    title: "Sleep Stages",
+    copy: "Deep, light and REM when you want the full picture.",
+  },
 ];
 
 const comparison = [
-  { feature: "Heart rate variability", trace: true, others: false },
-  { feature: "Recovery score", trace: true, others: false },
-  { feature: "4-stage sleep tracking", trace: true, others: false },
+  { feature: "Activity recognition", trace: true, others: false },
+  { feature: "Live GPS location", trace: true, others: false },
+  { feature: "Skin temperature tracking", trace: true, others: false },
+  { feature: "Resting heart rate", trace: true, others: false },
   { feature: "Respiratory rate", trace: true, others: false },
-  { feature: "Itch & scratch detection", trace: true, others: false },
+  { feature: "Eating & drinking patterns", trace: true, others: false },
+  { feature: "Sleep stage tracking", trace: true, others: false },
   { feature: "Vet-ready health report", trace: true, others: false },
   { feature: "Battery life", trace: "45 days", others: "3 days" },
 ];
@@ -50,7 +120,7 @@ const faqs = [
   },
   {
     q: "Can I share data with my vet?",
-    a: "One tap exports a 30-day PDF with vitals, sleep and behaviour trends, formatted for a clinical consult.",
+    a: "One tap exports a 30-day PDF with activity, vitals and behaviour trends, formatted for a clinical consult.",
   },
   {
     q: "Is it safe for my pet to wear all day?",
@@ -64,7 +134,7 @@ const productJsonLd = {
   "@id": `${siteUrl}/#product`,
   name: "Furrever Smart Pet Collar",
   description:
-    "A screenless smart collar for dogs and cats that tracks sleep stages, recovery, activity zones, heart rate variability, respiratory rate and skin temperature, 24/7.",
+    "A screenless smart collar for dogs and cats that tracks activity, live GPS, skin temperature, resting heart rate, respiratory rate, eating and drinking patterns, and sleep, 24/7.",
   image: [`${siteUrl}/og-image.jpg`],
   brand: { "@type": "Brand", name: "Furrever" },
   category: "Pet Wearable / Pet Health Tracker",
@@ -99,7 +169,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Furrever is a screenless smart collar that tracks sleep, recovery, activity and vitals for dogs and cats, 24/7. Pre-book now. Launch price under ₹7,000.",
+          "Furrever is a screenless smart collar that tracks activity, GPS, temperature, vitals and daily routines for dogs and cats, 24/7. Be a founding pet parent. Launch price under ₹7,000.",
       },
       {
         property: "og:title",
@@ -108,7 +178,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Know your pet beyond the obvious. Track sleep, recovery, activity and vitals with a screenless smart collar. Pre-book under ₹7,000.",
+          "Know your pet beyond the obvious. Activity, GPS, temperature, vitals and more with a screenless smart collar. Be a founding pet parent under ₹7,000.",
       },
       { property: "og:url", content: `${siteUrl}/` },
       { property: "og:site_name", content: "Furrever" },
@@ -119,7 +189,7 @@ export const Route = createFileRoute("/")({
       {
         name: "twitter:description",
         content:
-          "Screenless smart collar for dogs and cats. Sleep, recovery, activity and vitals, tracked 24/7. Pre-book under ₹7,000.",
+          "Screenless smart collar for dogs and cats. Activity, GPS, temperature and vitals tracked 24/7. Be a founding pet parent under ₹7,000.",
       },
       { name: "robots", content: "index, follow" },
       { "script:ld+json": productJsonLd },
@@ -133,6 +203,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-svh overflow-x-clip bg-background">
+      <SectionNav />
       {/* Sticky chrome */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/95 pt-[env(safe-area-inset-top)] backdrop-blur-md">
         <div className="mx-auto flex h-12 max-w-[1400px] items-center justify-between gap-3 px-5 sm:gap-4 md:px-8">
@@ -147,7 +218,7 @@ function Index() {
               Under <span className="text-white">₹7,000</span>
             </p>
             <PrebookButton className="rounded-full border border-brand/70 px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-brand hover:bg-brand/10 sm:px-4 sm:text-[11px] md:px-6 md:py-2.5 md:text-[13px]">
-              Pre-book
+              Be A Founding Pet Parent
             </PrebookButton>
           </div>
         </div>
@@ -156,7 +227,7 @@ function Index() {
       {/* Screen-wide hero */}
       <section
         id="top"
-        className="relative mt-[calc(3rem+env(safe-area-inset-top))] min-h-[calc(100svh-3rem-env(safe-area-inset-top))] w-full overflow-hidden bg-black md:aspect-video md:min-h-0"
+        className="relative mt-[calc(3rem+env(safe-area-inset-top))] min-h-[calc(100svh-3rem-env(safe-area-inset-top))] w-full scroll-mt-[calc(3rem+env(safe-area-inset-top))] overflow-hidden bg-black md:aspect-video md:min-h-0"
       >
         <img
           src={heroCollar}
@@ -191,43 +262,83 @@ function Index() {
             <Countdown variant="hero" />
           </div>
           <p className="hero-meta text-center md:hidden">24x7 Pet Health Tracker</p>
+          <HeroPrebookCta />
         </div>
       </section>
 
       {/* Pillars */}
-      <section>
+      <section id="care" className="scroll-mt-[calc(3rem+env(safe-area-inset-top))]">
         <PillarStack />
       </section>
 
-      <TeardownScroll />
+      <TeardownScroll>
+        <div className="border-t border-white/10 bg-black">
+          <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-5 sm:py-14 md:grid-cols-3 md:gap-8 md:py-16">
+            {highlights.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className="flex gap-4 sm:gap-5">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 sm:h-12 sm:w-12">
+                    <Icon className="h-5 w-5 text-brand" aria-hidden />
+                  </div>
+                  <div className="min-w-0">
+                    <h2 className="font-display text-lg leading-snug text-white sm:text-xl">
+                      {item.title}
+                    </h2>
+                    <p className="mt-1.5 text-sm leading-relaxed text-white/60">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </TeardownScroll>
 
       {/* Three scores */}
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-20">
+      <section
+        id="scores"
+        className="mx-auto max-w-7xl scroll-mt-[calc(3rem+env(safe-area-inset-top))] px-4 py-14 sm:px-5 sm:py-20"
+      >
         <h2 className="font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
           Your pet, in three scores.
         </h2>
         <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-3">
           <ScoreDial
+            variant="wellness"
+            icon={Sparkles}
             value={86}
-            label="Sleep"
-            caption="Quality measured in stages, not just hours on the couch."
+            label="Wellness"
+            subtitle="Looking good today"
+            caption="A warm daily snapshot of overall health - activity, vitals and routine in one friendly score."
           />
           <ScoreDial
-            value={74}
-            suffix="%"
-            label="Recovery"
-            caption="How ready your pet is for today's walk, run or play."
+            variant="mood"
+            icon={Smile}
+            value={78}
+            label="Mood"
+            subtitle="Playful and happy"
+            caption="Playtime, zoomies and curiosity - picked up from movement and behaviour."
           />
           <ScoreDial
-            value={312}
-            label="Effort"
-            caption="Energy spent through the day, updated in real time."
+            variant="heartbeat"
+            icon={HeartPulse}
+            value={72}
+            max={120}
+            unit="bpm"
+            label="Heart Beats"
+            subtitle="Steady at rest"
+            caption="Resting heart rate - tracked against your pet's baseline."
           />
         </div>
       </section>
 
       {/* Lifestyle split */}
-      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-5 sm:py-10">
+      <section
+        id="lifestyle"
+        className="mx-auto max-w-7xl scroll-mt-[calc(3rem+env(safe-area-inset-top))] px-4 py-8 sm:px-5 sm:py-10"
+      >
         <div className="grid gap-4 sm:gap-6 md:grid-cols-[1.4fr_1fr]">
           <div className="relative min-h-[280px] overflow-hidden rounded-2xl sm:min-h-[340px] sm:rounded-3xl md:min-h-0">
             <img
@@ -239,10 +350,10 @@ function Index() {
               className="h-full min-h-[280px] w-full object-cover sm:min-h-[340px] md:min-h-full"
             />
             <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-background to-transparent p-5 sm:p-8">
-              <h3 className="font-display text-2xl sm:text-3xl">Insights that adapt</h3>
+              <h3 className="font-display text-2xl sm:text-3xl">Activity that adds up</h3>
               <p className="mt-2 max-w-md text-sm text-muted-foreground">
-                Baselines are learned per pet (breed, age and temperament), so a change means
-                something.
+                Walks, play and rest are recognized automatically - so you see patterns, not just
+                steps.
               </p>
             </div>
           </div>
@@ -256,9 +367,9 @@ function Index() {
               className="h-full min-h-[240px] w-full object-cover sm:min-h-[300px] md:min-h-full"
             />
             <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-background to-transparent p-5 sm:p-8">
-              <h3 className="font-display text-2xl sm:text-3xl">Quiet by design</h3>
+              <h3 className="font-display text-2xl sm:text-3xl">Find them fast</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                No screen, no beeps, no lights at night.
+                Live GPS on the collar when they slip the gate or wander off.
               </p>
             </div>
           </div>
@@ -266,10 +377,13 @@ function Index() {
       </section>
 
       {/* Science carousel */}
-      <ScienceCarousel items={science} />
+      <ScienceCarousel id="science" items={science} />
 
       {/* Comparison */}
-      <section className="mx-auto max-w-4xl px-4 py-14 sm:px-5 sm:py-20">
+      <section
+        id="compare"
+        className="mx-auto max-w-4xl scroll-mt-[calc(3rem+env(safe-area-inset-top))] px-4 py-14 sm:px-5 sm:py-20"
+      >
         <h2 className="font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
           Better everywhere
         </h2>
@@ -307,7 +421,10 @@ function Index() {
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-3xl px-4 py-14 sm:px-5 sm:py-20">
+      <section
+        id="faq"
+        className="mx-auto max-w-3xl scroll-mt-[calc(3rem+env(safe-area-inset-top))] px-4 py-14 sm:px-5 sm:py-20"
+      >
         <h2 className="font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
           Frequently asked questions
         </h2>
@@ -326,7 +443,7 @@ function Index() {
       {/* Pre-book CTA */}
       <section
         id="prebook"
-        className="relative overflow-hidden px-4 py-16 sm:px-5 sm:py-20 md:py-24"
+        className="relative scroll-mt-[calc(3rem+env(safe-area-inset-top))] overflow-hidden px-4 py-16 sm:px-5 sm:py-20 md:py-24"
       >
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[min(100vw,700px)] -translate-x-1/2 -translate-y-1/2 opacity-30 blur-[100px] sm:h-[400px]"
@@ -336,7 +453,7 @@ function Index() {
         <div className="relative mx-auto max-w-3xl rounded-2xl border border-border bg-card p-6 text-center sm:rounded-3xl sm:p-10">
           <Bell className="mx-auto h-6 w-6 text-brand" />
           <h2 className="mt-4 font-display text-3xl sm:mt-5 sm:text-4xl md:text-5xl">
-            Pre-book for launch
+            Be a founding pet parent
           </h2>
           <p className="mt-3 text-sm text-muted-foreground sm:text-base">
             Final pricing is still being planned, and will stay under ₹7,000. Fully refundable.
@@ -345,7 +462,7 @@ function Index() {
             <Countdown />
           </div>
           <PrebookButton className="mt-8 inline-flex w-full max-w-xs justify-center rounded-full bg-gradient-brand px-8 py-3.5 font-medium text-primary-foreground shadow-brand sm:mt-10 sm:w-auto">
-            Pre-book now
+            Be A Founding Pet Parent
           </PrebookButton>
         </div>
       </section>

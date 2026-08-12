@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/logo-white.png";
-import { PrebookButton } from "@/components/landing/prebook-context";
+import { PrebookButton } from "@/components/landing/PrebookButton";
 
 export function SiteFooter() {
   return (
@@ -29,7 +29,7 @@ export function SiteFooter() {
             </h3>
             <ul className="mt-3 space-y-2 text-sm sm:mt-4">
               <li>
-                <PrebookButton className="hover:text-brand">Pre-book</PrebookButton>
+                <PrebookButton className="hover:text-brand">Be A Founding Pet Parent</PrebookButton>
               </li>
               <li>
                 <Link to="/" className="hover:text-brand">

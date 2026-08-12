@@ -11,7 +11,7 @@ export type ScienceItem = {
 const SPEED_PX_PER_SEC = 28;
 const LOOP_COPIES = 3;
 
-export function ScienceCarousel({ items }: { items: ScienceItem[] }) {
+export function ScienceCarousel({ items, id }: { items: ScienceItem[]; id?: string }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const draggingRef = useRef(false);
@@ -109,7 +109,8 @@ export function ScienceCarousel({ items }: { items: ScienceItem[] }) {
 
   return (
     <section
-      className="relative overflow-hidden py-14 sm:py-20 md:py-24"
+      id={id}
+      className="relative scroll-mt-[calc(3rem+env(safe-area-inset-top))] overflow-hidden py-14 sm:py-20 md:py-24"
       onPointerMove={onPointerMove}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}

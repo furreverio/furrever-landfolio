@@ -6,7 +6,39 @@ import {
 } from "@/config/pillars";
 
 /** Viewport heights per pillar - higher = slower scrub between cards. */
-const SCROLL_VH_PER_PILLAR = 2.5;
+const SCROLL_VH_PER_PILLAR = 1.5;
+
+function PillarCard({ pillar }: { pillar: PillarConfig }) {
+  const Icon = pillarIcons[pillar.icon];
+
+  return (
+    <div className="grid gap-5 rounded-2xl border border-border bg-card p-4 sm:gap-6 sm:rounded-3xl sm:p-6 md:grid-cols-[minmax(0,18rem)_1fr] md:items-center md:gap-8 md:p-8 lg:grid-cols-[minmax(0,20rem)_1fr]">
+      <div className="min-w-0">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-2 sm:h-11 sm:w-11">
+          <Icon className="h-5 w-5 text-brand" />
+        </div>
+        <div className="mt-4 text-[10px] uppercase tracking-[0.22em] text-brand sm:mt-5 sm:text-xs sm:tracking-[0.25em]">
+          {pillar.kicker}
+        </div>
+        <h3 className="mt-2 text-xl leading-snug sm:text-2xl md:text-3xl">{pillar.title}</h3>
+        {pillar.copy ? (
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:mt-3">{pillar.copy}</p>
+        ) : null}
+      </div>
+      <div className="grid min-w-0 grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-3">
+        {pillar.metrics.map((metric) => (
+          <div
+            key={metric.label}
+            className="rounded-xl bg-surface-2 px-4 py-3 sm:rounded-2xl sm:p-5"
+          >
+            <div className="text-[11px] text-muted-foreground sm:text-xs">{metric.label}</div>
+            <div className="mt-2 font-display text-base sm:mt-3 sm:text-lg">{metric.value}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function PillarStack({
   pillars = defaultPillars,
@@ -37,6 +69,12 @@ export function PillarStack({
   const n = pillars.length;
   const pos = progress * (n - 1);
   const active = Math.round(pos);
+  const sizerPillar = pillars.reduce((tallest, pillar) =>
+    pillar.title.length + (pillar.copy?.length ?? 0) >
+    tallest.title.length + (tallest.copy?.length ?? 0)
+      ? pillar
+      : tallest,
+  pillars[0]);
 
   return (
     <div ref={ref} style={{ height: `${n * SCROLL_VH_PER_PILLAR * 100}svh` }} className="relative">
@@ -47,8 +85,10 @@ export function PillarStack({
           </h2>
 
           <div className="relative mt-6 sm:mt-8 md:mt-10">
+            <div className="pointer-events-none invisible" aria-hidden>
+              <PillarCard pillar={sizerPillar} />
+            </div>
             {pillars.map((p, i) => {
-              const Icon = pillarIcons[p.icon];
               const d = i - pos;
               const abs = Math.abs(d);
               const style: React.CSSProperties = {
@@ -61,46 +101,10 @@ export function PillarStack({
                 <div
                   key={p.id}
                   aria-hidden={i !== active}
-                  className={
-                    i === 0
-                      ? "relative will-change-transform"
-                      : "absolute inset-0 will-change-transform"
-                  }
+                  className="absolute inset-0 will-change-transform"
                   style={style}
                 >
-                  <div className="grid gap-4 rounded-2xl border border-border bg-card p-4 sm:gap-5 sm:rounded-3xl sm:p-6 md:grid-cols-[1fr_2fr] md:gap-6 md:p-8">
-                    <div>
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-2 sm:h-11 sm:w-11">
-                        <Icon className="h-5 w-5 text-brand" />
-                      </div>
-                      <div className="mt-4 text-[10px] uppercase tracking-[0.22em] text-brand sm:mt-5 sm:text-xs sm:tracking-[0.25em]">
-                        {p.kicker}
-                      </div>
-                      <h3 className="mt-2 text-xl leading-snug sm:text-2xl md:text-3xl">
-                        {p.title}
-                      </h3>
-                      {p.copy ? (
-                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:mt-3">
-                          {p.copy}
-                        </p>
-                      ) : null}
-                    </div>
-                    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-3">
-                      {p.metrics.map((c) => (
-                        <div
-                          key={c.label}
-                          className="flex items-baseline justify-between gap-3 rounded-xl bg-surface-2 px-4 py-3 sm:block sm:rounded-2xl sm:p-5"
-                        >
-                          <div className="text-[11px] text-muted-foreground sm:text-xs">
-                            {c.label}
-                          </div>
-                          <div className="font-display text-base sm:mt-3 sm:text-lg">
-                            {c.value}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <PillarCard pillar={p} />
                 </div>
               );
             })}

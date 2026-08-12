@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/landing/SiteFooter";
-import { PrebookButton } from "@/components/landing/prebook-context";
+import { PrebookButton } from "@/components/landing/PrebookButton";
 import logo from "@/assets/logo-white.png";
 
 const breadcrumbJsonLd = {
@@ -130,10 +130,10 @@ function About() {
         <div className="mt-10 border-t border-border pt-8 sm:mt-12 sm:pt-10">
           <h2 className="font-display text-xl sm:text-2xl">Ready when you are</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Pre-book at the launch price. Fully refundable until we ship.
+            Join as a founding pet parent at the launch price. Fully refundable until we ship.
           </p>
           <PrebookButton className="mt-5 inline-flex rounded-full bg-gradient-brand px-8 py-3 font-medium text-primary-foreground shadow-brand">
-            Pre-book now
+            Be A Founding Pet Parent
           </PrebookButton>
         </div>
       </main>

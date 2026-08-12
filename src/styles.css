@@ -365,5 +365,115 @@
   }
 }
 
+/* Score dial live animations */
+@keyframes score-ecg-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes score-wellness-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes score-wellness-halo {
+  0%,
+  100% {
+    transform: scale(0.98);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.9;
+  }
+}
+
+@keyframes score-wellness-spark {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(-4px) scale(1.25);
+    opacity: 1;
+  }
+}
+
+@keyframes score-wellness-wave {
+  0%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px color-mix(in oklab, var(--brand-glow) 25%, transparent));
+  }
+  50% {
+    opacity: 0.92;
+    filter: drop-shadow(0 0 10px color-mix(in oklab, var(--brand-glow) 45%, transparent));
+  }
+}
+
+@keyframes score-wellness-icon {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.score-dial--heartbeat .score-dial-ecg {
+  animation: score-ecg-scroll 5s linear infinite;
+}
+
+.score-dial--wellness .score-dial-wellness-glow {
+  animation: score-wellness-glow 4.5s ease-in-out infinite;
+}
+
+.score-dial--wellness .score-dial-wellness-halo {
+  animation: score-wellness-halo 4.5s ease-in-out infinite;
+}
+
+.score-dial--wellness .score-dial-wellness-ring {
+  animation: score-wellness-wave 4.5s ease-in-out infinite;
+}
+
+.score-dial--wellness .score-dial-wellness-icon {
+  animation: score-wellness-icon 4.5s ease-in-out infinite;
+}
+
+.score-dial--wellness .score-dial-wellness-spark--1 {
+  animation: score-wellness-spark 3.2s ease-in-out infinite;
+}
+
+.score-dial--wellness .score-dial-wellness-spark--2 {
+  animation: score-wellness-spark 3.2s ease-in-out 0.8s infinite;
+}
+
+.score-dial--wellness .score-dial-wellness-spark--3 {
+  animation: score-wellness-spark 3.2s ease-in-out 1.6s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .score-dial-ecg,
+  .score-dial-wellness-glow,
+  .score-dial-wellness-halo,
+  .score-dial-wellness-ring,
+  .score-dial-wellness-icon,
+  .score-dial-wellness-spark {
+    animation: none !important;
+  }
+}
 
 

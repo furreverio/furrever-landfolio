@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 const FRAME_COUNT = 84;
 const BASE = import.meta.env.BASE_URL.replace(/\/?$/, "/");
@@ -12,7 +12,7 @@ function isNarrowViewport() {
   return typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
 }
 
-export function TeardownScroll() {
+export function TeardownScroll({ children }: { children?: ReactNode }) {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -132,11 +132,15 @@ export function TeardownScroll() {
 
   return (
     <section
-      ref={sectionRef}
-      className="relative bg-black"
-      style={{ height: `${SCROLL_VH * 100}vh` }}
+      id="collar"
+      className="relative scroll-mt-[calc(3rem+env(safe-area-inset-top))] bg-black"
       aria-label="Product teardown animation"
     >
+      <div
+        ref={sectionRef}
+        className="relative"
+        style={{ height: `${SCROLL_VH * 100}vh` }}
+      >
       <div className="sticky top-[calc(3rem+env(safe-area-inset-top))] flex h-[calc(100svh-3rem-env(safe-area-inset-top))] w-full flex-col overflow-hidden">
         {/* Mobile: title band above the frame so type never fights the crop */}
         <div className="relative z-20 shrink-0 px-5 pb-3 pt-5 md:absolute md:inset-x-0 md:top-0 md:z-10 md:px-10 md:pb-0 md:pt-12 md:pr-16">
@@ -189,6 +193,8 @@ export function TeardownScroll() {
           </p>
         </div>
       </div>
+      </div>
+      {children}
     </section>
   );
 }

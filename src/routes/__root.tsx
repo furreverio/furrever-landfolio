@@ -72,7 +72,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 const siteUrl = "https://furrever.io";
 const siteTitle = "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats";
 const siteDescription =
-  "Furrever is a screenless smart collar that tracks sleep, recovery, activity and vitals for dogs and cats, 24/7. Pre-book now. Launch price under ₹7,000.";
+  "Furrever is a screenless smart collar that tracks activity, GPS, temperature, vitals and daily routines for dogs and cats, 24/7. Be a founding pet parent. Launch price under ₹7,000.";
 const ogImage = `${siteUrl}/og-image.jpg`;
 
 const organizationJsonLd = {
