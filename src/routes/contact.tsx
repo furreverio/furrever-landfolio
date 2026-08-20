@@ -13,12 +13,12 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.io/" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.com/" },
     {
       "@type": "ListItem",
       position: 2,
       name: "Contact Us",
-      item: "https://furrever.io/contact",
+      item: "https://furrever.com/contact",
     },
   ],
 };
@@ -27,14 +27,14 @@ const contactPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
   name: "Contact Furrever",
-  url: "https://furrever.io/contact",
+  url: "https://furrever.com/contact",
   description:
     "Get in touch with Locapaw Technologies Pvt Ltd about Furrever pre-bookings, product questions and support.",
   mainEntity: {
     "@type": "Organization",
-    "@id": "https://furrever.io/#organization",
+    "@id": "https://furrever.com/#organization",
     name: "Locapaw Technologies Pvt Ltd",
-    email: "kevin@furrever.io",
+    email: "kevin@furrever.com",
     telephone: "+91-9686660425",
     address: {
       "@type": "PostalAddress",
@@ -48,7 +48,7 @@ const contactPageJsonLd = {
       {
         "@type": "ContactPoint",
         contactType: "customer support",
-        email: "kevin@furrever.io",
+        email: "kevin@furrever.com",
         telephone: "+91-9686660425",
         availableLanguage: ["English", "Hindi"],
         areaServed: "IN",
@@ -64,22 +64,22 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Contact Locapaw Technologies Pvt Ltd about Furrever - email kevin@furrever.io or call 9686660425 for product questions, pre-bookings and support.",
+          "Contact Locapaw Technologies Pvt Ltd about Furrever - email kevin@furrever.com or call 9686660425 for product questions, pre-bookings and support.",
       },
       { property: "og:title", content: "Contact Us | Furrever Smart Pet Collar" },
       {
         property: "og:description",
         content:
-          "Email kevin@furrever.io or call 9686660425. We reply within 1–2 business days.",
+          "Email kevin@furrever.com or call 9686660425. We reply within 1–2 business days.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://furrever.io/contact" },
+      { property: "og:url", content: "https://furrever.com/contact" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "index, follow" },
       { "script:ld+json": breadcrumbJsonLd },
       { "script:ld+json": contactPageJsonLd },
     ],
-    links: [{ rel: "canonical", href: "https://furrever.io/contact" }],
+    links: [{ rel: "canonical", href: "https://furrever.com/contact" }],
   }),
   component: Contact,
 });
@@ -87,19 +87,19 @@ export const Route = createFileRoute("/contact")({
 const topics = [
   {
     label: "Pre-booking or order",
-    href: "mailto:kevin@furrever.io?subject=Pre-booking%20question",
+    href: "mailto:kevin@furrever.com?subject=Pre-booking%20question",
   },
   {
     label: "Product question",
-    href: "mailto:kevin@furrever.io?subject=Product%20question",
+    href: "mailto:kevin@furrever.com?subject=Product%20question",
   },
   {
     label: "Refund or cancellation",
-    href: "mailto:kevin@furrever.io?subject=Refund%20or%20cancellation",
+    href: "mailto:kevin@furrever.com?subject=Refund%20or%20cancellation",
   },
   {
     label: "Privacy request",
-    href: "mailto:privacy@furrever.io?subject=Privacy%20request",
+    href: "mailto:privacy@furrever.com?subject=Privacy%20request",
   },
 ];
 
@@ -148,7 +148,7 @@ function Contact() {
 
           <div className="mt-10 space-y-3 sm:mt-12">
             <a
-              href="mailto:kevin@furrever.io"
+              href="mailto:kevin@furrever.com"
               className="group flex items-center gap-4 rounded-2xl border border-border bg-surface/80 px-4 py-4 transition-colors hover:border-brand/50 hover:bg-surface sm:gap-5 sm:px-5 sm:py-5"
             >
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-background text-brand sm:h-12 sm:w-12">
@@ -159,7 +159,7 @@ function Contact() {
                   Email
                 </span>
                 <span className="mt-1 block truncate font-display text-lg text-foreground group-hover:text-brand sm:text-xl">
-                  kevin@furrever.io
+                  kevin@furrever.com
                 </span>
               </span>
               <ArrowUpRight

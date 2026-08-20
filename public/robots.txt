@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://furrever.io/sitemap.xml
+Sitemap: https://furrever.com/sitemap.xml

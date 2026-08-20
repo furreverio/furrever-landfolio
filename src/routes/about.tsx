@@ -7,12 +7,12 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.io/" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.com/" },
     {
       "@type": "ListItem",
       position: 2,
       name: "About Us",
-      item: "https://furrever.io/about",
+      item: "https://furrever.com/about",
     },
   ],
 };
@@ -21,10 +21,10 @@ const aboutPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
   name: "About Furrever",
-  url: "https://furrever.io/about",
+  url: "https://furrever.com/about",
   description:
     "Furrever is a screenless smart pet collar built by Locapaw Technologies Pvt Ltd to help pet parents understand sleep, recovery, activity and vitals.",
-  mainEntity: { "@id": "https://furrever.io/#organization" },
+  mainEntity: { "@id": "https://furrever.com/#organization" },
 };
 
 export const Route = createFileRoute("/about")({
@@ -43,13 +43,13 @@ export const Route = createFileRoute("/about")({
           "Know your pet, beyond the obvious. Meet the team behind Furrever, the screenless smart pet collar.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://furrever.io/about" },
+      { property: "og:url", content: "https://furrever.com/about" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "index, follow" },
       { "script:ld+json": breadcrumbJsonLd },
       { "script:ld+json": aboutPageJsonLd },
     ],
-    links: [{ rel: "canonical", href: "https://furrever.io/about" }],
+    links: [{ rel: "canonical", href: "https://furrever.com/about" }],
   }),
   component: About,
 });
@@ -119,8 +119,8 @@ function About() {
             </p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               For questions about the product or your pre-booking, email us at:{" "}
-              <a href="mailto:kevin@furrever.io" className="text-foreground hover:text-brand">
-                kevin@furrever.io
+              <a href="mailto:kevin@furrever.com" className="text-foreground hover:text-brand">
+                kevin@furrever.com
               </a>
               .
             </p>

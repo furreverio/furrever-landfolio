@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 import { nitro } from "nitro/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
-// Pages + custom domain (furrever.io) → "/". Project URL without custom domain → "/<repo>/".
+// Pages + custom domain (furrever.com) → "/". Project URL without custom domain → "/<repo>/".
 const base = process.env["BASE_PATH"] ?? "/";
 
 export default defineConfig({

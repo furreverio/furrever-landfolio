@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://furrever.io/</loc>
+    <loc>https://furrever.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://furrever.io/about</loc>
+    <loc>https://furrever.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://furrever.io/contact</loc>
+    <loc>https://furrever.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://furrever.io/privacy</loc>
+    <loc>https://furrever.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://furrever.io/terms</loc>
+    <loc>https://furrever.com/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://furrever.io/refunds</loc>
+    <loc>https://furrever.com/refunds</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

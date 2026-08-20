@@ -2,7 +2,7 @@
 
 Landing site for the Furrever smart pet collar - pre-book form, product story, privacy & terms.
 
-Live: [furrever.io](https://furrever.io)
+Live: [furrever.com](https://furrever.com)
 
 ## Development
 

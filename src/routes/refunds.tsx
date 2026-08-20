@@ -6,12 +6,12 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.io/" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.com/" },
     {
       "@type": "ListItem",
       position: 2,
       name: "Refund & Cancellation Policy",
-      item: "https://furrever.io/refunds",
+      item: "https://furrever.com/refunds",
     },
   ],
 };
@@ -34,12 +34,12 @@ export const Route = createFileRoute("/refunds")({
         content: "How to cancel or request a refund for your Furrever pre-booking or order.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "https://furrever.io/refunds" },
+      { property: "og:url", content: "https://furrever.com/refunds" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "index, follow" },
       { "script:ld+json": breadcrumbJsonLd },
     ],
-    links: [{ rel: "canonical", href: "https://furrever.io/refunds" }],
+    links: [{ rel: "canonical", href: "https://furrever.com/refunds" }],
   }),
   component: Refunds,
 });
@@ -67,7 +67,7 @@ const sections = [
   },
   {
     h: "How to request a refund or cancellation",
-    p: "To cancel a pre-booking or request a refund, contact us at kevin@furrever.io or call 9686660425. Please include your name, email and order or pre-booking details so we can assist you quickly.",
+    p: "To cancel a pre-booking or request a refund, contact us at kevin@furrever.com or call 9686660425. Please include your name, email and order or pre-booking details so we can assist you quickly.",
   },
 ];
 

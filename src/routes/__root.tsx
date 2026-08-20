@@ -69,7 +69,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-const siteUrl = "https://furrever.io";
+const siteUrl = "https://furrever.com";
 const siteTitle = "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats";
 const siteDescription =
   "Furrever is a screenless smart collar that tracks activity, GPS, temperature, vitals and daily routines for dogs and cats, 24/7. Be a founding pet parent. Launch price under ₹7,000.";

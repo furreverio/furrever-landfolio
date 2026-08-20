@@ -6,12 +6,12 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.io/" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.com/" },
     {
       "@type": "ListItem",
       position: 2,
       name: "Terms & Conditions",
-      item: "https://furrever.io/terms",
+      item: "https://furrever.com/terms",
     },
   ],
 };
@@ -31,12 +31,12 @@ export const Route = createFileRoute("/terms")({
         content: "Terms of sale and use for the Furrever smart pet collar and app.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "https://furrever.io/terms" },
+      { property: "og:url", content: "https://furrever.com/terms" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "index, follow" },
       { "script:ld+json": breadcrumbJsonLd },
     ],
-    links: [{ rel: "canonical", href: "https://furrever.io/terms" }],
+    links: [{ rel: "canonical", href: "https://furrever.com/terms" }],
   }),
   component: Terms,
 });
@@ -72,7 +72,7 @@ const sections = [
   },
   {
     h: "Governing law and contact",
-    p: "These terms are governed by the laws of India. Questions: support@furrever.io (Locapaw Technologies Pvt Ltd).",
+    p: "These terms are governed by the laws of India. Questions: support@furrever.com (Locapaw Technologies Pvt Ltd).",
   },
 ];
 

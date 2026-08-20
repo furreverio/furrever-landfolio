@@ -36,7 +36,7 @@ jobs:
       - name: Build static site for GitHub Pages
         run: bun run build:pages
         env:
-          # Custom domain (furrever.io) serves at site root.
+          # Custom domain (furrever.com) serves at site root.
           # Without a custom domain, project Pages need /<repo>/ instead.
           BASE_PATH: /
           VITE_DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}

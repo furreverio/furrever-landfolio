@@ -77,8 +77,8 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-7xl flex-col gap-3 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Locapaw Technologies Pvt Ltd</span>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <a href="mailto:kevin@furrever.io" className="hover:text-brand">
-              kevin@furrever.io
+            <a href="mailto:kevin@furrever.com" className="hover:text-brand">
+              kevin@furrever.com
             </a>
             <a href="tel:+919686660425" className="hover:text-brand">
               9686660425

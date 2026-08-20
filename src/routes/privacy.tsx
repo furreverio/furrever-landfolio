@@ -6,12 +6,12 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.io/" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://furrever.com/" },
     {
       "@type": "ListItem",
       position: 2,
       name: "Privacy Policy",
-      item: "https://furrever.io/privacy",
+      item: "https://furrever.com/privacy",
     },
   ],
 };
@@ -31,12 +31,12 @@ export const Route = createFileRoute("/privacy")({
         content: "Data practices for the Furrever smart pet collar and companion app.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "https://furrever.io/privacy" },
+      { property: "og:url", content: "https://furrever.com/privacy" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "index, follow" },
       { "script:ld+json": breadcrumbJsonLd },
     ],
-    links: [{ rel: "canonical", href: "https://furrever.io/privacy" }],
+    links: [{ rel: "canonical", href: "https://furrever.com/privacy" }],
   }),
   component: Privacy,
 });
@@ -68,7 +68,7 @@ const sections = [
   },
   {
     h: "Contact",
-    p: "For privacy questions or requests, write to privacy@furrever.io (Locapaw Technologies Pvt Ltd).",
+    p: "For privacy questions or requests, write to privacy@furrever.com (Locapaw Technologies Pvt Ltd).",
   },
 ];
 

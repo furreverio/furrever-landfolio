@@ -36,7 +36,7 @@ import heroCollar from "@/assets/hero-collar.png";
 import dogRunning from "@/assets/dog-running.jpg";
 import catSleep from "@/assets/cat-sleep.jpg";
 
-const siteUrl = "https://furrever.io";
+const siteUrl = "https://furrever.com";
 
 const highlights = [
   {
