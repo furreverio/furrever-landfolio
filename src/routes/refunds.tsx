@@ -19,19 +19,19 @@ const breadcrumbJsonLd = {
 export const Route = createFileRoute("/refunds")({
   head: () => ({
     meta: [
-      { title: "Refund & Cancellation Policy | Furrever Smart Pet Collar" },
+      { title: "Refunds & Cancellations - Furrever Founding Orders" },
       {
         name: "description",
         content:
-          "Refund and cancellation terms for Furrever pre-bookings and orders, operated by Locapaw Technologies Pvt Ltd.",
+          "Cancel a Furrever founding reservation before shipment for a full refund. How to request one from Locapaw Technologies.",
       },
       {
         property: "og:title",
-        content: "Refund & Cancellation Policy | Furrever Smart Pet Collar",
+        content: "Refunds & Cancellations - Furrever Founding Orders",
       },
       {
         property: "og:description",
-        content: "How to cancel or request a refund for your Furrever pre-booking or order.",
+        content: "Fully refundable until we ship. Contact kevin@furrever.com with your order details.",
       },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "https://furrever.com/refunds" },

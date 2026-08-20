@@ -23,24 +23,24 @@ const aboutPageJsonLd = {
   name: "About Furrever",
   url: "https://furrever.com/about",
   description:
-    "Furrever is a screenless smart pet collar built by Locapaw Technologies Pvt Ltd to help pet parents understand sleep, recovery, activity and vitals.",
+    "Furrever is built in Bengaluru by Locapaw Technologies-screenless collars that track GPS, vitals and daily routines for dogs and cats.",
   mainEntity: { "@id": "https://furrever.com/#organization" },
 };
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us | Furrever Smart Pet Collar" },
+      { title: "About Furrever - Built in Bengaluru for Pet Parents" },
       {
         name: "description",
         content:
-          "Learn about Furrever and Locapaw Technologies Pvt Ltd - builders of a screenless smart collar that tracks sleep, recovery, activity and vitals for dogs and cats.",
+          "We design quiet, screenless collars so Indian pet parents catch health and location signals early-without another gadget screaming for attention.",
       },
-      { property: "og:title", content: "About Us | Furrever Smart Pet Collar" },
+      { property: "og:title", content: "About Furrever - Built in Bengaluru for Pet Parents" },
       {
         property: "og:description",
         content:
-          "Know your pet, beyond the obvious. Meet the team behind Furrever, the screenless smart pet collar.",
+          "Locapaw Technologies builds Furrever: GPS, vitals and routines in a collar pets will actually wear.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://furrever.com/about" },
@@ -57,19 +57,19 @@ export const Route = createFileRoute("/about")({
 const sections = [
   {
     h: "Our mission",
-    p: "Know your pet, beyond the obvious. Pets cannot tell you when something feels off - so we built Furrever to surface the signals that matter: sleep, recovery, activity and everyday vitals, day and night.",
+    p: "Know your pet, beyond the obvious. Pets cannot tell you when something feels off-so we built Furrever to surface the signals that matter first: where they are, how they're moving, and how their body is trending day to day.",
   },
   {
     h: "What we build",
-    p: "Furrever is a screenless smart collar for dogs and cats. The pod clips onto a collar and tracks sleep stages, recovery readiness, effort through the day, heart rate variability, respiratory rate, skin temperature and behaviour cues - quietly, without lights or beeps at night.",
+    p: "Furrever is a screenless smart collar for dogs and cats. The pod clips onto a collar and tracks live GPS, resting heart rate, respiratory rate, skin temperature, meal patterns and activity-quietly, without lights or beeps at night.",
   },
   {
     h: "Why Furrever",
-    p: "Most pet wearables focus on steps and location. We focus on health baselines that adapt to each animal - breed, age and temperament - so a change actually means something. One tap exports a vet-ready report when you need a clinical conversation.",
+    p: "Most pet wearables chase step counts or phone-tethered tags. We focus on health baselines that adapt to each animal-breed, age and temperament-so a change actually means something. One tap exports a vet-ready report when you need a clinical conversation.",
   },
   {
     h: "How we work",
-    p: "Furrever is designed in India by Locapaw Technologies Pvt Ltd. We care about fit, battery life and comfort as much as sensor accuracy - because a collar only helps if your pet will wear it every day.",
+    p: "Furrever is designed in India by Locapaw Technologies Pvt Ltd. We care about fit, battery life and comfort as much as sensor accuracy-because a collar only helps if your pet will wear it every day.",
   },
 ];
 

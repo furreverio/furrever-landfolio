@@ -35,8 +35,12 @@ import logo from "@/assets/logo-white.png";
 import heroCollar from "@/assets/hero-collar.png";
 import dogRunning from "@/assets/dog-running.jpg";
 import catSleep from "@/assets/cat-sleep.jpg";
-
-const siteUrl = "https://furrever.com";
+import {
+  homeDescription,
+  homeTitle,
+  productDescription,
+  siteUrl,
+} from "@/lib/seo";
 
 const highlights = [
   {
@@ -111,20 +115,36 @@ const comparison = [
 
 const faqs = [
   {
-    q: "Which pets is Furrever built for?",
-    a: "Dogs and cats above 3 kg. The pod clips onto any collar between 24 and 62 cm, and the sensor stack is calibrated across coat densities and colours.",
+    q: "What is Furrever?",
+    a: "Furrever is a screenless smart collar for dogs and cats. A small pod clips onto a regular collar and quietly tracks live GPS, resting heart rate, temperature, activity and daily routines-so you notice changes before they become emergencies.",
   },
   {
-    q: "Does it work through thick fur?",
-    a: "Yes. The contact plate sits against the skin at the underside of the neck, and the algorithm is trained on double-coated breeds like Huskies and Golden Retrievers.",
+    q: "Does Furrever include live GPS?",
+    a: "Yes. Location sits on the collar for escapes, walks and safe-zone check-ins-not as a phone accessory you leave at home.",
   },
   {
-    q: "Can I share data with my vet?",
+    q: "Which pets can wear Furrever?",
+    a: "Dogs and cats above 3 kg. The pod fits collars between 24 and 62 cm and is calibrated across coat densities, including double-coated breeds like Huskies and Golden Retrievers.",
+  },
+  {
+    q: "How long does the battery last?",
+    a: "Up to about 45 days on a charge in typical use-far longer than most GPS pet trackers that need charging every few days.",
+  },
+  {
+    q: "How much does Furrever cost?",
+    a: "Pricing stays under ₹7,000. Final launch pricing is still being set; pre-booking amounts are fully refundable until we ship.",
+  },
+  {
+    q: "Is Furrever a medical device?",
+    a: "No. Furrever is a wellness and activity monitor. Insights are informational-always talk to a licensed veterinarian for medical concerns.",
+  },
+  {
+    q: "Can I share Furrever data with my vet?",
     a: "One tap exports a 30-day PDF with activity, vitals and behaviour trends, formatted for a clinical consult.",
   },
   {
     q: "Is it safe for my pet to wear all day?",
-    a: "The pod weighs 11 g, has rounded edges and no screen or speaker. It is IP68 rated, so swimming, mud and rain are all fine.",
+    a: "The pod weighs about 11 g, has rounded edges and no screen or speaker. It is IP68 rated for swimming, mud and rain.",
   },
 ];
 
@@ -133,26 +153,57 @@ const productJsonLd = {
   "@type": "Product",
   "@id": `${siteUrl}/#product`,
   name: "Furrever Smart Pet Collar",
-  description:
-    "A screenless smart collar for dogs and cats that tracks activity, live GPS, skin temperature, resting heart rate, respiratory rate, eating and drinking patterns, and sleep, 24/7.",
+  alternateName: ["Furrever collar", "Furrever pet wearable"],
+  description: productDescription,
   image: [`${siteUrl}/og-image.jpg`],
-  brand: { "@type": "Brand", name: "Furrever" },
-  category: "Pet Wearable / Pet Health Tracker",
+  brand: { "@type": "Brand", name: "Furrever", url: siteUrl },
+  manufacturer: { "@id": `${siteUrl}/#organization` },
+  category: "Pet Health Wearable",
+  material: "Screenless clip-on pod",
+  countryOfOrigin: {
+    "@type": "Country",
+    name: "India",
+  },
   url: `${siteUrl}/`,
+  audience: {
+    "@type": "PeopleAudience",
+    suggestedMinAge: 0,
+    audienceType: "Dog and cat parents",
+  },
+  additionalProperty: [
+    { "@type": "PropertyValue", name: "GPS", value: "Live location on collar" },
+    { "@type": "PropertyValue", name: "Battery life", value: "Up to 45 days" },
+    { "@type": "PropertyValue", name: "Weight", value: "11 g" },
+    { "@type": "PropertyValue", name: "Water resistance", value: "IP68" },
+    {
+      "@type": "PropertyValue",
+      name: "Sensors",
+      value: "Heart rate, respiration, temperature, motion",
+    },
+  ],
   offers: {
     "@type": "Offer",
     url: `${siteUrl}/#prebook`,
     priceCurrency: "INR",
     price: "6999",
+    priceValidUntil: "2027-12-31",
     availability: "https://schema.org/PreOrder",
     itemCondition: "https://schema.org/NewCondition",
     seller: { "@id": `${siteUrl}/#organization` },
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingDestination: {
+        "@type": "DefinedRegion",
+        addressCountry: "IN",
+      },
+    },
   },
 };
 
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": `${siteUrl}/#faq`,
   mainEntity: faqs.map((f) => ({
     "@type": "Question",
     name: f.q,
@@ -160,40 +211,30 @@ const faqJsonLd = {
   })),
 };
 
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+  ],
+};
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      {
-        title: "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
-      },
-      {
-        name: "description",
-        content:
-          "Furrever is a screenless smart collar that tracks activity, GPS, temperature, vitals and daily routines for dogs and cats, 24/7. Be a founding pet parent. Launch price under ₹7,000.",
-      },
-      {
-        property: "og:title",
-        content: "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
-      },
-      {
-        property: "og:description",
-        content:
-          "Know your pet beyond the obvious. Activity, GPS, temperature, vitals and more with a screenless smart collar. Be a founding pet parent under ₹7,000.",
-      },
+      { title: homeTitle },
+      { name: "description", content: homeDescription },
+      { property: "og:title", content: homeTitle },
+      { property: "og:description", content: homeDescription },
       { property: "og:url", content: `${siteUrl}/` },
       { property: "og:site_name", content: "Furrever" },
-      {
-        name: "twitter:title",
-        content: "Furrever Smart Pet Collar | 24/7 Health Tracker for Dogs & Cats",
-      },
-      {
-        name: "twitter:description",
-        content:
-          "Screenless smart collar for dogs and cats. Activity, GPS, temperature and vitals tracked 24/7. Be a founding pet parent under ₹7,000.",
-      },
-      { name: "robots", content: "index, follow" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: homeTitle },
+      { name: "twitter:description", content: homeDescription },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       { "script:ld+json": productJsonLd },
       { "script:ld+json": faqJsonLd },
+      { "script:ld+json": breadcrumbJsonLd },
     ],
     links: [{ rel: "canonical", href: `${siteUrl}/` }],
   }),

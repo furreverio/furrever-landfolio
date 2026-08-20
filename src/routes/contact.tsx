@@ -29,7 +29,7 @@ const contactPageJsonLd = {
   name: "Contact Furrever",
   url: "https://furrever.com/contact",
   description:
-    "Get in touch with Locapaw Technologies Pvt Ltd about Furrever pre-bookings, product questions and support.",
+    "Email or call Locapaw Technologies about Furrever founding reservations, product questions and support in India.",
   mainEntity: {
     "@type": "Organization",
     "@id": "https://furrever.com/#organization",
@@ -60,17 +60,17 @@ const contactPageJsonLd = {
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Us | Furrever Smart Pet Collar" },
+      { title: "Contact Furrever - Email & Phone (Bengaluru)" },
       {
         name: "description",
         content:
-          "Contact Locapaw Technologies Pvt Ltd about Furrever - email kevin@furrever.com or call 9686660425 for product questions, pre-bookings and support.",
+          "Reach Locapaw Technologies about Furrever: kevin@furrever.com or 9686660425. We usually reply within 1–2 business days.",
       },
-      { property: "og:title", content: "Contact Us | Furrever Smart Pet Collar" },
+      { property: "og:title", content: "Contact Furrever - Email & Phone (Bengaluru)" },
       {
         property: "og:description",
         content:
-          "Email kevin@furrever.com or call 9686660425. We reply within 1–2 business days.",
+          "Founding reservations, product questions and support. kevin@furrever.com · 9686660425.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://furrever.com/contact" },

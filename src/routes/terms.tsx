@@ -19,16 +19,16 @@ const breadcrumbJsonLd = {
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms & Conditions | Furrever Smart Pet Collar" },
+      { title: "Terms of Use & Sale - Furrever Pet Collar" },
       {
         name: "description",
         content:
-          "Terms of sale and use for the Furrever smart pet collar and app, operated by Locapaw Technologies Pvt Ltd.",
+          "Rules for using furrever.com and ordering a Furrever collar from Locapaw Technologies, including founding reservations.",
       },
-      { property: "og:title", content: "Terms & Conditions | Furrever Smart Pet Collar" },
+      { property: "og:title", content: "Terms of Use & Sale - Furrever Pet Collar" },
       {
         property: "og:description",
-        content: "Terms of sale and use for the Furrever smart pet collar and app.",
+        content: "Website, product and founding reservation terms from Locapaw Technologies Pvt Ltd.",
       },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "https://furrever.com/terms" },

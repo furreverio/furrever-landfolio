@@ -19,16 +19,16 @@ const breadcrumbJsonLd = {
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy | Furrever Smart Pet Collar" },
+      { title: "Privacy Policy - How Furrever Handles Pet & Account Data" },
       {
         name: "description",
         content:
-          "How Locapaw Technologies Pvt Ltd collects, uses and protects data from the Furrever smart pet collar and app.",
+          "What Locapaw Technologies collects from the Furrever collar, app and site-and how you can ask to see or delete it.",
       },
-      { property: "og:title", content: "Privacy Policy | Furrever Smart Pet Collar" },
+      { property: "og:title", content: "Privacy Policy - How Furrever Handles Pet & Account Data" },
       {
         property: "og:description",
-        content: "Data practices for the Furrever smart pet collar and companion app.",
+        content: "Clear data practices for Furrever pet parents. Questions: privacy@furrever.com.",
       },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "https://furrever.com/privacy" },
