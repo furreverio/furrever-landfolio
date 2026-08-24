@@ -33,8 +33,8 @@ import { TeardownScroll } from "@/components/landing/TeardownScroll";
 import { SectionNav } from "@/components/landing/SectionNav";
 import logo from "@/assets/logo-white.png";
 import heroCollar from "@/assets/hero-collar.png";
-import dogPhoto from "@/assets/indiandog.jpg";
-import catPhoto from "@/assets/cat.jpg";
+import dogPhoto from "@/assets/Off-Leash-Dog-Walking.png";
+import catPhoto from "@/assets/collared cat outside.jpg";
 import {
   homeDescription,
   homeTitle,
@@ -384,11 +384,11 @@ function Index() {
           <div className="relative min-h-[280px] overflow-hidden rounded-2xl sm:min-h-[340px] sm:rounded-3xl md:min-h-0">
             <img
               src={dogPhoto}
-              alt="Puppy sitting outdoors"
+              alt="Dog running off-leash on a trail"
               loading="lazy"
-              width={1200}
-              height={800}
-              className="h-full min-h-[280px] w-full object-cover object-center sm:min-h-[340px] md:min-h-full"
+              width={560}
+              height={315}
+              className="h-full min-h-[280px] w-full object-cover object-[35%_center] sm:min-h-[340px] md:min-h-full"
             />
             <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-background to-transparent p-5 sm:p-8">
               <h3 className="font-display text-2xl sm:text-3xl">Activity that adds up</h3>
@@ -401,11 +401,11 @@ function Index() {
           <div className="relative min-h-[240px] overflow-hidden rounded-2xl sm:min-h-[300px] sm:rounded-3xl md:min-h-0">
             <img
               src={catPhoto}
-              alt="Tabby kitten sleeping"
+              alt="Orange tabby cat wearing a collar outdoors"
               loading="lazy"
-              width={1600}
-              height={1200}
-              className="h-full min-h-[240px] w-full object-cover object-[70%_center] sm:min-h-[300px] md:min-h-full"
+              width={960}
+              height={540}
+              className="h-full min-h-[240px] w-full object-cover object-[45%_center] sm:min-h-[300px] md:min-h-full"
             />
             <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-background to-transparent p-5 sm:p-8">
               <h3 className="font-display text-2xl sm:text-3xl">Find them fast</h3>

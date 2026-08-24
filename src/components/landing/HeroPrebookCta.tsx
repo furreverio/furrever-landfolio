@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import dogRunning from "@/assets/dog-running.jpg";
-import catSleep from "@/assets/cat-sleep.jpg";
+import dogPhoto from "@/assets/Off-Leash-Dog-Walking.png";
+import catPhoto from "@/assets/collared cat outside.jpg";
 import { cn } from "@/lib/utils";
 import { rememberPetType, usePrebook, type PetType } from "./prebook-context";
 
-const pets: { value: PetType; label: string; image: string }[] = [
-  { value: "dog", label: "Dog", image: dogRunning },
-  { value: "cat", label: "Cat", image: catSleep },
+const pets: { value: PetType; label: string; image: string; objectClass: string }[] = [
+  { value: "dog", label: "Dog", image: dogPhoto, objectClass: "object-[35%_center]" },
+  { value: "cat", label: "Cat", image: catPhoto, objectClass: "object-[45%_center]" },
 ];
 
 export function HeroPrebookCta({
@@ -110,7 +110,10 @@ export function HeroPrebookCta({
               <img
                 src={pet.image}
                 alt=""
-                className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-500 group-hover/pet:scale-110 group-hover/pet:opacity-100"
+                className={cn(
+                  "absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-500 group-hover/pet:scale-110 group-hover/pet:opacity-100",
+                  pet.objectClass,
+                )}
               />
               <span className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-black/10" />
               <span className="relative z-10 flex h-full items-center justify-center font-hero text-[11px] font-semibold uppercase tracking-[0.18em] text-white sm:text-[13px]">

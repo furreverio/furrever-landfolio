@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Link } from "@tanstack/react-router";
 import { CheckCircle2 } from "lucide-react";
-import dogRunning from "@/assets/dog-running.jpg";
-import catSleep from "@/assets/cat-sleep.jpg";
+import dogPhoto from "@/assets/Off-Leash-Dog-Walking.png";
+import catPhoto from "@/assets/collared cat outside.jpg";
 import {
   rememberPetType,
   readLastPetType,
@@ -54,9 +54,10 @@ const petOptions: {
   value: PetType;
   label: string;
   image: string;
+  objectClass: string;
 }[] = [
-  { value: "dog", label: "Dog", image: dogRunning },
-  { value: "cat", label: "Cat", image: catSleep },
+  { value: "dog", label: "Dog", image: dogPhoto, objectClass: "object-[35%_center]" },
+  { value: "cat", label: "Cat", image: catPhoto, objectClass: "object-[45%_center]" },
 ];
 
 const STORAGE_KEY = "furrever-prebook-leads";
@@ -349,7 +350,10 @@ function PetTypeStrip({
                   src={option.image}
                   alt=""
                   aria-hidden
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className={cn(
+                    "h-full w-full object-cover transition-transform duration-300 group-hover:scale-105",
+                    option.objectClass,
+                  )}
                 />
                 <span className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent" />
                 {selected ? (
