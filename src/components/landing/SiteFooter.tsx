@@ -60,6 +60,11 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link to="/account-deletion" className="hover:text-brand">
+                  Delete account
+                </Link>
+              </li>
+              <li>
                 <Link to="/terms" className="hover:text-brand">
                   Terms &amp; Conditions
                 </Link>

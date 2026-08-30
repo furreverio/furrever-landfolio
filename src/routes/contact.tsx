@@ -101,6 +101,10 @@ const topics = [
     label: "Privacy request",
     href: "mailto:privacy@furrever.com?subject=Privacy%20request",
   },
+  {
+    label: "Delete my account",
+    href: "mailto:privacy@furrever.com?subject=Account%20deletion%20request",
+  },
 ];
 
 const helpfulLinks = [
@@ -108,6 +112,7 @@ const helpfulLinks = [
   { to: "/refunds" as const, label: "Refund & Cancellation" },
   { to: "/terms" as const, label: "Terms & Conditions" },
   { to: "/privacy" as const, label: "Privacy Policy" },
+  { to: "/account-deletion" as const, label: "Delete account" },
 ];
 
 function Contact() {

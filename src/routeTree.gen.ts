@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AccountDeletionRouteImport } from './routes/account-deletion'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RefundsRouteImport } from './routes/refunds'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountDeletionRoute = AccountDeletionRouteImport.update({
+  id: '/account-deletion',
+  path: '/account-deletion',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -50,6 +56,7 @@ const TermsRoute = TermsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account-deletion': typeof AccountDeletionRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/refunds': typeof RefundsRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account-deletion': typeof AccountDeletionRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/refunds': typeof RefundsRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account-deletion': typeof AccountDeletionRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/refunds': typeof RefundsRoute
@@ -74,13 +83,28 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/privacy' | '/refunds' | '/terms'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/account-deletion'
+    | '/contact'
+    | '/privacy'
+    | '/refunds'
+    | '/terms'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/privacy' | '/refunds' | '/terms'
+  to:
+    | '/'
+    | '/about'
+    | '/account-deletion'
+    | '/contact'
+    | '/privacy'
+    | '/refunds'
+    | '/terms'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/account-deletion'
     | '/contact'
     | '/privacy'
     | '/refunds'
@@ -90,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AccountDeletionRoute: typeof AccountDeletionRoute
   ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundsRoute: typeof RefundsRoute
@@ -110,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account-deletion': {
+      id: '/account-deletion'
+      path: '/account-deletion'
+      fullPath: '/account-deletion'
+      preLoaderRoute: typeof AccountDeletionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -146,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AccountDeletionRoute: AccountDeletionRoute,
   ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,
   RefundsRoute: RefundsRoute,
