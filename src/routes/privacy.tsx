@@ -393,22 +393,22 @@ function Privacy() {
               headers={["Provider", "Purpose", "Information shared"]}
               rows={[
                 [
-                  "Google — Firebase Crashlytics",
+                  "Google - Firebase Crashlytics",
                   "Crash and stability reporting",
                   "Diagnostic data, device identifiers, crash traces",
                 ],
                 [
-                  "Google — Firebase Analytics",
+                  "Google - Firebase Analytics",
                   "Product usage analytics",
                   "App interaction events, device and coarse location data derived from IP",
                 ],
                 [
-                  "Google — Firebase Cloud Messaging",
+                  "Google - Firebase Cloud Messaging",
                   "Push notifications you have allowed",
                   "Device push token and notification payload",
                 ],
                 [
-                  "Google — Maps Platform",
+                  "Google - Maps Platform",
                   "Displaying maps and geocoding safe-zone addresses",
                   "Map queries and coordinates",
                 ],
@@ -445,8 +445,8 @@ function Privacy() {
 
             <p className="mt-4 text-sm font-medium text-foreground">Others in your household</p>
             <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-              If you accept or send a household invitation, the pet profiles in that household —
-              including pet details, photos, safe zones, and collar insights — are visible to the
+              If you accept or send a household invitation, the pet profiles in that household -
+              including pet details, photos, safe zones, and collar insights - are visible to the
               other pet parents in it.
             </p>
 
@@ -542,7 +542,7 @@ function Privacy() {
             <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
               You can grant or revoke location, camera, photo, Bluetooth, nearby devices, and
               notification permissions at any time in your device settings. Revoking a permission
-              may disable the related feature — for example, revoking Bluetooth prevents collar
+              may disable the related feature - for example, revoking Bluetooth prevents collar
               setup.
             </p>
 
@@ -701,45 +701,45 @@ function Privacy() {
               headers={["Data type (Play Console)", "Collected?", "Shared with third parties?", "Purpose"]}
               rows={[
                 [
-                  "Location — approximate",
+                  "Location - approximate",
                   "Yes (IP; phone location used on-device only)",
-                  "Yes — Google Maps (map queries); Google Analytics (coarse IP-derived location)",
+                  "Yes - Google Maps (map queries); Google Analytics (coarse IP-derived location)",
                   "App functionality, analytics",
                 ],
                 [
-                  "Location — precise",
+                  "Location - precise",
                   "Yes (collar GPS and saved safe zones)",
-                  "Yes — Google Maps (map queries and geocoding)",
+                  "Yes - Google Maps (map queries and geocoding)",
                   "App functionality",
                 ],
                 [
-                  "Personal info — name, email, phone, address",
+                  "Personal info - name, email, phone, address",
                   "Yes",
-                  "Yes — SMS partner (phone); hosting provider",
+                  "Yes - SMS partner (phone); hosting provider",
                   "App functionality",
                 ],
                 [
                   "Photos and videos",
                   "Yes (pet and profile photos you upload)",
-                  "Yes — hosting provider",
+                  "Yes - hosting provider",
                   "App functionality",
                 ],
                 [
-                  "App activity — app interactions",
+                  "App activity - app interactions",
                   "Yes",
-                  "Yes — Firebase Analytics",
+                  "Yes - Firebase Analytics",
                   "Analytics",
                 ],
                 [
-                  "App info and performance — crash logs and diagnostics",
+                  "App info and performance - crash logs and diagnostics",
                   "Yes",
-                  "Yes — Firebase Crashlytics",
+                  "Yes - Firebase Crashlytics",
                   "App functionality / diagnostics",
                 ],
                 [
                   "Device or other IDs",
                   "Yes (collar ID, request IDs, crash identifiers)",
-                  "Yes — Firebase Crashlytics",
+                  "Yes - Firebase Crashlytics",
                   "App functionality, diagnostics",
                 ],
                 [
