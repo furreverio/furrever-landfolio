@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { getAnalytics } from "@/lib/analytics";
+import { rememberSurface } from "@/lib/analytics/session";
 
 const FRAME_COUNT = 84;
 const BASE = import.meta.env.BASE_URL.replace(/\/?$/, "/");
@@ -7,19 +9,26 @@ const FRAME_PATH = (i: number) =>
 
 /** Scroll length in viewport heights - longer = slower, more cinematic scrub. */
 const SCROLL_VH = 5.5;
+const PCB_FRAME = 50;
+const MILESTONES = [25, 50, 75] as const;
 
 function isNarrowViewport() {
   return typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
 }
 
 export function TeardownScroll({ children }: { children?: ReactNode }) {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const frameRef = useRef(0);
   const rafRef = useRef(0);
   const [ready, setReady] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
+  const startedRef = useRef(false);
+  const maxFrameRef = useRef(0);
+  const milestonesRef = useRef(new Set<number>());
+  const completedRef = useRef(false);
+  const hoveredRef = useRef(new Set<string>());
 
   // Preload frames
   useEffect(() => {
@@ -107,6 +116,29 @@ export function TeardownScroll({ children }: { children?: ReactNode }) {
         frameRef.current = next;
         drawFrame(next);
       }
+
+      if (next > 1 && !startedRef.current) {
+        startedRef.current = true;
+        rememberSurface("collar");
+        getAnalytics().track("scrub_started", { surface_id: "collar" });
+      }
+      if (next > maxFrameRef.current) {
+        maxFrameRef.current = next;
+        const pct = Math.round((next / (FRAME_COUNT - 1)) * 100);
+        for (const mark of MILESTONES) {
+          if (pct >= mark && !milestonesRef.current.has(mark)) {
+            milestonesRef.current.add(mark);
+            getAnalytics().track("scrub_progress", { max_frame: next, max_pct: mark });
+          }
+        }
+        if (next >= FRAME_COUNT - 1 && !completedRef.current) {
+          completedRef.current = true;
+          getAnalytics().track("scrub_completed", {
+            reached_pcb: maxFrameRef.current >= PCB_FRAME,
+            max_frame: next,
+          });
+        }
+      }
     };
 
     const onScroll = () => {
@@ -161,6 +193,29 @@ export function TeardownScroll({ children }: { children?: ReactNode }) {
             className="absolute inset-0 h-full w-full"
             aria-hidden={!ready}
           />
+
+          <div className="pointer-events-none absolute inset-0 z-10 hidden md:block">
+            {(
+              [
+                ["battery", "top-[34%]"],
+                ["pcb", "top-[46%]"],
+                ["sensor", "top-[58%]"],
+              ] as const
+            ).map(([label, top]) => (
+              <button
+                key={label}
+                type="button"
+                aria-label={label}
+                data-analytics-target={`teardown-${label}`}
+                className={`pointer-events-auto absolute left-[6%] h-10 w-28 ${top}`}
+                onMouseEnter={() => {
+                  if (hoveredRef.current.has(label)) return;
+                  hoveredRef.current.add(label);
+                  getAnalytics().track("teardown_label_hovered", { label });
+                }}
+              />
+            ))}
+          </div>
 
           {!ready ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black">

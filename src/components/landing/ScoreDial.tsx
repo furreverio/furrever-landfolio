@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState, type ComponentType } from "react";
 import type { LucideProps } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getAnalytics } from "@/lib/analytics";
 
 type ScoreIcon = ComponentType<LucideProps>;
 type ScoreVariant = "wellness" | "mood" | "heartbeat";
@@ -37,6 +38,8 @@ export function ScoreDial({
   const gradientId = useId().replace(/:/g, "");
   const [shown, setShown] = useState(0);
   const [inView, setInView] = useState(false);
+  const viewed = useRef(false);
+  const enteredAt = useRef<number | null>(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -47,6 +50,11 @@ export function ScoreDial({
         const visible = entries[0]?.isIntersecting ?? false;
         setInView(visible);
         if (!visible) return;
+        if (!viewed.current) {
+          viewed.current = true;
+          enteredAt.current = Date.now();
+          getAnalytics().track("score_dial_viewed", { dial_id: variant });
+        }
 
         io.disconnect();
         const start = performance.now();
@@ -61,8 +69,17 @@ export function ScoreDial({
     );
 
     io.observe(el);
-    return () => io.disconnect();
-  }, [value]);
+    return () => {
+      io.disconnect();
+      if (enteredAt.current != null) {
+        getAnalytics().track("score_dial_engaged", {
+          dial_id: variant,
+          dwell_ms: Date.now() - enteredAt.current,
+        });
+        enteredAt.current = null;
+      }
+    };
+  }, [value, variant]);
 
   const pct = Math.min(100, (shown / (max || 1)) * 100);
   const dash = (pct / 100) * RING_C;

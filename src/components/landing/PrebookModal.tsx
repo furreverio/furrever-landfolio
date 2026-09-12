@@ -6,6 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { CheckCircle2 } from "lucide-react";
 import dogPhoto from "@/assets/Off-Leash-Dog-Walking.png";
 import catPhoto from "@/assets/collared cat outside.jpg";
+import { getAnalytics, hashEmail } from "@/lib/analytics";
 import {
   rememberPetType,
   readLastPetType,
@@ -167,19 +168,44 @@ export function PrebookModal({
   const selectPetType = (value: PetType) => {
     setValue("petType", value, { shouldValidate: true, shouldDirty: true });
     rememberPetType(value);
+    getAnalytics().track("pet_type_selected", { pet_type: value, source: "modal" });
   };
 
-  const onSubmit = handleSubmit(async (values) => {
-    rememberPetType(values.petType);
-    saveLead(values);
-    try {
-      await notifyDiscord(values);
+  const onSubmit = handleSubmit(
+    async (values) => {
+      rememberPetType(values.petType);
+      saveLead(values);
+      getAnalytics().track("prebook_submitted", {
+        pet_type: values.petType,
+        city: values.city,
+        accept_contact: values.acceptContact,
+      });
+      try {
+        await notifyDiscord(values);
+      } catch (err) {
+        console.error(err);
+        getAnalytics().track("prebook_notify_failed", {
+          reason: err instanceof Error ? err.message.slice(0, 120) : "unknown",
+        });
+      }
+      try {
+        const userId = await hashEmail(values.email);
+        getAnalytics().identify(userId, {
+          pet_type: values.petType,
+          city: values.city,
+          accept_contact: values.acceptContact,
+          is_founding_parent: true,
+        });
+      } catch {
+        /* hashing unavailable */
+      }
+      getAnalytics().track("prebook_completed", {});
       setSubmitted(true);
-    } catch (err) {
-      console.error(err);
-      setSubmitted(true);
-    }
-  });
+    },
+    (errs) => {
+      getAnalytics().track("prebook_validation_failed", { fields: Object.keys(errs) });
+    },
+  );
 
   const handleOpenChange = (next: boolean) => {
     onOpenChange(next);
@@ -315,7 +341,7 @@ function PetTypeStrip({
 }: {
   value?: PetType;
   onChange: (value: PetType) => void;
-  error?: string;
+  error?: string | undefined;
 }) {
   return (
     <div className="space-y-2.5">
@@ -385,7 +411,7 @@ function Field({
   children,
 }: {
   label: string;
-  error?: string;
+  error?: string | undefined;
   children: ReactNode;
 }) {
   return (
@@ -404,7 +430,7 @@ function ConsentCheck({
   children,
 }: {
   checked: boolean;
-  error?: string;
+  error?: string | undefined;
   onCheckedChange: (checked: boolean) => void;
   children: ReactNode;
 }) {

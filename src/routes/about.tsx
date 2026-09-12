@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { PrebookButton } from "@/components/landing/PrebookButton";
+import { trackOutbound } from "@/lib/analytics/links";
 import logo from "@/assets/logo-white.png";
 
 const breadcrumbJsonLd = {
@@ -119,7 +120,11 @@ function About() {
             </p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               For questions about the product or your pre-booking, email us at:{" "}
-              <a href="mailto:kevin@furrever.com" className="text-foreground hover:text-brand">
+              <a
+                href="mailto:kevin@furrever.com"
+                className="text-foreground hover:text-brand"
+                onClick={() => trackOutbound("mailto")}
+              >
                 kevin@furrever.com
               </a>
               .
@@ -132,7 +137,10 @@ function About() {
           <p className="mt-2 text-sm text-muted-foreground">
             Join as a founding pet parent at the launch price. Fully refundable until we ship.
           </p>
-          <PrebookButton className="mt-5 inline-flex rounded-full bg-gradient-brand px-8 py-3 font-medium text-primary-foreground shadow-brand">
+          <PrebookButton
+            source="about"
+            className="mt-5 inline-flex rounded-full bg-gradient-brand px-8 py-3 font-medium text-primary-foreground shadow-brand"
+          >
             Be A Founding Pet Parent
           </PrebookButton>
         </div>

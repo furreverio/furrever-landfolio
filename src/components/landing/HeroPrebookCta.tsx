@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import dogPhoto from "@/assets/Off-Leash-Dog-Walking.png";
 import catPhoto from "@/assets/collared cat outside.jpg";
 import { cn } from "@/lib/utils";
+import { getAnalytics } from "@/lib/analytics";
 import { rememberPetType, usePrebook, type PetType } from "./prebook-context";
 
 const pets: { value: PetType; label: string; image: string; objectClass: string }[] = [
@@ -45,10 +46,13 @@ export function HeroPrebookCta({
     };
   }, [expanded, canHover]);
 
+  const source = variant === "brand" ? "join_section" : "hero";
+
   const pick = (petType: PetType) => {
     rememberPetType(petType);
     setExpanded(false);
-    openPrebook(petType);
+    getAnalytics().track("pet_type_selected", { pet_type: petType, source });
+    openPrebook(petType, source);
   };
 
   const isBrand = variant === "brand";

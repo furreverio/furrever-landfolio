@@ -4,6 +4,8 @@ import {
   pillars as defaultPillars,
   type PillarConfig,
 } from "@/config/pillars";
+import { getAnalytics } from "@/lib/analytics";
+import { rememberCard, rememberSurface } from "@/lib/analytics/session";
 
 /** Viewport heights per pillar - higher = slower scrub between cards. */
 const SCROLL_VH_PER_PILLAR = 1.5;
@@ -47,6 +49,20 @@ export function PillarStack({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const [inView, setInView] = useState(false);
+  const prevActive = useRef<number | null>(null);
+  const enteredAt = useRef(Date.now());
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(Boolean(entry?.isIntersecting && entry.intersectionRatio > 0.15)),
+      { threshold: [0.15, 0.4] },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -69,12 +85,53 @@ export function PillarStack({
   const n = pillars.length;
   const pos = progress * (n - 1);
   const active = Math.round(pos);
-  const sizerPillar = pillars.reduce((tallest, pillar) =>
-    pillar.title.length + (pillar.copy?.length ?? 0) >
-    tallest.title.length + (tallest.copy?.length ?? 0)
-      ? pillar
-      : tallest,
-  pillars[0]);
+
+  useEffect(() => {
+    if (!inView) return;
+    const pillar = pillars[active];
+    if (!pillar) return;
+    rememberSurface("care");
+    rememberCard(pillar.id);
+    const prev = prevActive.current;
+    if (prev != null && prev !== active) {
+      const previous = pillars[prev];
+      if (previous) {
+        getAnalytics().track("card_engaged", {
+          surface_id: "care",
+          card_id: previous.id,
+          index: prev,
+          name: previous.title,
+          dwell_ms: Date.now() - enteredAt.current,
+        });
+      }
+      if (prev > active) {
+        getAnalytics().track("card_revisited", {
+          surface_id: "care",
+          card_id: pillar.id,
+          index: active,
+          name: pillar.title,
+          from_index: prev,
+        });
+      }
+    }
+    getAnalytics().track("card_viewed", {
+      surface_id: "care",
+      card_id: pillar.id,
+      index: active,
+      name: pillar.title,
+    });
+    prevActive.current = active;
+    enteredAt.current = Date.now();
+  }, [active, inView, pillars]);
+  const firstPillar = pillars[0];
+  const sizerPillar = firstPillar
+    ? pillars.reduce((tallest, pillar) =>
+        pillar.title.length + (pillar.copy?.length ?? 0) >
+        tallest.title.length + (tallest.copy?.length ?? 0)
+          ? pillar
+          : tallest,
+      firstPillar)
+    : firstPillar;
 
   return (
     <div ref={ref} style={{ height: `${n * SCROLL_VH_PER_PILLAR * 100}svh` }} className="relative">
@@ -86,7 +143,7 @@ export function PillarStack({
 
           <div className="relative mt-6 sm:mt-8 md:mt-10">
             <div className="pointer-events-none invisible" aria-hidden>
-              <PillarCard pillar={sizerPillar} />
+              {sizerPillar ? <PillarCard pillar={sizerPillar} /> : null}
             </div>
             {pillars.map((p, i) => {
               const d = i - pos;
@@ -104,7 +161,18 @@ export function PillarStack({
                   className="absolute inset-0 will-change-transform"
                   style={style}
                 >
-                  <PillarCard pillar={p} />
+                  <div
+                    onPointerDown={() =>
+                      getAnalytics().track("card_clicked", {
+                        surface_id: "care",
+                        card_id: p.id,
+                        index: i,
+                        name: p.title,
+                      })
+                    }
+                  >
+                    <PillarCard pillar={p} />
+                  </div>
                 </div>
               );
             })}

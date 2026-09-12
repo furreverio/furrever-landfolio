@@ -19,7 +19,7 @@ export function SectionNav() {
   useEffect(() => {
     const onScroll = () => {
       const trigger = 96 + (window.visualViewport?.offsetTop ?? 0);
-      let current = pageSections[0].id;
+      let current: string = pageSections[0]?.id ?? "top";
 
       for (const section of pageSections) {
         const el = document.getElementById(section.id);

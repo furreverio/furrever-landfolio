@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getAnalytics } from "@/lib/analytics";
+import { rememberCard, rememberSurface } from "@/lib/analytics/session";
 
 export type ScienceItem = {
   icon: LucideIcon;
@@ -22,6 +24,10 @@ export function ScienceCarousel({ items, id }: { items: ScienceItem[]; id?: stri
   const rafRef = useRef(0);
 
   const [active, setActive] = useState(0);
+  const swipeCount = useRef(0);
+  const seen = useRef(new Set<number>([0]));
+  const lastDragX = useRef(0);
+  const swipedThisDrag = useRef(false);
 
   const loop = Array.from({ length: LOOP_COPIES }, () => items).flat();
 
@@ -76,6 +82,9 @@ export function ScienceCarousel({ items, id }: { items: ScienceItem[]; id?: stri
           }
         });
         setActive((prev) => (prev === best ? prev : best));
+        if (draggingRef.current || hoverPausedRef.current) {
+          seen.current.add(best);
+        }
       }
 
       rafRef.current = requestAnimationFrame(tick);
@@ -85,16 +94,45 @@ export function ScienceCarousel({ items, id }: { items: ScienceItem[]; id?: stri
     return () => cancelAnimationFrame(rafRef.current);
   }, [items.length]);
 
+  useEffect(() => {
+    if (!draggingRef.current && !hoverPausedRef.current && swipeCount.current === 0) return;
+    const item = items[active];
+    if (!item) return;
+    rememberSurface("science");
+    rememberCard(item.title);
+    getAnalytics().track("science_panel_focused", { panel_id: item.title, index: active });
+  }, [active, items]);
+
+  useEffect(() => {
+    return () => {
+      const last = items[active];
+      getAnalytics().track("science_session_summary", {
+        swipe_count: swipeCount.current,
+        max_cards_seen: seen.current.size,
+        last_panel: last?.title ?? "unknown",
+      });
+    };
+    // flush once on unmount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const onPointerMove = (e: PointerEvent<HTMLElement>) => {
     if (!draggingRef.current) return;
     const dx = e.clientX - lastPointerX.current;
     lastPointerX.current = e.clientX;
     offsetRef.current -= dx;
+    if (!swipedThisDrag.current && Math.abs(e.clientX - lastDragX.current) > 24) {
+      swipedThisDrag.current = true;
+      swipeCount.current += 1;
+      getAnalytics().track("science_swiped", { swipe_count: swipeCount.current });
+    }
   };
 
   const onPointerDown = (e: PointerEvent<HTMLElement>) => {
     draggingRef.current = true;
     lastPointerX.current = e.clientX;
+    lastDragX.current = e.clientX;
+    swipedThisDrag.current = false;
     e.currentTarget.setPointerCapture(e.pointerId);
   };
 
@@ -166,6 +204,8 @@ export function ScienceCarousel({ items, id }: { items: ScienceItem[]; id?: stri
                 if (!loopW) return;
                 const cardW = loopW / items.length;
                 offsetRef.current = cardW * i;
+                hoverPausedRef.current = true;
+                seen.current.add(i);
                 setActive(i);
               }}
             />

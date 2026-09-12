@@ -1,6 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/logo-white.png";
 import { PrebookButton } from "@/components/landing/PrebookButton";
+import { trackFooterLink, trackOutbound } from "@/lib/analytics/links";
+
+const mapsUrl =
+  "https://www.google.com/maps/search/?api=1&query=" +
+  encodeURIComponent(
+    "2nd Floor, 235, Binnamangala, 13th Cross Road, Indira Nagar, 2nd Stage, Bengaluru Urban, Karnataka, 560038",
+  );
 
 export function SiteFooter() {
   return (
@@ -17,8 +24,16 @@ export function SiteFooter() {
           <p className="mt-3 max-w-sm text-xs leading-relaxed text-muted-foreground">
             Locapaw Technologies Pvt Ltd
             <br />
-            2nd Floor, 235, Binnamangala, 13th Cross Road, Indira Nagar, 2nd Stage, Bengaluru Urban,
-            Karnataka, 560038
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-brand"
+              onClick={() => trackOutbound("address")}
+            >
+              2nd Floor, 235, Binnamangala, 13th Cross Road, Indira Nagar, 2nd Stage, Bengaluru
+              Urban, Karnataka, 560038
+            </a>
           </p>
         </div>
 
@@ -29,20 +44,26 @@ export function SiteFooter() {
             </h3>
             <ul className="mt-3 space-y-2 text-sm sm:mt-4">
               <li>
-                <PrebookButton className="hover:text-brand">Be A Founding Pet Parent</PrebookButton>
+                <PrebookButton source="footer" className="hover:text-brand">
+                  Be A Founding Pet Parent
+                </PrebookButton>
               </li>
               <li>
-                <Link to="/" className="hover:text-brand">
+                <Link to="/" className="hover:text-brand" onClick={() => trackFooterLink("home")}>
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-brand">
+                <Link to="/about" className="hover:text-brand" onClick={() => trackFooterLink("about")}>
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-brand">
+                <Link
+                  to="/contact"
+                  className="hover:text-brand"
+                  onClick={() => trackFooterLink("contact")}
+                >
                   Contact Us
                 </Link>
               </li>
@@ -55,22 +76,38 @@ export function SiteFooter() {
             </h3>
             <ul className="mt-3 space-y-2 text-sm sm:mt-4">
               <li>
-                <Link to="/privacy" className="hover:text-brand">
+                <Link
+                  to="/privacy"
+                  className="hover:text-brand"
+                  onClick={() => trackFooterLink("privacy")}
+                >
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/account-deletion" className="hover:text-brand">
+                <Link
+                  to="/account-deletion"
+                  className="hover:text-brand"
+                  onClick={() => trackFooterLink("account_deletion")}
+                >
                   Delete account
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="hover:text-brand">
+                <Link
+                  to="/terms"
+                  className="hover:text-brand"
+                  onClick={() => trackFooterLink("terms")}
+                >
                   Terms &amp; Conditions
                 </Link>
               </li>
               <li>
-                <Link to="/refunds" className="hover:text-brand">
+                <Link
+                  to="/refunds"
+                  className="hover:text-brand"
+                  onClick={() => trackFooterLink("refunds")}
+                >
                   Refund &amp; Cancellation
                 </Link>
               </li>
@@ -82,10 +119,18 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-7xl flex-col gap-3 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Locapaw Technologies Pvt Ltd</span>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <a href="mailto:kevin@furrever.com" className="hover:text-brand">
+            <a
+              href="mailto:kevin@furrever.com"
+              className="hover:text-brand"
+              onClick={() => trackOutbound("mailto")}
+            >
               kevin@furrever.com
             </a>
-            <a href="tel:+919686660425" className="hover:text-brand">
+            <a
+              href="tel:+919686660425"
+              className="hover:text-brand"
+              onClick={() => trackOutbound("tel")}
+            >
               9686660425
             </a>
           </div>

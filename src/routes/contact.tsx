@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { SiteFooter } from "@/components/landing/SiteFooter";
+import { trackOutbound } from "@/lib/analytics/links";
 import logo from "@/assets/logo-white.png";
 
 const registeredAddress =
@@ -154,6 +155,7 @@ function Contact() {
           <div className="mt-10 space-y-3 sm:mt-12">
             <a
               href="mailto:kevin@furrever.com"
+              onClick={() => trackOutbound("mailto")}
               className="group flex items-center gap-4 rounded-2xl border border-border bg-surface/80 px-4 py-4 transition-colors hover:border-brand/50 hover:bg-surface sm:gap-5 sm:px-5 sm:py-5"
             >
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-background text-brand sm:h-12 sm:w-12">
@@ -175,6 +177,7 @@ function Contact() {
 
             <a
               href="tel:+919686660425"
+              onClick={() => trackOutbound("tel")}
               className="group flex items-center gap-4 rounded-2xl border border-border bg-surface/80 px-4 py-4 transition-colors hover:border-brand/50 hover:bg-surface sm:gap-5 sm:px-5 sm:py-5"
             >
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-background text-brand sm:h-12 sm:w-12">
@@ -198,6 +201,7 @@ function Contact() {
               href={mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackOutbound("maps")}
               className="group flex items-start gap-4 rounded-2xl border border-border bg-surface/80 px-4 py-4 transition-colors hover:border-brand/50 hover:bg-surface sm:gap-5 sm:px-5 sm:py-5"
             >
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-background text-brand sm:h-12 sm:w-12">
@@ -228,6 +232,7 @@ function Contact() {
                 <a
                   key={topic.label}
                   href={topic.href}
+                  onClick={() => trackOutbound("mailto")}
                   className="rounded-xl border border-border px-3.5 py-2 text-sm text-foreground transition-colors hover:border-brand/50 hover:text-brand"
                 >
                   {topic.label}

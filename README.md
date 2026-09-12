@@ -42,6 +42,12 @@ VITE_DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/ID/TOKEN
 
 If the variable is missing, the form still succeeds and stores a local copy in the browser; Discord is skipped.
 
+## Analytics
+
+PostHog, Mixpanel, and Amplitude share one event catalog. See [docs/analytics.md](docs/analytics.md) and [docs/analytics-setup.md](docs/analytics-setup.md).
+
+Enable or disable a vendor with `VITE_ANALYTICS_VENDORS` (no code change). SDKs load only after the visitor accepts the consent bar.
+
 > The webhook URL is baked into the client bundle. Anyone who extracts it can post to that channel. Fine for a private notify channel; rotate the webhook if it leaks.
 
 ## Deploy

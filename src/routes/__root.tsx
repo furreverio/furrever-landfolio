@@ -7,10 +7,11 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { PrebookProvider } from "../components/landing/prebook-context";
+import { AnalyticsProvider, getAnalytics } from "../lib/analytics";
 import {
   brandName,
   homeDescription,
@@ -21,10 +22,18 @@ import {
   siteUrl,
 } from "../lib/seo";
 
+function NotFoundTracker() {
+  useEffect(() => {
+    getAnalytics().track("not_found", { path: window.location.pathname });
+  }, []);
+  return null;
+}
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
+        <NotFoundTracker />
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -46,6 +55,13 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+  useEffect(() => {
+    getAnalytics().track("page_error", {
+      route: window.location.pathname,
+      message: error.message.slice(0, 200),
+    });
+    getAnalytics().captureException(error, { route: window.location.pathname });
+  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -211,10 +227,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PrebookProvider>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-      </PrebookProvider>
+      <AnalyticsProvider>
+        <PrebookProvider>
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </PrebookProvider>
+      </AnalyticsProvider>
     </QueryClientProvider>
   );
 }

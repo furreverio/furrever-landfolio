@@ -93,11 +93,10 @@ function Privacy() {
             choices and rights you have.
           </p>
           <p>
-            This policy applies to the Furrever apps for Android and iOS, the Furrever website at{" "}
+            This policy applies to the Furrever apps for Android and iOS and the Furrever website at{" "}
             <a href={siteUrl} className="text-foreground underline underline-offset-2">
               furrever.com
             </a>
-            , and the Furrever backend services at <code className="text-foreground">api.furrever.io</code>
             . It is the privacy policy linked from our Google Play Store and Apple App Store
             listings.
           </p>
@@ -399,8 +398,13 @@ function Privacy() {
                 ],
                 [
                   "Google - Firebase Analytics",
-                  "Product usage analytics",
+                  "Product usage analytics (mobile app)",
                   "App interaction events, device and coarse location data derived from IP",
+                ],
+                [
+                  "Website analytics providers",
+                  "Optional website usage analytics (with consent)",
+                  "Anonymous usage events and coarse device data; form fields are not sent",
                 ],
                 [
                   "Google - Firebase Cloud Messaging",

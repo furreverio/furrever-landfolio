@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import {
   Battery,
   Bell,
@@ -31,6 +32,8 @@ import { PrebookButton } from "@/components/landing/PrebookButton";
 import { HeroPrebookCta } from "@/components/landing/HeroPrebookCta";
 import { TeardownScroll } from "@/components/landing/TeardownScroll";
 import { SectionNav } from "@/components/landing/SectionNav";
+import { AnalyticsSurface, faqQuestionId, getAnalytics } from "@/lib/analytics";
+import { useImpression } from "@/lib/analytics/surfaces";
 import logo from "@/assets/logo-white.png";
 import heroCollar from "@/assets/hero-collar.png";
 import dogPhoto from "@/assets/Off-Leash-Dog-Walking.png";
@@ -258,7 +261,10 @@ function Index() {
             <p className="hidden text-xs text-white/70 sm:block">
               Under <span className="text-white">₹7,000</span>
             </p>
-            <PrebookButton className="rounded-full border border-brand/70 px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-brand hover:bg-brand/10 sm:px-4 sm:text-[11px] md:px-6 md:py-2.5 md:text-[13px]">
+            <PrebookButton
+              source="header"
+              className="rounded-full border border-brand/70 px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-brand hover:bg-brand/10 sm:px-4 sm:text-[11px] md:px-6 md:py-2.5 md:text-[13px]"
+            >
               Be A Founding Pet Parent
             </PrebookButton>
           </div>
@@ -266,6 +272,7 @@ function Index() {
       </header>
 
       {/* Screen-wide hero */}
+      <AnalyticsSurface id="hero">
       <section
         id="top"
         className="relative mt-[calc(3rem+env(safe-area-inset-top))] min-h-[calc(100svh-3rem-env(safe-area-inset-top))] w-full scroll-mt-[calc(3rem+env(safe-area-inset-top))] overflow-hidden bg-black md:aspect-video md:min-h-0"
@@ -306,19 +313,30 @@ function Index() {
           <HeroPrebookCta />
         </div>
       </section>
+      </AnalyticsSurface>
 
       {/* Pillars */}
+      <AnalyticsSurface id="care">
       <section id="care" className="scroll-mt-[calc(3rem+env(safe-area-inset-top))]">
         <PillarStack />
       </section>
+      </AnalyticsSurface>
 
+      <AnalyticsSurface id="collar">
       <TeardownScroll>
         <div className="border-t border-white/10 bg-black">
           <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-5 sm:py-14 md:grid-cols-3 md:gap-8 md:py-16">
             {highlights.map((item) => {
               const Icon = item.icon;
+              const cardId =
+                item.title === "Recommended by veterinarians"
+                  ? "vets"
+                  : item.title === "Biometric sensors"
+                    ? "biometrics"
+                    : "battery";
               return (
-                <div key={item.title} className="flex gap-4 sm:gap-5">
+                <TrustCard key={item.title} cardId={cardId}>
+                <div className="flex gap-4 sm:gap-5">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 sm:h-12 sm:w-12">
                     <Icon className="h-5 w-5 text-brand" aria-hidden />
                   </div>
@@ -331,13 +349,16 @@ function Index() {
                     </p>
                   </div>
                 </div>
+                </TrustCard>
               );
             })}
           </div>
         </div>
       </TeardownScroll>
+      </AnalyticsSurface>
 
       {/* Three scores */}
+      <AnalyticsSurface id="scores">
       <section
         id="scores"
         className="mx-auto max-w-7xl scroll-mt-[calc(3rem+env(safe-area-inset-top))] px-4 py-14 sm:px-5 sm:py-20"
@@ -374,13 +395,16 @@ function Index() {
           />
         </div>
       </section>
+      </AnalyticsSurface>
 
       {/* Lifestyle split */}
+      <AnalyticsSurface id="lifestyle">
       <section
         id="lifestyle"
         className="mx-auto max-w-7xl scroll-mt-[calc(3rem+env(safe-area-inset-top))] px-4 py-8 sm:px-5 sm:py-10"
       >
         <div className="grid gap-4 sm:gap-6 md:grid-cols-[1.4fr_1fr]">
+          <LifestyleCard cardId="activity" petHint="dog">
           <div className="relative min-h-[280px] overflow-hidden rounded-2xl sm:min-h-[340px] sm:rounded-3xl md:min-h-0">
             <img
               src={dogPhoto}
@@ -398,6 +422,8 @@ function Index() {
               </p>
             </div>
           </div>
+          </LifestyleCard>
+          <LifestyleCard cardId="find_them" petHint="cat">
           <div className="relative min-h-[240px] overflow-hidden rounded-2xl sm:min-h-[300px] sm:rounded-3xl md:min-h-0">
             <img
               src={catPhoto}
@@ -414,13 +440,18 @@ function Index() {
               </p>
             </div>
           </div>
+          </LifestyleCard>
         </div>
       </section>
+      </AnalyticsSurface>
 
       {/* Science carousel */}
+      <AnalyticsSurface id="science">
       <ScienceCarousel id="science" items={science} />
+      </AnalyticsSurface>
 
       {/* Comparison */}
+      <AnalyticsSurface id="compare">
       <section
         id="compare"
         className="mx-auto max-w-4xl scroll-mt-[calc(3rem+env(safe-area-inset-top))] px-4 py-14 sm:px-5 sm:py-20"
@@ -460,8 +491,10 @@ function Index() {
           </div>
         </div>
       </section>
+      </AnalyticsSurface>
 
       {/* FAQ */}
+      <AnalyticsSurface id="faq">
       <section
         id="faq"
         className="mx-auto max-w-3xl scroll-mt-[calc(3rem+env(safe-area-inset-top))] px-4 py-14 sm:px-5 sm:py-20"
@@ -469,7 +502,14 @@ function Index() {
         <h2 className="font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
           Frequently asked questions
         </h2>
-        <Accordion type="single" collapsible className="mt-8 sm:mt-10">
+        <Accordion
+          type="single"
+          collapsible
+          className="mt-8 sm:mt-10"
+          onValueChange={(value) => {
+            if (value) getAnalytics().track("faq_expanded", { question_id: faqQuestionId(value) });
+          }}
+        >
           {faqs.map((f) => (
             <AccordionItem key={f.q} value={f.q} className="border-border">
               <AccordionTrigger className="text-left text-sm sm:text-base">{f.q}</AccordionTrigger>
@@ -480,8 +520,10 @@ function Index() {
           ))}
         </Accordion>
       </section>
+      </AnalyticsSurface>
 
       {/* Pre-book CTA */}
+      <AnalyticsSurface id="join_cta">
       <section
         id="prebook"
         className="relative scroll-mt-[calc(3rem+env(safe-area-inset-top))] overflow-hidden px-4 py-16 sm:px-5 sm:py-20 md:py-24"
@@ -507,8 +549,57 @@ function Index() {
           </div>
         </div>
       </section>
+      </AnalyticsSurface>
 
       <SiteFooter />
+    </div>
+  );
+}
+
+function TrustCard({
+  cardId,
+  children,
+}: {
+  cardId: "vets" | "biometrics" | "battery";
+  children: ReactNode;
+}) {
+  return (
+    <div
+      onMouseEnter={() => getAnalytics().track("trust_card_hovered", { card_id: cardId })}
+      onClick={() => getAnalytics().track("trust_card_clicked", { card_id: cardId })}
+    >
+      {children}
+    </div>
+  );
+}
+
+function LifestyleCard({
+  cardId,
+  petHint,
+  children,
+}: {
+  cardId: "activity" | "find_them";
+  petHint: "dog" | "cat";
+  children: ReactNode;
+}) {
+  const ref = useImpression({
+    onView: () => getAnalytics().track("lifestyle_card_viewed", { card_id: cardId, pet_hint: petHint }),
+    onLeave: (dwellMs) =>
+      getAnalytics().track("lifestyle_card_engaged", {
+        card_id: cardId,
+        pet_hint: petHint,
+        dwell_ms: dwellMs,
+      }),
+  });
+
+  return (
+    <div
+      ref={ref}
+      onPointerDown={() =>
+        getAnalytics().track("lifestyle_card_clicked", { card_id: cardId, pet_hint: petHint })
+      }
+    >
+      {children}
     </div>
   );
 }

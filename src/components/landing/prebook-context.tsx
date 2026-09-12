@@ -7,7 +7,10 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { getAnalytics, type PrebookSource } from "@/lib/analytics";
 import { PrebookModal } from "./PrebookModal";
+
+export type { PrebookSource };
 
 export type PetType = "dog" | "cat";
 
@@ -34,7 +37,7 @@ export function rememberPetType(petType: PetType) {
 type PrebookContextValue = {
   open: boolean;
   setOpen: (open: boolean) => void;
-  openPrebook: (petType?: PetType) => void;
+  openPrebook: (petType?: PetType, source?: PrebookSource) => void;
   initialPetType: PetType | null;
 };
 
@@ -44,9 +47,11 @@ export function PrebookProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [initialPetType, setInitialPetType] = useState<PetType | null>(null);
 
-  const openPrebook = useCallback((petType?: PetType) => {
+  const openPrebook = useCallback((petType?: PetType, source: PrebookSource = "header") => {
     setInitialPetType(petType ?? null);
     setOpen(true);
+    const props = petType ? { source, pet_type: petType } : { source };
+    getAnalytics().track("prebook_opened", props);
   }, []);
 
   const handleSetOpen = useCallback((next: boolean) => {
@@ -57,7 +62,10 @@ export function PrebookProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const syncFromHash = () => {
       if (window.location.hash === "#prebook") {
-        setOpen(true);
+        setOpen((was) => {
+          if (!was) getAnalytics().track("prebook_opened", { source: "hash" });
+          return true;
+        });
       }
     };
     syncFromHash();
