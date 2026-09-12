@@ -3,7 +3,8 @@ import { useEffect, useState, type ReactNode } from "react";
 import { createNoopAdapter } from "./adapters/noop";
 import { setAnalyticsClient } from "./client";
 import { readAnalyticsConfig } from "./config";
-import { readConsent, writeConsent, type ConsentValue } from "./consent";
+import { analyticsLog, wrapClientWithDebug } from "./debug";
+import { isAnalyticsAllowed, readConsent, resolveConsent, writeConsent, type ConsentValue } from "./consent";
 import { ConsentChip } from "./consent-bar";
 import { AnalyticsContext, ConsentContext } from "./context";
 import { legalDocsByPath } from "./events";
@@ -28,12 +29,17 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
-    setConsent(readConsent());
+    const next = resolveConsent(readConsent());
+    writeConsent(next);
+    setConsent(next);
     setHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (consent !== "accepted") {
+    if (!hydrated) return;
+
+    if (!isAnalyticsAllowed(consent)) {
+      analyticsLog("idle", { consent, hint: "user chose No" });
       const noop = createNoopAdapter();
       setAnalyticsClient(noop);
       setClient(noop);
@@ -45,19 +51,21 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
     const config = readAnalyticsConfig();
     void createAnalyticsClient(config).then((next) => {
       if (cancelled) return;
-      next.setSuperProperties(collectSuperProperties());
-      setAnalyticsClient(next);
-      setClient(next);
+      const wrapped = wrapClientWithDebug(next);
+      wrapped.optIn();
+      wrapped.setSuperProperties(collectSuperProperties());
+      setAnalyticsClient(wrapped);
+      setClient(wrapped);
       setReady(true);
     });
 
     return () => {
       cancelled = true;
     };
-  }, [consent]);
+  }, [consent, hydrated]);
 
   useEffect(() => {
-    if (!ready || consent !== "accepted") return;
+    if (!ready || !isAnalyticsAllowed(consent)) return;
 
     if (markSessionStarted()) {
       client.track("session_started", {});
@@ -74,7 +82,7 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
   }, [ready, consent, pathname, client]);
 
   useEffect(() => {
-    if (!ready || consent !== "accepted") return;
+    if (!ready || !isAnalyticsAllowed(consent)) return;
 
     const started = performance.now();
 

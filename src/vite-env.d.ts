@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_ANALYTICS_VENDORS?: string;
   readonly VITE_ANALYTICS_REPLAY_VENDORS?: string;
   readonly VITE_ANALYTICS_REPLAY_SAMPLE?: string;
+  readonly VITE_ANALYTICS_DEBUG?: string;
   readonly VITE_POSTHOG_KEY?: string;
   readonly VITE_POSTHOG_HOST?: string;
   readonly VITE_MIXPANEL_TOKEN?: string;

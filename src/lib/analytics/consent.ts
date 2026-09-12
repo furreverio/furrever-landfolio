@@ -13,6 +13,15 @@ export function readConsent(): ConsentValue | null {
   return null;
 }
 
+/** Unset means on. Only an explicit No opts out. */
+export function isAnalyticsAllowed(consent: ConsentValue | null): boolean {
+  return consent !== "rejected";
+}
+
+export function resolveConsent(stored: ConsentValue | null): ConsentValue {
+  return stored === "rejected" ? "rejected" : "accepted";
+}
+
 export function writeConsent(value: ConsentValue) {
   try {
     window.localStorage.setItem(CONSENT_KEY, value);

@@ -6,7 +6,7 @@ export function ConsentChip() {
   const consent = useConsent();
   const [open, setOpen] = useState(false);
 
-  if (!consent?.ready || consent.consent !== null) return null;
+  if (!consent?.ready || consent.consent !== "rejected") return null;
 
   return (
     <div className="pointer-events-none fixed right-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-30 sm:right-5">
