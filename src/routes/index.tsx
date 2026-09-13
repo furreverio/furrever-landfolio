@@ -62,7 +62,7 @@ const highlights = [
     icon: Battery,
     title: "Long-lasting battery",
     description:
-      "Up to 45 days on a charge, in a screenless LED-first design unlike anything else on the market.",
+      "Up to 20 days on a charge, in a screenless LED-first design unlike anything else on the market.",
   },
 ];
 
@@ -113,7 +113,7 @@ const comparison = [
   { feature: "Eating & drinking patterns", trace: true, others: false },
   { feature: "Sleep stage tracking", trace: true, others: false },
   { feature: "Vet-ready health report", trace: true, others: false },
-  { feature: "Battery life", trace: "45 days", others: "3 days" },
+  { feature: "Battery life", trace: "20 days", others: "3 days" },
 ];
 
 const faqs = [
@@ -131,7 +131,7 @@ const faqs = [
   },
   {
     q: "How long does the battery last?",
-    a: "Up to about 45 days on a charge in typical use-far longer than most GPS pet trackers that need charging every few days.",
+    a: "Up to about 20 days on a charge in typical use-far longer than most GPS pet trackers that need charging every few days.",
   },
   {
     q: "How much does Furrever cost?",
@@ -175,7 +175,7 @@ const productJsonLd = {
   },
   additionalProperty: [
     { "@type": "PropertyValue", name: "GPS", value: "Live location on collar" },
-    { "@type": "PropertyValue", name: "Battery life", value: "Up to 45 days" },
+    { "@type": "PropertyValue", name: "Battery life", value: "Up to 20 days" },
     { "@type": "PropertyValue", name: "Weight", value: "11 g" },
     { "@type": "PropertyValue", name: "Water resistance", value: "IP68" },
     {

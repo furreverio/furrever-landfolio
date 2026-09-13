@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const TARGET = Date.UTC(2026, 8, 15, 10, 0, 0);
+const TARGET = Date.UTC(2026, 8, 30, 10, 0, 0);
 
 /** Inflated start for the intro fall animation. */
 const INTRO_FROM_SECONDS = 90 * 86400 + 23 * 3600 + 59 * 60 + 59;
