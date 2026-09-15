@@ -1,7 +1,7 @@
 import { VENDOR_IDS, type VendorId } from "./types";
 
 const DEFAULT_VENDORS: readonly VendorId[] = VENDOR_IDS;
-const DEFAULT_SAMPLE = 0.2;
+const DEFAULT_SAMPLE = 1;
 
 function envString(value: string | undefined): string {
   return value?.trim() ?? "";

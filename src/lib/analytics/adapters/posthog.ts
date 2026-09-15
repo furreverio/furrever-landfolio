@@ -36,6 +36,10 @@ export function createPostHogAdapter(
     },
     loaded(client) {
       client.register({ distinct_id: getAnonymousId() });
+      if (options.replay) {
+        // true = ignore SDK/project sampling so this session is actually recorded
+        client.startSessionRecording(true);
+      }
     },
   });
 

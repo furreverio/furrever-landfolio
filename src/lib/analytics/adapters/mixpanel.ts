@@ -29,9 +29,11 @@ export function createMixpanelAdapter(token: string, options: AdapterOptions): A
   });
   mixpanel.identify(getAnonymousId());
 
-  if (options.replay && analyticsDebugEnabled()) {
+  if (options.replay) {
     mixpanel.start_session_recording();
-    analyticsLog("mixpanel replay forced on (debug)", mixpanel.get_session_recording_properties());
+    if (analyticsDebugEnabled()) {
+      analyticsLog("mixpanel replay started", mixpanel.get_session_recording_properties());
+    }
   }
 
   return {
