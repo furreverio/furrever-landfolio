@@ -18,6 +18,9 @@ export function createAmplitudeAdapter(apiKey: string, options: AdapterOptions):
     amplitude.add(
       sessionReplayPlugin({
         sampleRate: options.replaySample,
+        privacyConfig: {
+          defaultMaskLevel: "light",
+        },
       }),
     );
   }

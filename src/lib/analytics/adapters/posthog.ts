@@ -31,8 +31,7 @@ export function createPostHogAdapter(
     disable_session_recording: !options.replay,
     enable_heatmaps: true,
     session_recording: {
-      maskAllInputs: true,
-      maskTextSelector: "input, textarea, [data-ph-mask]",
+      maskAllInputs: false,
       sampleRate: options.replay ? options.replaySample : 0,
     },
     loaded(client) {

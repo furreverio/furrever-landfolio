@@ -32,13 +32,14 @@ function describeKeys() {
   };
 }
 
-const keys = describeKeys();
-console.log(
-  `[analytics] env enabled=${keys.enabled} vendors=${keys.vendors} posthog=${keys.posthog} mixpanel=${keys.mixpanel} amplitude=${keys.amplitude} host=${keys.posthogHost}`,
-);
 if (typeof window === "undefined") {
   console.log(
-    "[analytics] This is the bun/vite terminal. Click events log in the browser: localhost:3000 → right-click → Inspect → Console.",
+    "[analytics] Server boot. Vendor keys and click events log in the browser: localhost:3000 → Inspect → Console.",
+  );
+} else {
+  const keys = describeKeys();
+  console.log(
+    `[analytics] env enabled=${keys.enabled} vendors=${keys.vendors} posthog=${keys.posthog} mixpanel=${keys.mixpanel} amplitude=${keys.amplitude} host=${keys.posthogHost}`,
   );
 }
 

@@ -7,6 +7,19 @@ function envString(value: string | undefined): string {
   return value?.trim() ?? "";
 }
 
+function processEnv(name: string): string | undefined {
+  try {
+    if (typeof process === "undefined") return undefined;
+    return process.env[name];
+  } catch {
+    return undefined;
+  }
+}
+
+function readEnv(viteValue: string | undefined, name: string): string {
+  return envString(viteValue) || envString(processEnv(name));
+}
+
 function parseVendors(raw: string | undefined, fallback: readonly VendorId[]): VendorId[] {
   if (raw == null || raw.trim() === "") return [...fallback];
   const seen = new Set<VendorId>();
@@ -37,19 +50,28 @@ export type AnalyticsConfig = {
 };
 
 export function readAnalyticsConfig(): AnalyticsConfig {
-  const enabled = envString(import.meta.env.VITE_ANALYTICS_ENABLED) !== "false";
-  const vendors = parseVendors(import.meta.env.VITE_ANALYTICS_VENDORS, DEFAULT_VENDORS);
-  const replayVendors = parseVendors(import.meta.env.VITE_ANALYTICS_REPLAY_VENDORS, vendors);
+  const enabled = readEnv(import.meta.env.VITE_ANALYTICS_ENABLED, "VITE_ANALYTICS_ENABLED") !== "false";
+  const vendors = parseVendors(
+    readEnv(import.meta.env.VITE_ANALYTICS_VENDORS, "VITE_ANALYTICS_VENDORS") || undefined,
+    DEFAULT_VENDORS,
+  );
+  const replayVendors = parseVendors(
+    readEnv(import.meta.env.VITE_ANALYTICS_REPLAY_VENDORS, "VITE_ANALYTICS_REPLAY_VENDORS") || undefined,
+    vendors,
+  );
 
   return {
     enabled,
     vendors,
     replayVendors,
-    replaySample: parseSample(import.meta.env.VITE_ANALYTICS_REPLAY_SAMPLE),
-    posthogKey: envString(import.meta.env.VITE_POSTHOG_KEY),
-    posthogHost: envString(import.meta.env.VITE_POSTHOG_HOST) || "https://us.i.posthog.com",
-    mixpanelToken: envString(import.meta.env.VITE_MIXPANEL_TOKEN),
-    amplitudeApiKey: envString(import.meta.env.VITE_AMPLITUDE_API_KEY),
+    replaySample: parseSample(
+      readEnv(import.meta.env.VITE_ANALYTICS_REPLAY_SAMPLE, "VITE_ANALYTICS_REPLAY_SAMPLE") || undefined,
+    ),
+    posthogKey: readEnv(import.meta.env.VITE_POSTHOG_KEY, "VITE_POSTHOG_KEY"),
+    posthogHost:
+      readEnv(import.meta.env.VITE_POSTHOG_HOST, "VITE_POSTHOG_HOST") || "https://us.i.posthog.com",
+    mixpanelToken: readEnv(import.meta.env.VITE_MIXPANEL_TOKEN, "VITE_MIXPANEL_TOKEN"),
+    amplitudeApiKey: readEnv(import.meta.env.VITE_AMPLITUDE_API_KEY, "VITE_AMPLITUDE_API_KEY"),
   };
 }
 
