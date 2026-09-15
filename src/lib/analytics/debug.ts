@@ -32,15 +32,17 @@ function describeKeys() {
   };
 }
 
-if (typeof window === "undefined") {
-  console.log(
-    "[analytics] Server boot. Vendor keys and click events log in the browser: localhost:3000 → Inspect → Console.",
-  );
-} else {
-  const keys = describeKeys();
-  console.log(
-    `[analytics] env enabled=${keys.enabled} vendors=${keys.vendors} posthog=${keys.posthog} mixpanel=${keys.mixpanel} amplitude=${keys.amplitude} host=${keys.posthogHost}`,
-  );
+if (analyticsDebugEnabled()) {
+  if (typeof window === "undefined") {
+    console.log(
+      "[analytics] Server boot. Vendor keys and click events log in the browser: Inspect → Console.",
+    );
+  } else {
+    const keys = describeKeys();
+    console.log(
+      `[analytics] env enabled=${keys.enabled} vendors=${keys.vendors} posthog=${keys.posthog} mixpanel=${keys.mixpanel} amplitude=${keys.amplitude} host=${keys.posthogHost}`,
+    );
+  }
 }
 
 export function wrapClientWithDebug(client: AnalyticsClient): AnalyticsClient {

@@ -44,10 +44,10 @@ jobs:
           VITE_ANALYTICS_VENDORS: posthog,mixpanel,amplitude
           VITE_ANALYTICS_REPLAY_VENDORS: posthog,mixpanel,amplitude
           VITE_ANALYTICS_REPLAY_SAMPLE: "0.2"
-          VITE_POSTHOG_KEY: ${{ secrets.POSTHOG_KEY }}
-          VITE_POSTHOG_HOST: ${{ secrets.POSTHOG_HOST }}
-          VITE_MIXPANEL_TOKEN: ${{ secrets.MIXPANEL_TOKEN }}
-          VITE_AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
+          VITE_POSTHOG_KEY: ${{ secrets.VITE_POSTHOG_KEY || secrets.POSTHOG_KEY }}
+          VITE_POSTHOG_HOST: ${{ secrets.VITE_POSTHOG_HOST || secrets.POSTHOG_HOST }}
+          VITE_MIXPANEL_TOKEN: ${{ secrets.VITE_MIXPANEL_TOKEN || secrets.MIXPANEL_TOKEN }}
+          VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY || secrets.AMPLITUDE_API_KEY }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
