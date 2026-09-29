@@ -4,7 +4,14 @@ import { createNoopAdapter } from "./adapters/noop";
 import { setAnalyticsClient } from "./client";
 import { readAnalyticsConfig } from "./config";
 import { analyticsLog, wrapClientWithDebug } from "./debug";
-import { isAnalyticsAllowed, readConsent, resolveConsent, writeConsent, type ConsentValue } from "./consent";
+import {
+  isAnalyticsAllowed,
+  readConsent,
+  resolveConsent,
+  resolveInternalFlag,
+  writeConsent,
+  type ConsentValue,
+} from "./consent";
 import { ConsentChip } from "./consent-bar";
 import { AnalyticsContext, ConsentContext } from "./context";
 import { legalDocsByPath } from "./events";
@@ -25,6 +32,7 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
   const [client, setClient] = useState<AnalyticsClient>(() => createNoopAdapter());
   const [consent, setConsent] = useState<ConsentValue | null>(null);
   const [hydrated, setHydrated] = useState(false);
+  const [internal, setInternal] = useState(false);
   const [ready, setReady] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
@@ -32,14 +40,20 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
     const next = resolveConsent(readConsent());
     writeConsent(next);
     setConsent(next);
+    setInternal(resolveInternalFlag());
     setHydrated(true);
   }, []);
 
   useEffect(() => {
     if (!hydrated) return;
 
-    if (!isAnalyticsAllowed(consent)) {
-      analyticsLog("idle", { consent, hint: "user chose No" });
+    if (internal || !isAnalyticsAllowed(consent)) {
+      analyticsLog(
+        "idle",
+        internal
+          ? { hint: "internal browser (?internal=0 to re-enable)" }
+          : { consent, hint: "user chose No" },
+      );
       const noop = createNoopAdapter();
       setAnalyticsClient(noop);
       setClient(noop);
@@ -53,7 +67,7 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
       if (cancelled) return;
       const wrapped = wrapClientWithDebug(next);
       wrapped.optIn();
-      wrapped.setSuperProperties(collectSuperProperties());
+      wrapped.setSuperProperties(collectSuperProperties(config.siteVersion));
       setAnalyticsClient(wrapped);
       setClient(wrapped);
       setReady(true);
@@ -62,7 +76,7 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [consent, hydrated]);
+  }, [consent, hydrated, internal]);
 
   useEffect(() => {
     if (!ready || !isAnalyticsAllowed(consent)) return;

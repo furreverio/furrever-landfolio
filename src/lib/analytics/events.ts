@@ -23,10 +23,11 @@ export const analyticsEvents = {
   surface_viewed: z.object({
     surface_id: z.string(),
   }),
-  surface_engaged: z.object({
+  surface_left: z.object({
     surface_id: z.string(),
-    dwell_ms: z.number(),
-    max_frame: z.number().optional(),
+    seconds_visible: z.number(),
+    visit: z.number(),
+    reason: z.enum(["scrolled", "page_hidden", "navigated"]),
   }),
   card_viewed: z.object({
     surface_id: z.string(),

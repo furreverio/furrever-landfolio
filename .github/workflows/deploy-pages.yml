@@ -40,6 +40,7 @@ jobs:
           # Without a custom domain, project Pages need /<repo>/ instead.
           BASE_PATH: /
           VITE_DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          VITE_SITE_VERSION: ${{ github.sha }}
           VITE_ANALYTICS_ENABLED: "true"
           VITE_ANALYTICS_VENDORS: posthog,mixpanel,amplitude
           VITE_ANALYTICS_REPLAY_VENDORS: posthog,mixpanel,amplitude

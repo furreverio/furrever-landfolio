@@ -32,6 +32,12 @@ function parseVendors(raw: string | undefined, fallback: readonly VendorId[]): V
   return [...seen];
 }
 
+/** Full git SHAs are shortened; any other label (e.g. `v2-hero-copy`) is kept as-is. */
+function parseSiteVersion(raw: string): string {
+  if (!raw) return "dev";
+  return /^[0-9a-f]{40}$/i.test(raw) ? raw.slice(0, 7) : raw;
+}
+
 function parseSample(raw: string | undefined): number {
   const n = Number(raw);
   if (!Number.isFinite(n)) return DEFAULT_SAMPLE;
@@ -47,6 +53,7 @@ export type AnalyticsConfig = {
   posthogHost: string;
   mixpanelToken: string;
   amplitudeApiKey: string;
+  siteVersion: string;
 };
 
 export function readAnalyticsConfig(): AnalyticsConfig {
@@ -72,6 +79,7 @@ export function readAnalyticsConfig(): AnalyticsConfig {
       readEnv(import.meta.env.VITE_POSTHOG_HOST, "VITE_POSTHOG_HOST") || "https://us.i.posthog.com",
     mixpanelToken: readEnv(import.meta.env.VITE_MIXPANEL_TOKEN, "VITE_MIXPANEL_TOKEN"),
     amplitudeApiKey: readEnv(import.meta.env.VITE_AMPLITUDE_API_KEY, "VITE_AMPLITUDE_API_KEY"),
+    siteVersion: parseSiteVersion(readEnv(import.meta.env.VITE_SITE_VERSION, "VITE_SITE_VERSION")),
   };
 }
 

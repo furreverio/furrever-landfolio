@@ -11,7 +11,7 @@ function rememberedPetType(): string {
   return "unknown";
 }
 
-export function collectSuperProperties(): AnalyticsProps {
+export function collectSuperProperties(siteVersion: string): AnalyticsProps {
   if (typeof window === "undefined") return {};
 
   const params = new URLSearchParams(window.location.search);
@@ -28,6 +28,7 @@ export function collectSuperProperties(): AnalyticsProps {
   return {
     ...utm,
     anon_id: getAnonymousId(),
+    site_version: siteVersion,
     referrer: document.referrer || "direct",
     landing_path: `${window.location.pathname}${window.location.hash}`,
     device_class,

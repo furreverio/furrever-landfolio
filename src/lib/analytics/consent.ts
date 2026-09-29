@@ -29,3 +29,18 @@ export function writeConsent(value: ConsentValue) {
     /* ignore */
   }
 }
+
+const INTERNAL_KEY = "furrever-internal";
+
+/** `?internal=1` marks this browser as team traffic until `?internal=0`. */
+export function resolveInternalFlag(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const param = new URLSearchParams(window.location.search).get("internal");
+    if (param === "1") window.localStorage.setItem(INTERNAL_KEY, "1");
+    if (param === "0") window.localStorage.removeItem(INTERNAL_KEY);
+    return window.localStorage.getItem(INTERNAL_KEY) === "1";
+  } catch {
+    return false;
+  }
+}

@@ -11,6 +11,7 @@ interface ImportMetaEnv {
   readonly VITE_POSTHOG_HOST?: string;
   readonly VITE_MIXPANEL_TOKEN?: string;
   readonly VITE_AMPLITUDE_API_KEY?: string;
+  readonly VITE_SITE_VERSION?: string;
 }
 
 interface ImportMeta {
