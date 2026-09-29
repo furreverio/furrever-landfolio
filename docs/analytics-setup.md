@@ -32,7 +32,7 @@ VITE_POSTHOG_HOST=https://us.i.posthog.com
 
 1. Sign up at [mixpanel.com](https://mixpanel.com). Project **Furrever Web**.
 2. Project Settings → copy **Project Token**.
-3. Data residency: US or EU (pick one and stay on it).
+3. Data residency: EU ([project 4063109](https://eu.mixpanel.com/project/4063109)). The SDK posts to `https://api-eu.mixpanel.com`; a US project would need `api_host` changed in `adapters/mixpanel.ts`.
 4. Autocapture: On.
 5. Session replay: On. Heatmaps: On. Our SDK sets `record_heatmap_data: true`.
 6. Lexicon: paste event names from [analytics.md](./analytics.md) so they match PostHog and Amplitude.

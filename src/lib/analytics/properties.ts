@@ -1,3 +1,4 @@
+import { getAnonymousId } from "./identity";
 import type { AnalyticsProps } from "./types";
 
 function rememberedPetType(): string {
@@ -26,6 +27,7 @@ export function collectSuperProperties(): AnalyticsProps {
 
   return {
     ...utm,
+    anon_id: getAnonymousId(),
     referrer: document.referrer || "direct",
     landing_path: `${window.location.pathname}${window.location.hash}`,
     device_class,
