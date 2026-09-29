@@ -111,6 +111,7 @@ Code lives in `src/lib/analytics/`. Adding a fourth tool = one registry row + on
 - SDKs load **only after** Accept on the consent bar.
 - Choice is stored in `localStorage` as `furrever-analytics-consent`.
 - Reject → `NoopAdapter`. Pre-book still works.
+- Team traffic: open any page with `?internal=1` once. That browser never loads a vendor SDK (stored as `furrever-internal` in `localStorage`). `?internal=0` undoes it. The flag is per origin, so localhost is unaffected.
 - Never send name, email, or phone to any vendor. Discord remains the PII ops channel.
 - On successful pre-book: `identify(sha256(email))` and traits `{ pet_type, city, accept_contact, is_founding_parent }`.
 - Session replay masks inputs.
@@ -130,8 +131,10 @@ Same payload to every enabled vendor. TypeScript fails if a component invents a 
 | `first_interaction` | First click, scroll, or mousemove | `type`, `ms` |
 | `first_click` | First click (separate from interaction) | `ms`, `target?` |
 | `session_ended` | `pagehide` / tab hidden | `last_surface_id`, `last_card_id?`, `max_scroll_depth` |
-| `surface_viewed` | ~50% visible for ~800ms | `surface_id` |
-| `surface_engaged` | Leave after dwell | `surface_id`, `dwell_ms` (+ `max_frame` on collar) |
+| `surface_viewed` | Half the section on screen (or it fills half the screen) for ~800ms, once per page load | `surface_id` |
+| `surface_left` | Each visit of ≥800ms ends: scrolled away, tab hidden/closed, or SPA navigation. Background-tab time is excluded. | `surface_id`, `seconds_visible`, `visit` (1 = first view, 2+ = re-read), `reason` (`scrolled` \| `page_hidden` \| `navigated`) |
+
+A tab switch mid-visit emits two `surface_left` events with the same `visit`; sum `seconds_visible` per visit. The drop-off section is the `surface_left` with `reason=page_hidden`.
 
 ### Pillars (`#care`, all 6 cards)
 
@@ -182,7 +185,7 @@ Transparent DOM hotspots sit over Battery / PCB / Sensor so click/hover heatmaps
 
 ### Compare (`#compare`)
 
-`surface_viewed` / `surface_engaged` only. Row hover is a heatmap. Reach → convert is a dashboard funnel.
+`surface_viewed` / `surface_left` only. Row hover is a heatmap. Reach → convert is a dashboard funnel.
 
 ### FAQ (`#faq`)
 
@@ -220,7 +223,9 @@ Fired once inside `openPrebook`. Buttons only pass `source`.
 
 ### Super properties
 
-Attached to every event: `utm_*`, `referrer`, `landing_path`, `device_class`, `remembered_pet_type`, `consent`.
+Attached to every event: `utm_*`, `anon_id`, `site_version`, `referrer`, `landing_path`, `device_class`, `remembered_pet_type`, `consent`.
+
+`site_version` is the short git SHA of the deploy (`VITE_SITE_VERSION`, set by CI; `dev` locally). Filter by it to compare before/after a copy or layout change.
 
 ---
 
