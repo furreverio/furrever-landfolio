@@ -65,7 +65,7 @@ export function LaunchBadge() {
         <span className="launch-badge__dot" aria-hidden />
         Cohort {COHORT}
       </span>
-      <span className="launch-badge__date">Launching {launchDay()}</span>
+      <span className="launch-badge__date">Starting {launchDay()}</span>
     </p>
   );
 }
