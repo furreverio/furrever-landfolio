@@ -23,7 +23,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Countdown, launchLabel } from "@/components/landing/Countdown";
+import { Countdown, LaunchBadge } from "@/components/landing/Countdown";
 import { ScoreDial } from "@/components/landing/ScoreDial";
 import { PillarStack } from "@/components/landing/PillarStack";
 import { ScienceCarousel } from "@/components/landing/ScienceCarousel";
@@ -305,7 +305,7 @@ function Index() {
 
         {/* Center launch + countdown */}
         <div className="absolute inset-x-0 bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-30 flex flex-col items-center gap-3 px-3 pb-2 sm:bottom-10 sm:gap-4 sm:px-4 md:bottom-[12%] md:gap-5">
-          <p className="hero-launch">{launchLabel()}</p>
+          <LaunchBadge />
           <div className="flex w-full max-w-md items-center justify-center">
             <Countdown variant="hero" />
           </div>
@@ -541,7 +541,10 @@ function Index() {
           <p className="mt-3 text-sm text-muted-foreground sm:text-base">
             Final pricing is still being planned, and will stay under ₹7,000. Fully refundable.
           </p>
-          <div className="mt-6 flex justify-center overflow-x-auto sm:mt-8">
+          <div className="mt-6 flex justify-center sm:mt-8">
+            <LaunchBadge />
+          </div>
+          <div className="mt-4 flex justify-center overflow-x-auto sm:mt-5">
             <Countdown />
           </div>
           <div className="mt-8 flex justify-center sm:mt-10">

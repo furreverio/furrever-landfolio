@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-const TARGET = Date.UTC(2026, 8, 30, 10, 0, 0);
+const TARGET = Date.UTC(2026, 10, 1, 10, 0, 0);
+const COHORT = "01";
 
 /** Inflated start for the intro fall animation. */
 const INTRO_FROM_SECONDS = 90 * 86400 + 23 * 3600 + 59 * 60 + 59;
@@ -38,7 +39,7 @@ function easeOutExpo(t: number) {
   return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
 }
 
-export function launchLabel() {
+function launchDay() {
   const d = new Date(TARGET);
   const months = [
     "January",
@@ -54,7 +55,19 @@ export function launchLabel() {
     "November",
     "December",
   ];
-  return `Launching on ${ordinal(d.getUTCDate())} ${months[d.getUTCMonth()]}`;
+  return `${ordinal(d.getUTCDate())} ${months[d.getUTCMonth()]}`;
+}
+
+export function LaunchBadge() {
+  return (
+    <p className="launch-badge">
+      <span className="launch-badge__cohort">
+        <span className="launch-badge__dot" aria-hidden />
+        Cohort {COHORT}
+      </span>
+      <span className="launch-badge__date">Launching {launchDay()}</span>
+    </p>
+  );
 }
 
 export function Countdown({
